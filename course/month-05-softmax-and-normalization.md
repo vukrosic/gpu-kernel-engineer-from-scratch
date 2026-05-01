@@ -20,3 +20,11 @@ Correct row-wise softmax and a numerical-stability explanation.
 ## Portfolio Note
 
 Connect softmax and normalization to transformer workloads.
+
+## Code Paths
+
+- NumPy reference: `gputriton/reference.py`
+- CUDA starter: `cuda/softmax.cu`
+- Triton starter: `triton_kernels/softmax.py`
+- CUDA starter: `cuda/layernorm.cu`
+- Triton starter: `triton_kernels/layernorm.py`

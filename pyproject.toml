@@ -11,11 +11,12 @@ requires-python = ">=3.10"
 dependencies = ["numpy>=1.24"]
 
 [project.optional-dependencies]
-dev = ["pytest>=8"]
+dev = ["pytest>=8", "ruff>=0.6"]
+viz = ["matplotlib>=3.8"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["."]
 
 [tool.setuptools.packages.find]
-include = ["gputriton*"]
+include = ["gputriton*", "triton_kernels*"]

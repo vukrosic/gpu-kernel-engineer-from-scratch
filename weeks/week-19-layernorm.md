@@ -9,6 +9,8 @@ It is useful because it mixes reduction thinking with per-element output.
 
 - [../course/month-05-softmax-and-normalization.md](../course/month-05-softmax-and-normalization.md)
 - [../weeks/week-18-fused-softmax.md](../weeks/week-18-fused-softmax.md)
+- [../cuda/layernorm.cu](../cuda/layernorm.cu)
+- [../triton_kernels/layernorm.py](../triton_kernels/layernorm.py)
 
 ## Exact Commands
 
@@ -37,6 +39,9 @@ Create `results/week-19-layernorm.md` with:
 - which parts are reduction-like
 - which parts are elementwise
 - why it shows up in deep learning code
+
+The implementation track is `gputriton/reference.py` first, then the CUDA and
+Triton starter files listed above.
 
 ## Write Down
 

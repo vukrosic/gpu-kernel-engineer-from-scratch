@@ -10,6 +10,8 @@ result before any tiling.
 
 - [../course/month-06-matmul-foundations.md](../course/month-06-matmul-foundations.md)
 - [week-template.md](week-template.md)
+- [../cuda/naive_matmul.cu](../cuda/naive_matmul.cu)
+- [../triton_kernels/matmul.py](../triton_kernels/matmul.py)
 
 ## Exact Commands
 
@@ -23,14 +25,27 @@ python examples/reference_bench.py
 ## Code Sketch
 
 ```python
-# Sketch the smallest working version of this week's idea.
-# Keep it tiny: one loop, one mask, one tile, or one benchmark.
+def matmul_reference(a, b):
+    m, k = len(a), len(a[0])
+    _, n = len(b), len(b[0])
+    out = [[0.0 for _ in range(n)] for _ in range(m)]
+    for i in range(m):
+        for j in range(n):
+            total = 0.0
+            for p in range(k):
+                total += a[i][p] * b[p][j]
+            out[i][j] = total
+    return out
 ```
 
 Write one sentence explaining why the sketch is correct before you optimize it.
 
 Write `results/week-21-naive-matmul.md` with the shapes you tried, the loop
 order you used, and one note about correctness.
+
+Use `gputriton/reference.py` as the baseline, then compare the lesson sketch
+to `cuda/naive_matmul.cu` and the Triton matmul implementation later in the
+course.
 
 ## Write Down
 

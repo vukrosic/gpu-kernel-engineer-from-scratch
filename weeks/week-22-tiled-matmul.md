@@ -22,8 +22,15 @@ python examples/reference_bench.py
 ## Code Sketch
 
 ```python
-# Sketch the smallest working version of this week's idea.
-# Keep it tiny: one loop, one mask, one tile, or one benchmark.
+def tiled_block(a, b, row0, col0, tile_m=4, tile_n=4, tile_k=2):
+    # Reuse the same small submatrices before moving on.
+    acc = [[0.0 for _ in range(tile_n)] for _ in range(tile_m)]
+    for k0 in range(0, len(a[0]), tile_k):
+        for i in range(tile_m):
+            for j in range(tile_n):
+                for kk in range(tile_k):
+                    acc[i][j] += a[row0 + i][k0 + kk] * b[k0 + kk][col0 + j]
+    return acc
 ```
 
 Write one sentence explaining why the sketch is correct before you optimize it.

@@ -22,8 +22,11 @@ python examples/reference_bench.py
 ## Code Sketch
 
 ```python
-# Sketch the smallest working version of this week's idea.
-# Keep it tiny: one loop, one mask, one tile, or one benchmark.
+def batched_matmul(batch_a, batch_b):
+    out = []
+    for a, b in zip(batch_a, batch_b):
+        out.append(matmul_tile(a, b))
+    return out
 ```
 
 Write one sentence explaining why the sketch is correct before you optimize it.

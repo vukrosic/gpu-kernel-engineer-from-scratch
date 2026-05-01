@@ -10,6 +10,8 @@ many values into fewer values by summing or maximizing over a dimension.
 - [../gputriton/reference.py](../gputriton/reference.py)
 - [../course/month-03-reductions.md](../course/month-03-reductions.md)
 - [../weeks/week-07-timing-harness-and-benchmarking.md](../weeks/week-07-timing-harness-and-benchmarking.md)
+- [../cuda/reduce_sum.cu](../cuda/reduce_sum.cu)
+- [../triton_kernels/reduce_sum.py](../triton_kernels/reduce_sum.py)
 
 ## Exact Commands
 

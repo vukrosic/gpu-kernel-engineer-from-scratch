@@ -9,6 +9,7 @@ is to understand where numerically stable softmax work gets fused together.
 
 - [../course/month-07-triton-for-ai-kernels.md](../course/month-07-triton-for-ai-kernels.md)
 - [week-26-triton-blocks-and-masks.md](week-26-triton-blocks-and-masks.md)
+- [../triton_kernels/softmax.py](../triton_kernels/softmax.py)
 
 ## Exact Commands
 
@@ -22,14 +23,22 @@ python examples/reference_bench.py
 ## Code Sketch
 
 ```python
-# Sketch the smallest working version of this week's idea.
-# Keep it tiny: one loop, one mask, one tile, or one benchmark.
+import math
+
+def softmax_row(xs):
+    shift = max(xs)
+    exps = [math.exp(x - shift) for x in xs]
+    total = sum(exps)
+    return [value / total for value in exps]
 ```
 
 Write one sentence explaining why the sketch is correct before you optimize it.
 
 Write `results/week-27-triton-softmax.md` with the softmax steps and one note
 about stability or reuse.
+
+Compare the Triton starter in `triton_kernels/softmax.py` against the NumPy
+reference in `gputriton/reference.py`.
 
 ## Write Down
 

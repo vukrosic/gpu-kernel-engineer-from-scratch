@@ -1,7 +1,7 @@
 # Kernel Topics
 
 This folder organizes kernels by concept. Implementations can live in `cuda/`,
-`triton/`, or `gputriton/` depending on the stage of the course.
+`triton_kernels/`, or `gputriton/` depending on the stage of the course.
 
 ## Core Kernels
 

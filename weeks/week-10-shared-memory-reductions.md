@@ -11,6 +11,8 @@ workers can cooperate on an intermediate result before writing one final answer.
 - [../course/month-03-reductions.md](../course/month-03-reductions.md)
 - [../weeks/week-09-naive-reductions.md](../weeks/week-09-naive-reductions.md)
 - [../gputriton/reference.py](../gputriton/reference.py)
+- [../cuda/reduce_sum.cu](../cuda/reduce_sum.cu)
+- [../triton_kernels/reduce_sum.py](../triton_kernels/reduce_sum.py)
 
 ## Exact Commands
 

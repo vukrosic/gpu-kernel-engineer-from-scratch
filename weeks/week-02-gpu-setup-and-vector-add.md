@@ -14,6 +14,8 @@ Open these files before you do anything else:
 - [../gputriton/bench.py](../gputriton/bench.py)
 - [../tests/test_reference.py](../tests/test_reference.py)
 - [../course/month-01-gpu-foundations.md](../course/month-01-gpu-foundations.md)
+- [../cuda/vector_add.cu](../cuda/vector_add.cu)
+- [../triton_kernels/vector_add.py](../triton_kernels/vector_add.py)
 
 ## Exact Commands
 
@@ -54,6 +56,10 @@ Then write a one-paragraph kernel sketch in the same file:
 
 If you have a CUDA environment, you can optionally write the same idea as a
 scratch kernel, but the repo does not require that yet.
+
+On a GPU machine, use `cuda/vector_add.cu` for the CUDA version and
+`triton_kernels/vector_add.py` for the Triton version. On this Mac, stick to
+the reference path and the written sketch.
 
 ## Code Sketch
 

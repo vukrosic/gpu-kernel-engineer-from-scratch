@@ -40,6 +40,10 @@ Create `results/week-17-softmax-math.md` and include:
 - why subtracting the max helps numerical stability
 - why softmax output sums to 1
 
+On the implementation track, compare the reference path in
+`gputriton/reference.py` with the starter kernels in `cuda/softmax.cu` and
+`triton_kernels/softmax.py`.
+
 ## Write Down
 
 Answer:

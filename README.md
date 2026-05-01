@@ -15,6 +15,8 @@ If you do not watch any video, follow this order:
 4. Use the scaffolded weekly files in `weeks/` for the rest of the year.
 5. Use [course/syllabus.md](course/syllabus.md) only as the full map.
 6. Use [course/recovery-system.md](course/recovery-system.md) if you fall behind.
+7. Use [FINISH_PLAN.md](FINISH_PLAN.md) when you want the repo brought to its
+   finished public-project state.
 
 Run the starter repo:
 
@@ -22,6 +24,8 @@ Run the starter repo:
 python -m pip install -e ".[dev]"
 pytest
 python examples/reference_bench.py
+make bootstrap-results
+make bench
 ```
 
 ## A To B Path
@@ -189,8 +193,9 @@ Inside the community, the goal is to help you:
 - `course/` contains the full 12-month roadmap, weekly rhythm, and recovery system.
 - `weeks/` contains one follow-it-top-to-bottom file per course week.
 - `assignments/` contains the assignment index and reusable assignment template.
-- `cuda/` is the home for CUDA C++ kernels and notes as the course expands.
-- `triton/` is the home for Triton kernels and notes as the course expands.
+- `cuda/` contains standalone CUDA C++ starter kernels and their notes.
+- `triton/` contains Triton docs and implementation notes.
+- `triton_kernels/` contains executable Triton Python kernels.
 - `kernels/` organizes AI-kernel topics independent of implementation language.
 - `gputriton/` contains current portable reference implementations.
 - `examples/` contains runnable demos.
@@ -199,3 +204,4 @@ Inside the community, the goal is to help you:
 - `portfolio/` contains resume, interview, and project-packaging material.
 - `creator/` contains channel cadence, content packaging, and publishing workflow.
 - `bonus/10-day-sprint/` contains optional compressed practice material.
+- `FINISH_PLAN.md` describes the path from scaffold to finished project.

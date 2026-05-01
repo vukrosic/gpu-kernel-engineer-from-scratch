@@ -20,3 +20,9 @@ Row sum and row max with tests.
 ## Portfolio Note
 
 Explain why reductions need coordination and why naive parallelism is not enough.
+
+## Code Paths
+
+- NumPy reference: `gputriton/reference.py`
+- CUDA starter: `cuda/reduce_sum.cu`
+- Triton starter: `triton_kernels/reduce_sum.py`

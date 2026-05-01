@@ -22,8 +22,10 @@ python examples/reference_bench.py
 ## Code Sketch
 
 ```python
-# Sketch the smallest working version of this week's idea.
-# Keep it tiny: one loop, one mask, one tile, or one benchmark.
+candidate_settings = [
+    {"block_m": 64, "block_n": 64, "block_k": 16},
+    {"block_m": 128, "block_n": 64, "block_k": 32},
+]
 ```
 
 Write one sentence explaining why the sketch is correct before you optimize it.

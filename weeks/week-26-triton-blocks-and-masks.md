@@ -22,8 +22,12 @@ python examples/reference_bench.py
 ## Code Sketch
 
 ```python
-# Sketch the smallest working version of this week's idea.
-# Keep it tiny: one loop, one mask, one tile, or one benchmark.
+def masked_load(values, start, block_size):
+    block = []
+    for i in range(block_size):
+        idx = start + i
+        block.append(values[idx] if idx < len(values) else 0.0)
+    return block
 ```
 
 Write one sentence explaining why the sketch is correct before you optimize it.

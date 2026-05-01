@@ -20,3 +20,8 @@ One Triton kernel, one test, and one benchmark.
 ## Portfolio Note
 
 Explain CUDA as the mental model and Triton as a productive AI-kernel tool.
+
+## Code Paths
+
+- Triton implementation package: `triton_kernels/`
+- Reference baseline: `gputriton/reference.py`

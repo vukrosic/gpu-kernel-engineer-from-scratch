@@ -9,6 +9,8 @@ about reading Triton code without panic and recognizing the shape of a kernel.
 
 - [../course/month-07-triton-for-ai-kernels.md](../course/month-07-triton-for-ai-kernels.md)
 - [week-template.md](week-template.md)
+- [../triton_kernels/vector_add.py](../triton_kernels/vector_add.py)
+- [../triton/README.md](../triton/README.md)
 
 ## Exact Commands
 
@@ -22,14 +24,19 @@ python examples/reference_bench.py
 ## Code Sketch
 
 ```python
-# Sketch the smallest working version of this week's idea.
-# Keep it tiny: one loop, one mask, one tile, or one benchmark.
+def vector_add_program(pid, block_size, n):
+    offsets = [pid * block_size + i for i in range(block_size)]
+    mask = [offset < n for offset in offsets]
+    return offsets, mask
 ```
 
 Write one sentence explaining why the sketch is correct before you optimize it.
 
 Write `results/week-25-triton-mental-model.md` with a block diagram and three
 questions about Triton's execution model.
+
+The implementation side of this month lives in `triton_kernels/`, while the
+`triton/` folder stays as the documentation layer.
 
 ## Write Down
 

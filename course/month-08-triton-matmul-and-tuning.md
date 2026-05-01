@@ -20,3 +20,8 @@ One tuned Triton matmul benchmark.
 ## Portfolio Note
 
 Show how one tuning choice changed performance and explain why.
+
+## Code Paths
+
+- Triton implementation package: `triton_kernels/matmul.py`
+- Reference baseline: `gputriton/reference.py`

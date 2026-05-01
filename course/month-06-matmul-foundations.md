@@ -20,3 +20,9 @@ One correct matmul kernel and one benchmark against a trusted baseline.
 ## Portfolio Note
 
 Explain why matmul dominates deep learning and what tiling is trying to reuse.
+
+## Code Paths
+
+- NumPy reference: `gputriton/reference.py`
+- CUDA starter: `cuda/naive_matmul.cu`
+- Triton starter: `triton_kernels/matmul.py`
