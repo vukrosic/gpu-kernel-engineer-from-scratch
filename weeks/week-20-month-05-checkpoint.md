@@ -24,11 +24,15 @@ python examples/reference_bench.py
 ## Code Sketch
 
 ```python
-# Sketch the smallest working version of this week's idea.
-# Keep it tiny: one loop, one mask, one tile, or one benchmark.
+month_5 = {
+    "softmax": "stable scores into probabilities",
+    "fusion": "fewer passes over the same data",
+    "layernorm": "normalize with shared statistics",
+}
 ```
 
-Write one sentence explaining why the sketch is correct before you optimize it.
+This sketch is correct because a checkpoint should compress the month into the
+three ideas the learner must remember.
 
 Create `results/month-05-checkpoint.md` with:
 

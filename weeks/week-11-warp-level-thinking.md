@@ -23,11 +23,15 @@ python examples/reference_bench.py
 ## Code Sketch
 
 ```python
-# Sketch the smallest working version of this week's idea.
-# Keep it tiny: one loop, one mask, one tile, or one benchmark.
+def group_reduce(values):
+    partials = []
+    for i in range(0, len(values), 2):
+        partials.append(values[i] + values[i + 1])
+    return partials
 ```
 
-Write one sentence explaining why the sketch is correct before you optimize it.
+This sketch is correct because the group first reduces nearby values into
+partials instead of forcing one worker to do every step alone.
 
 Create `results/week-11-warp-thinking.md` with:
 

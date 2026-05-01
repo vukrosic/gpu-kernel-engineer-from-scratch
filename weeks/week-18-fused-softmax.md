@@ -22,11 +22,21 @@ python examples/reference_bench.py
 ## Code Sketch
 
 ```python
-# Sketch the smallest working version of this week's idea.
-# Keep it tiny: one loop, one mask, one tile, or one benchmark.
+import math
+
+def fused_softmax(xs):
+    shift = max(xs)
+    exps = []
+    total = 0
+    for x in xs:
+        value = math.exp(x - shift)
+        exps.append(value)
+        total += value
+    return [value / total for value in exps]
 ```
 
-Write one sentence explaining why the sketch is correct before you optimize it.
+This sketch is correct because it fuses the exponentiation and summation into
+one pass while keeping the same math as the unfused version.
 
 Create `results/week-18-fused-softmax.md` with:
 

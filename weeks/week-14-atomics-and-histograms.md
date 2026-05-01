@@ -23,11 +23,15 @@ python examples/reference_bench.py
 ## Code Sketch
 
 ```python
-# Sketch the smallest working version of this week's idea.
-# Keep it tiny: one loop, one mask, one tile, or one benchmark.
+def histogram(values, bins=4):
+    counts = [0] * bins
+    for value in values:
+        counts[value % bins] += 1
+    return counts
 ```
 
-Write one sentence explaining why the sketch is correct before you optimize it.
+This sketch is correct because every input updates exactly one bucket, which
+makes the atomic-update problem easy to see.
 
 Create `results/week-14-atomics-histograms.md` and include:
 

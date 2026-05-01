@@ -24,11 +24,15 @@ python examples/reference_bench.py
 ## Code Sketch
 
 ```python
-# Sketch the smallest working version of this week's idea.
-# Keep it tiny: one loop, one mask, one tile, or one benchmark.
+summary = {
+    "reduction": "turn many values into fewer values",
+    "grouped_work": "workers cooperate on partial sums",
+    "next": "synchronization",
+}
 ```
 
-Write one sentence explaining why the sketch is correct before you optimize it.
+This sketch is correct because a checkpoint is a summary artifact, not a new
+algorithm: it captures the lesson in compact form before you move on.
 
 Create `results/month-03-checkpoint.md` with:
 

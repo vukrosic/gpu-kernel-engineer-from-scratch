@@ -22,11 +22,17 @@ python examples/reference_bench.py
 ## Code Sketch
 
 ```python
-# Sketch the smallest working version of this week's idea.
-# Keep it tiny: one loop, one mask, one tile, or one benchmark.
+import math
+
+def softmax(xs):
+    shift = max(xs)
+    exps = [math.exp(x - shift) for x in xs]
+    total = sum(exps)
+    return [x / total for x in exps]
 ```
 
-Write one sentence explaining why the sketch is correct before you optimize it.
+This sketch is correct because subtracting the max keeps the exponentials
+stable while preserving the final normalized probabilities.
 
 Create `results/week-17-softmax-math.md` and include:
 

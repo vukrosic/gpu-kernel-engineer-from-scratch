@@ -24,11 +24,15 @@ python examples/reference_bench.py
 ## Code Sketch
 
 ```python
-# Sketch the smallest working version of this week's idea.
-# Keep it tiny: one loop, one mask, one tile, or one benchmark.
+month_4 = [
+    "barriers prevent races",
+    "atomics protect shared counters",
+    "scan keeps information flowing",
+]
 ```
 
-Write one sentence explaining why the sketch is correct before you optimize it.
+This sketch is correct because the checkpoint is about organizing the month,
+not adding a new kernel.
 
 Create `results/month-04-checkpoint.md` with:
 

@@ -23,11 +23,17 @@ python examples/reference_bench.py
 ## Code Sketch
 
 ```python
-# Sketch the smallest working version of this week's idea.
-# Keep it tiny: one loop, one mask, one tile, or one benchmark.
+def prefix_sum(values):
+    out = []
+    running = 0
+    for value in values:
+        running += value
+        out.append(running)
+    return out
 ```
 
-Write one sentence explaining why the sketch is correct before you optimize it.
+This sketch is correct because it records the running total at every step, so
+the output keeps the same length as the input.
 
 Create `results/week-15-prefix-sum.md` with:
 

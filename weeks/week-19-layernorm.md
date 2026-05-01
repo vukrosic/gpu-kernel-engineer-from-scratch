@@ -22,11 +22,14 @@ python examples/reference_bench.py
 ## Code Sketch
 
 ```python
-# Sketch the smallest working version of this week's idea.
-# Keep it tiny: one loop, one mask, one tile, or one benchmark.
+def layernorm(xs, eps=1e-5):
+    mean = sum(xs) / len(xs)
+    var = sum((x - mean) ** 2 for x in xs) / len(xs)
+    return [(x - mean) / (var + eps) ** 0.5 for x in xs]
 ```
 
-Write one sentence explaining why the sketch is correct before you optimize it.
+This sketch is correct because it normalizes the whole row with a shared mean
+and variance before returning one adjusted value per input.
 
 Create `results/week-19-layernorm.md` with:
 

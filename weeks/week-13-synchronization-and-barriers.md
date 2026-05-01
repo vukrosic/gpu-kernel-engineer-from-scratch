@@ -22,11 +22,14 @@ python examples/reference_bench.py
 ## Code Sketch
 
 ```python
-# Sketch the smallest working version of this week's idea.
-# Keep it tiny: one loop, one mask, one tile, or one benchmark.
+def wait_then_continue(flag):
+    while not flag["ready"]:
+        pass
+    return flag["value"]
 ```
 
-Write one sentence explaining why the sketch is correct before you optimize it.
+This sketch is correct as a coordination example because the reader can see
+the "wait here" moment before using the shared value.
 
 Create `results/week-13-synchronization.md` with:
 
