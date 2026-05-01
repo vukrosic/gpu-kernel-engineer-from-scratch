@@ -3,11 +3,6 @@
 A 12-month CUDA, Triton, and AI systems course where you build a public GPU
 kernels portfolio one week at a time.
 
-The honest promise: this course cannot control hiring markets, interviews, or
-compensation. It can help you build what you do control: correct kernels, real
-benchmarks, clear explanations, and portfolio artifacts that prove you understand
-GPU performance engineering.
-
 ## Start Here
 
 This repo is the 1-year roadmap to become a GPU kernel engineer.
@@ -38,32 +33,6 @@ By the end, you should be able to demonstrate:
 - CUDA and Triton implementations of AI-relevant operations
 - a public repo that can be discussed in ML systems and AI infrastructure interviews
 
-## What About AMD, Chinese GPUs, And Other Stacks?
-
-This course is CUDA and Triton first because that is the most practical path for
-AI kernel engineering today: most examples, jobs, research code, and debugging
-resources assume NVIDIA GPUs.
-
-The argument for adding other ecosystems:
-
-- AMD ROCm matters for open infrastructure and non-NVIDIA deployments.
-- Vendor diversity is becoming more important as GPU demand grows.
-- Learning portability makes you a more flexible systems engineer.
-- Some concepts transfer cleanly: memory hierarchy, tiling, reductions, fusion,
-  benchmarking, and profiling discipline.
-
-The argument against teaching everything at once:
-
-- CUDA alone is already a serious year-long skill tree.
-- Mixing vendors too early makes the course harder to follow.
-- Most learners need one strong mental model before comparing ecosystems.
-- Portfolio reviewers usually care more about clear, correct, benchmarked work
-  than shallow coverage of many platforms.
-
-Decision: this roadmap goes deep on CUDA, Triton, and AI systems first. Other
-GPU stacks should appear as comparison weeks, bonus modules, or advanced
-extensions after the core mental model is solid.
-
 ## 12-Month Roadmap
 
 | Month | Theme | Week 1 | Week 2 | Week 3 | Week 4 |
@@ -91,6 +60,22 @@ The detailed week-by-week plan is in [course/syllabus.md](course/syllabus.md).
 - If you fall behind, use [course/recovery-system.md](course/recovery-system.md) instead of quitting.
 
 The rule is simple: correct and finished beats perfect and abandoned.
+
+## Community
+
+The repo is the free roadmap. The community is for feedback, accountability, and
+help finishing the work.
+
+Join here: [Become AI Researcher](https://skool.com/become-ai-researcher-2669/about)
+
+Inside the community, the goal is to help you:
+
+- stay on pace with the weekly roadmap
+- ask questions when a kernel, benchmark, or setup step breaks
+- get feedback on portfolio notes, benchmark tables, and repo structure
+- join office hours and implementation review sessions
+- compare your work with other builders following the same path
+- turn finished assignments into resume bullets and interview explanations
 
 ## Repo Structure
 
