@@ -11,7 +11,7 @@ If you do not watch any video, follow this order:
 
 1. Open [Week 01: GPU Mental Model And Baseline](weeks/week-01-gpu-mental-model.md)
 2. Do every task in that file from top to bottom.
-3. When Week 01 is done, open [weeks/README.md](weeks/README.md) for the current weekly path.
+3. When Week 01 is done, open [weeks/README.md](weeks/README.md) and continue in order through Week 10.
 4. Use [course/syllabus.md](course/syllabus.md) only as the full map.
 5. Use [course/recovery-system.md](course/recovery-system.md) if you fall behind.
 

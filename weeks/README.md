@@ -14,6 +14,15 @@ Each week should have one Markdown file that can be followed from top to bottom:
 ## Available Weeks
 
 - [Week 01: GPU Mental Model And Baseline](week-01-gpu-mental-model.md)
+- [Week 02: GPU Setup And Vector Add](week-02-gpu-setup-and-vector-add.md)
+- [Week 03: Grids, Blocks, Threads, And Indexing](week-03-grids-blocks-threads-and-indexing.md)
+- [Week 04: Month 01 Checkpoint](week-04-month-01-checkpoint.md)
+- [Week 05: Memory Bandwidth And Axpy](week-05-memory-bandwidth-and-axpy.md)
+- [Week 06: Coalescing Vs Strides](week-06-coalescing-vs-strides.md)
+- [Week 07: Timing Harness And Benchmarking](week-07-timing-harness-and-benchmarking.md)
+- [Week 08: Month 02 Checkpoint](week-08-month-02-checkpoint.md)
+- [Week 09: Naive Reductions](week-09-naive-reductions.md)
+- [Week 10: Shared Memory Reductions](week-10-shared-memory-reductions.md)
 
 ## How To Use This Folder
 
