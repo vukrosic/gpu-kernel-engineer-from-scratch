@@ -3,9 +3,10 @@
 A 12-month CUDA, Triton, and AI systems course where you build a public GPU
 kernels portfolio one week at a time.
 
-This course does not promise a specific salary or job. It promises something
-you can control: correct kernels, real benchmarks, clear explanations, and
-portfolio artifacts that prove you understand GPU performance engineering.
+The honest promise: this course cannot control hiring markets, interviews, or
+compensation. It can help you build what you do control: correct kernels, real
+benchmarks, clear explanations, and portfolio artifacts that prove you understand
+GPU performance engineering.
 
 ## Start Here
 
@@ -37,22 +38,48 @@ By the end, you should be able to demonstrate:
 - CUDA and Triton implementations of AI-relevant operations
 - a public repo that can be discussed in ML systems and AI infrastructure interviews
 
+## What About AMD, Chinese GPUs, And Other Stacks?
+
+This course is CUDA and Triton first because that is the most practical path for
+AI kernel engineering today: most examples, jobs, research code, and debugging
+resources assume NVIDIA GPUs.
+
+The argument for adding other ecosystems:
+
+- AMD ROCm matters for open infrastructure and non-NVIDIA deployments.
+- Vendor diversity is becoming more important as GPU demand grows.
+- Learning portability makes you a more flexible systems engineer.
+- Some concepts transfer cleanly: memory hierarchy, tiling, reductions, fusion,
+  benchmarking, and profiling discipline.
+
+The argument against teaching everything at once:
+
+- CUDA alone is already a serious year-long skill tree.
+- Mixing vendors too early makes the course harder to follow.
+- Most learners need one strong mental model before comparing ecosystems.
+- Portfolio reviewers usually care more about clear, correct, benchmarked work
+  than shallow coverage of many platforms.
+
+Decision: this roadmap goes deep on CUDA, Triton, and AI systems first. Other
+GPU stacks should appear as comparison weeks, bonus modules, or advanced
+extensions after the core mental model is solid.
+
 ## 12-Month Roadmap
 
-| Month | Theme | Outcome |
-| --- | --- | --- |
-| 1 | GPU Foundations | Write first correct kernels and explain GPU execution. |
-| 2 | Memory And Benchmarking | Measure memory bandwidth and build a reliable benchmark harness. |
-| 3 | Reductions | Build row sum, row max, and shared-memory reductions. |
-| 4 | Scans, Atomics, Synchronization | Understand coordination between threads. |
-| 5 | Softmax And Normalization | Build transformer-adjacent kernels. |
-| 6 | Matmul Foundations | Build and tune matrix multiplication. |
-| 7 | Triton For AI Kernels | Rebuild key kernels in Triton. |
-| 8 | Triton Matmul And Tuning | Tune matmul with block sizes, warps, and stages. |
-| 9 | PyTorch Integration | Connect custom kernels to ML workflows. |
-| 10 | Transformer Kernels | Build fused MLP, GELU, RMSNorm, and attention pieces. |
-| 11 | Attention And Inference | Build simplified attention and KV-cache demos. |
-| 12 | Portfolio And Interviews | Package the capstone, benchmarks, and resume story. |
+| Month | Theme | Week 1 | Week 2 | Week 3 | Week 4 |
+| --- | --- | --- | --- | --- | --- |
+| 1 | GPU Foundations | GPU mental model and baseline | CUDA setup and vector add | Grids, blocks, threads, indexing | Checkpoint and Month 1 writeup |
+| 2 | Memory And Benchmarking | Global memory bandwidth | Coalesced vs strided access | Reliable timing harness | Memory bandwidth report |
+| 3 | Reductions | Row sum and row max | Shared-memory reductions | Warp-level thinking | Reduction benchmark report |
+| 4 | Scans, Atomics, Synchronization | Barriers and race conditions | Atomics and histograms | Prefix sum / scan | Synchronization interview notes |
+| 5 | Softmax And Normalization | Safe row-wise softmax | Fused softmax | LayerNorm | Normalization systems note |
+| 6 | Matmul Foundations | Naive matmul | Tiled matmul | Tile sizes and occupancy | Matmul portfolio page |
+| 7 | Triton For AI Kernels | Triton mental model | Blocks and masks | Triton softmax | CUDA vs Triton comparison |
+| 8 | Triton Matmul And Tuning | Triton matmul | Autotuning ideas | Batched matmul | Size vs speed chart |
+| 9 | PyTorch Integration | PyTorch baselines | Custom op wrapper | GPU test matrix | Installation and demo docs |
+| 10 | Transformer Kernels | GELU and activation fusion | RMSNorm | Attention pieces | Transformer bottleneck note |
+| 11 | Attention And Inference | Attention forward pass | FlashAttention concepts | KV cache basics | Capstone draft |
+| 12 | Portfolio And Interviews | Benchmark dashboard | Interview explanations | Resume and project story | Final capstone |
 
 The detailed week-by-week plan is in [course/syllabus.md](course/syllabus.md).
 
@@ -80,15 +107,3 @@ The rule is simple: correct and finished beats perfect and abandoned.
 - `portfolio/` contains resume, interview, and project-packaging material.
 - `creator/` contains channel cadence, content packaging, and publishing workflow.
 - `bonus/10-day-sprint/` contains optional compressed practice material.
-
-## Channel Positioning
-
-Public promise:
-
-```text
-In 12 months, build a public GPU kernels portfolio that proves you understand
-CUDA, Triton, performance engineering, and AI kernel optimization.
-```
-
-Use salary and career aspiration in titles carefully, but keep the actual course
-serious: kernels, benchmarks, explanations, and portfolio proof.

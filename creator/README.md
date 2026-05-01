@@ -2,6 +2,16 @@
 
 This folder keeps the YouTube course sustainable.
 
+## Public Promise
+
+```text
+In 12 months, build a public GPU kernels portfolio that proves you understand
+CUDA, Triton, performance engineering, and AI kernel optimization.
+```
+
+Use salary and career aspiration in titles carefully, but keep the actual course
+serious: kernels, benchmarks, explanations, and portfolio proof.
+
 ## Weekly Publishing Loop
 
 - Monday: flagship lesson.

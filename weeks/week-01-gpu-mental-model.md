@@ -38,11 +38,13 @@ Stretch path: 6-8 hours total.
 If you are busy, do the Minimum path. Staying in motion matters more than making
 Week 01 perfect.
 
-## Day 1: Read The Course Promise
+## Day 1: Write Your Course Promise
 
-Read these files:
+You probably arrived here from the root README. Do not loop back and read the
+same page again.
 
-- [../README.md](../README.md)
+Read only these two short files:
+
 - [../course/recovery-system.md](../course/recovery-system.md)
 - [../course/month-01-gpu-foundations.md](../course/month-01-gpu-foundations.md)
 
