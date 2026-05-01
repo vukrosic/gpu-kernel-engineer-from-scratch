@@ -18,6 +18,12 @@ serious: kernels, benchmarks, explanations, and portfolio proof.
 - Wednesday: short systems explainer.
 - Friday: portfolio review, career video, benchmark breakdown, or community update.
 
+## Anchor Video
+
+Start the course launch with the 50-minute roadmap video:
+
+- [roadmap-video-plan.md](roadmap-video-plan.md)
+
 ## Flagship Video Requirements
 
 Each flagship video should include:
