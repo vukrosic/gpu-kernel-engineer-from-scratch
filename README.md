@@ -7,17 +7,48 @@ kernels portfolio one week at a time.
 
 This repo is the 1-year roadmap to become a GPU kernel engineer.
 
-1. Start the course with [Week 01: GPU Mental Model And Baseline](weeks/week-01-gpu-mental-model.md)
-2. Read the full course map: [course/syllabus.md](course/syllabus.md)
-3. Read the recovery system: [course/recovery-system.md](course/recovery-system.md)
-4. Pick the current assignment: [assignments/README.md](assignments/README.md)
-5. Run the starter repo:
+If you do not watch any video, follow this order:
+
+1. Open [Week 01: GPU Mental Model And Baseline](weeks/week-01-gpu-mental-model.md)
+2. Do every task in that file from top to bottom.
+3. When Week 01 is done, open [weeks/README.md](weeks/README.md) for the current weekly path.
+4. Use [course/syllabus.md](course/syllabus.md) only as the full map.
+5. Use [course/recovery-system.md](course/recovery-system.md) if you fall behind.
+
+Run the starter repo:
 
 ```bash
 python -m pip install -e ".[dev]"
 pytest
 python examples/reference_bench.py
 ```
+
+## A To B Path
+
+Point A:
+
+- you know Python
+- you may use PyTorch
+- you do not yet understand GPU kernels deeply
+- you do not have a GPU-systems portfolio
+
+Point B:
+
+- you can write CUDA and Triton kernels
+- you can test kernels against trusted baselines
+- you can benchmark and explain performance
+- you can build AI-relevant kernels like softmax, matmul, layer norm, and attention pieces
+- you have a public portfolio repo with results, notes, and interview-ready explanations
+
+How you get there:
+
+1. Follow one week file at a time in `weeks/`.
+2. Each week, produce one artifact: code, test, benchmark, note, or portfolio section.
+3. Each month, use the fourth week to catch up and package your work.
+4. By Month 12, turn the artifacts into a final capstone and interview story.
+
+Do not try to speedrun the whole roadmap. The course works because the skills
+compound week by week.
 
 ## Course Promise
 
@@ -51,6 +82,21 @@ By the end, you should be able to demonstrate:
 | 12 | Portfolio And Interviews | Benchmark dashboard | Interview explanations | Resume and project story | Final capstone |
 
 The detailed week-by-week plan is in [course/syllabus.md](course/syllabus.md).
+
+## What To Do Each Week
+
+Each week follows the same shape:
+
+1. Read the current week file.
+2. Run the starter or reference code.
+3. Implement the smallest correct version.
+4. Add or run a correctness check.
+5. Benchmark or record an observation.
+6. Write a short note in `results/`.
+7. Do the Minimum, Standard, or Stretch version depending on your time.
+
+The weekly file is the source of truth. The syllabus tells you where the course
+is going, but the weekly file tells you what to do today.
 
 ## How The Course Prevents Burnout
 
