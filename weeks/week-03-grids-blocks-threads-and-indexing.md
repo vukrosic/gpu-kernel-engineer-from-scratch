@@ -50,6 +50,16 @@ data index -> worker id -> action
 
 Then do the same idea for a 2D grid and a row-major matrix.
 
+## Code Sketch
+
+```python
+def index_2d(row, col, width):
+    return row * width + col
+```
+
+This sketch is correct because row-major layout stores whole rows contiguously,
+so the row offset comes before the column offset.
+
 ## Write Down
 
 Answer these in your note:

@@ -20,6 +20,15 @@ python examples/reference_bench.py
 
 ## Build This
 
+## Code Sketch
+
+```python
+# Sketch the smallest working version of this week's idea.
+# Keep it tiny: one loop, one mask, one tile, or one benchmark.
+```
+
+Write one sentence explaining why the sketch is correct before you optimize it.
+
 Create `results/week-11-warp-thinking.md` with:
 
 - a sketch of a warp or small worker group

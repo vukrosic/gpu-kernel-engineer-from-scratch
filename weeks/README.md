@@ -39,6 +39,10 @@ For each week:
 If a week feels too large, do the Minimum checklist. If you have extra time, do
 Standard or Stretch.
 
+Every week file is written to be followable top to bottom. Many of the later
+weeks are shorter outline lessons, but they still include the same shape:
+commands, a build target, a note file, a code sketch, and a next-week preview.
+
 ## Year Scaffold
 
 The rest of the year is scaffolded here so the 12-month roadmap is visible at a

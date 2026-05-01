@@ -54,6 +54,16 @@ Then write a short note that answers:
 - why axpy is a good bridge between math and memory
 - why this week matters before coalescing and matmul
 
+## Code Sketch
+
+```python
+def axpy(x, y, alpha=1.5):
+    return [alpha * xi + yi for xi, yi in zip(x, y)]
+```
+
+This sketch is correct because each output element uses exactly one element
+from `x` and one from `y`, which makes the memory cost easy to reason about.
+
 ## Write Down
 
 Answer these in the note:

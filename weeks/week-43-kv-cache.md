@@ -19,6 +19,15 @@ python examples/reference_bench.py
 
 ## Build This
 
+## Code Sketch
+
+```python
+# Sketch the smallest working version of this week's idea.
+# Keep it tiny: one loop, one mask, one tile, or one benchmark.
+```
+
+Write one sentence explaining why the sketch is correct before you optimize it.
+
 Write `results/week-43-kv-cache.md` with one cache diagram and one note about
 what is reused during decoding.
 

@@ -50,6 +50,17 @@ Create `results/week-07-timing-harness.md` and include:
 
 Also compare your measurements from Week 05 and Week 06 if you can.
 
+## Code Sketch
+
+```python
+def repeated_measure(run, repeats=7):
+    samples = [run() for _ in range(repeats)]
+    return sorted(samples)[len(samples) // 2]
+```
+
+This sketch is correct because it runs the same action several times and uses a
+middle value instead of trusting one noisy result.
+
 ## Write Down
 
 Answer these in the note:

@@ -20,6 +20,15 @@ python examples/reference_bench.py
 
 Write the concrete artifact for this week in `results/week-XX-name.md`.
 
+## Code Sketch
+
+```python
+# Replace this with the smallest version of the idea for the current week.
+# Keep the shape tiny: read input, transform it once, and compare to a reference.
+```
+
+Explain why the sketch is correct before you try to make it fast.
+
 ## Write Down
 
 Answer three or four prompts that force a short explanation in your own words.

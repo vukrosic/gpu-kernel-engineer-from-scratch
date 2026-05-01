@@ -19,6 +19,15 @@ python examples/reference_bench.py
 
 ## Build This
 
+## Code Sketch
+
+```python
+# Sketch the smallest working version of this week's idea.
+# Keep it tiny: one loop, one mask, one tile, or one benchmark.
+```
+
+Write one sentence explaining why the sketch is correct before you optimize it.
+
 Write `results/month-11-checkpoint.md` with the clearest lessons from Month
 11 and one portfolio note.
 

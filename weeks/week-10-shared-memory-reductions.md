@@ -50,6 +50,18 @@ Create `results/week-10-shared-memory-reductions.md` and include:
 Use the `block_reduce_sum` idea above as your starting point and explain how it
 would map to a GPU block using shared memory or block-local coordination.
 
+## Code Sketch
+
+```python
+def block_reduce(values):
+    while len(values) > 1:
+        values = [values[i] + values[i + 1] for i in range(0, len(values), 2)]
+    return values[0]
+```
+
+This sketch is correct as a reduction shape because it keeps combining pairs
+until one accumulated answer remains.
+
 ## Write Down
 
 Answer these in the note:

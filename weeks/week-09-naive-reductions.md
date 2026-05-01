@@ -46,6 +46,19 @@ Create `results/week-09-naive-reductions.md` and include:
 Write a tiny Python loop version of row sum in the note or in a scratch snippet,
 then compare it to `numpy.sum`.
 
+## Code Sketch
+
+```python
+def row_sum(row):
+    total = 0
+    for value in row:
+        total += value
+    return total
+```
+
+This sketch is correct because it visits each value once and accumulates the
+full row into a single result.
+
 ## Write Down
 
 Answer these in the note:

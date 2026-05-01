@@ -67,20 +67,79 @@ By the end, you should be able to demonstrate:
 
 ## 12-Month Roadmap
 
-| Month | Theme | Week 1 | Week 2 | Week 3 | Week 4 |
-| --- | --- | --- | --- | --- | --- |
-| 1 | GPU Foundations | GPU mental model and baseline | CUDA setup and vector add | Grids, blocks, threads, indexing | Checkpoint and Month 1 writeup |
-| 2 | Memory And Benchmarking | Global memory bandwidth | Coalesced vs strided access | Reliable timing harness | Memory bandwidth report |
-| 3 | Reductions | Row sum and row max | Shared-memory reductions | Warp-level thinking | Reduction benchmark report |
-| 4 | Scans, Atomics, Synchronization | Barriers and race conditions | Atomics and histograms | Prefix sum / scan | Synchronization interview notes |
-| 5 | Softmax And Normalization | Safe row-wise softmax | Fused softmax | LayerNorm | Normalization systems note |
-| 6 | Matmul Foundations | Naive matmul | Tiled matmul | Tile sizes and occupancy | Matmul portfolio page |
-| 7 | Triton For AI Kernels | Triton mental model | Blocks and masks | Triton softmax | CUDA vs Triton comparison |
-| 8 | Triton Matmul And Tuning | Triton matmul | Autotuning ideas | Batched matmul | Size vs speed chart |
-| 9 | PyTorch Integration | PyTorch baselines | Custom op wrapper | GPU test matrix | Installation and demo docs |
-| 10 | Transformer Kernels | GELU and activation fusion | RMSNorm | Attention pieces | Transformer bottleneck note |
-| 11 | Attention And Inference | Attention forward pass | FlashAttention concepts | KV cache basics | Capstone draft |
-| 12 | Portfolio And Interviews | Benchmark dashboard | Interview explanations | Resume and project story | Final capstone |
+There are 48 weekly files because 12 months x 4 weeks = 48 weeks.
+
+Month 1: GPU Foundations
+- Week 01: GPU mental model and baseline
+- Week 02: CUDA setup and vector add
+- Week 03: Grids, blocks, threads, indexing
+- Week 04: Checkpoint and Month 1 writeup
+
+Month 2: Memory And Benchmarking
+- Week 05: Global memory bandwidth
+- Week 06: Coalesced vs strided access
+- Week 07: Reliable timing harness
+- Week 08: Memory bandwidth report
+
+Month 3: Reductions
+- Week 09: Row sum and row max
+- Week 10: Shared-memory reductions
+- Week 11: Warp-level thinking
+- Week 12: Reduction checkpoint
+
+Month 4: Scans, Atomics, Synchronization
+- Week 13: Barriers and race conditions
+- Week 14: Atomics and histograms
+- Week 15: Prefix sum and scan
+- Week 16: Synchronization checkpoint
+
+Month 5: Softmax And Normalization
+- Week 17: Safe row-wise softmax
+- Week 18: Fused softmax
+- Week 19: LayerNorm
+- Week 20: Normalization checkpoint
+
+Month 6: Matmul Foundations
+- Week 21: Naive matmul
+- Week 22: Tiled matmul
+- Week 23: Tile sizes and occupancy
+- Week 24: Matmul checkpoint
+
+Month 7: Triton For AI Kernels
+- Week 25: Triton mental model
+- Week 26: Triton blocks and masks
+- Week 27: Triton softmax
+- Week 28: Triton checkpoint
+
+Month 8: Triton Matmul And Tuning
+- Week 29: Triton matmul
+- Week 30: Autotuning
+- Week 31: Batched matmul
+- Week 32: Tuning checkpoint
+
+Month 9: PyTorch Integration
+- Week 33: PyTorch baselines
+- Week 34: Custom op wrapper
+- Week 35: GPU test matrix
+- Week 36: Integration checkpoint
+
+Month 10: Transformer Kernels
+- Week 37: GELU fusion
+- Week 38: RMSNorm
+- Week 39: Attention pieces
+- Week 40: Transformer checkpoint
+
+Month 11: Attention And Inference
+- Week 41: Attention forward pass
+- Week 42: FlashAttention concepts
+- Week 43: KV cache
+- Week 44: Attention checkpoint
+
+Month 12: Portfolio And Interviews
+- Week 45: Benchmark dashboard
+- Week 46: Interview explanations
+- Week 47: Resume and story
+- Week 48: Final capstone
 
 The detailed week-by-week plan is in [course/syllabus.md](course/syllabus.md),
 and the first ten weekly lessons live in [weeks/](weeks/).

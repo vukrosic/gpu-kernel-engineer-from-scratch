@@ -55,6 +55,19 @@ Then write a one-paragraph kernel sketch in the same file:
 If you have a CUDA environment, you can optionally write the same idea as a
 scratch kernel, but the repo does not require that yet.
 
+## Code Sketch
+
+```python
+def vector_add(a, b):
+    out = []
+    for x, y in zip(a, b):
+        out.append(x + y)
+    return out
+```
+
+This sketch is correct because every output element is the sum of one matching
+element from `a` and one matching element from `b`.
+
 ## Write Down
 
 Answer these in your note:
