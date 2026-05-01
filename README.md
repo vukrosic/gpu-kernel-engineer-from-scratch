@@ -12,8 +12,9 @@ If you do not watch any video, follow this order:
 1. Open [Week 01: GPU Mental Model And Baseline](weeks/week-01-gpu-mental-model.md)
 2. Do every task in that file from top to bottom.
 3. When Week 01 is done, open [weeks/README.md](weeks/README.md) and continue in order through Week 10.
-4. Use [course/syllabus.md](course/syllabus.md) only as the full map.
-5. Use [course/recovery-system.md](course/recovery-system.md) if you fall behind.
+4. Use the scaffolded weekly files in `weeks/` for the rest of the year.
+5. Use [course/syllabus.md](course/syllabus.md) only as the full map.
+6. Use [course/recovery-system.md](course/recovery-system.md) if you fall behind.
 
 Run the starter repo:
 
@@ -81,7 +82,8 @@ By the end, you should be able to demonstrate:
 | 11 | Attention And Inference | Attention forward pass | FlashAttention concepts | KV cache basics | Capstone draft |
 | 12 | Portfolio And Interviews | Benchmark dashboard | Interview explanations | Resume and project story | Final capstone |
 
-The detailed week-by-week plan is in [course/syllabus.md](course/syllabus.md).
+The detailed week-by-week plan is in [course/syllabus.md](course/syllabus.md),
+and the first ten weekly lessons live in [weeks/](weeks/).
 
 ## What To Do Each Week
 
