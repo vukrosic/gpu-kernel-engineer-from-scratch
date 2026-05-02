@@ -2,8 +2,9 @@
 
 ## What This Week Is
 
-You learn the shape of RMSNorm and why it shows up in modern transformer
-families. The main goal is to understand the normalization steps clearly.
+You learn the shape of RMSNorm and why modern transformers like it. The point
+is to see how one reduction and one scale can replace a more complicated
+normalization path.
 
 ## What To Read
 
@@ -19,23 +20,33 @@ python examples/reference_bench.py
 
 ## Build This
 
+Write RMSNorm from scratch on a tiny vector. Compare it to a reference
+LayerNorm-style note so you can name the shared pieces and the pieces RMSNorm
+leaves out.
+
 ## Code Sketch
 
 ```python
-# Sketch the smallest working version of this week's idea.
-# Keep it tiny: one loop, one mask, one tile, or one benchmark.
+import math
+
+
+def rmsnorm(xs, gamma, eps=1e-6):
+    mean_square = sum(x * x for x in xs) / len(xs)
+    scale = 1.0 / math.sqrt(mean_square + eps)
+    return [x * scale * g for x, g in zip(xs, gamma)]
 ```
 
-Write one sentence explaining why the sketch is correct before you optimize it.
+The sketch is correct because it normalizes by root mean square, then applies
+the learned scale, which is the core of RMSNorm.
 
-Write `results/week-38-rmsnorm.md` with the RMSNorm steps and one note about
-why it differs from LayerNorm.
+Write `results/week-38-rmsnorm.md` with the RMSNorm steps, the epsilon term,
+and one note about why it differs from LayerNorm.
 
 ## Write Down
 
-- What does RMSNorm normalize?
-- How is it simpler than LayerNorm?
-- Why does it matter in transformer blocks?
+- What does RMSNorm measure?
+- Which subtraction from LayerNorm disappears?
+- Why does a simpler normalization path matter in a transformer block?
 
 ## Minimum
 
@@ -59,4 +70,5 @@ Keep the comparison to LayerNorm very short.
 
 ## Next Week
 
-You will break attention into smaller pieces so the final kernel feels less mysterious.
+You will break attention into smaller pieces so the final kernel feels less
+mysterious.

@@ -1,23 +1,27 @@
 # Month 04 Checkpoint
 
-Status: scaffolded
+Status: month checkpoint template
 
 ## Summary
 
-TBD
+Summarize synchronization, atomics, and scan in three concise sentences. Focus
+on the coordination story, not just the topics.
 
 ## Best Result
 
-TBD
+Name the strongest artifact from Month 4 and explain why it is the best proof
+of the month.
 
 ## Hardest Bug
 
-TBD
+Describe the hardest race, ordering, or coordination issue you had to work
+through.
 
 ## Interview Explanation
 
-TBD
+Write the 60-second explanation you would give if someone asked why waiting or
+ordering is part of correctness.
 
 ## Portfolio Link
 
-TBD
+Record the exact file or section a reviewer should open first.

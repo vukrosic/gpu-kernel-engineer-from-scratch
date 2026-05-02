@@ -5,6 +5,9 @@
 This is the Month 3 checkpoint. You clean up your reduction notes and turn the
 first three months into a readable story.
 
+The checkpoint should make the month feel complete: naive reductions, block
+thinking, and warp-level thinking should all be present as one connected arc.
+
 ## What To Read
 
 - [../course/month-03-reductions.md](../course/month-03-reductions.md)
@@ -21,6 +24,14 @@ python examples/reference_bench.py
 
 ## Build This
 
+Create `results/week-12-month-03-checkpoint.md` with:
+
+- what reductions are
+- why grouped work matters
+- what got clearer over the last four weeks
+- what still feels fuzzy
+- one sentence that previews Month 4
+
 ## Code Sketch
 
 ```python
@@ -32,15 +43,7 @@ summary = {
 ```
 
 This sketch is correct because a checkpoint is a summary artifact, not a new
-algorithm: it captures the lesson in compact form before you move on.
-
-Create `results/month-03-checkpoint.md` with:
-
-- what reductions are
-- why grouped work matters
-- what got clearer over the last four weeks
-- what still feels fuzzy
-- one sentence that previews Month 4
+algorithm. It captures the lesson in compact form before you move on.
 
 ## Write Down
 

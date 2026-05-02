@@ -5,6 +5,10 @@
 Week 04 is not a new concept week. It is a checkpoint. You review the first
 three weeks, clean up your notes, and package the Month 1 story so far.
 
+The point is to make the month readable from the outside. If someone opened your
+notes tomorrow, they should be able to see the arc from mental model to vector
+add to indexing without needing a live explanation from you.
+
 ## What You Need From The Repo
 
 - [../course/month-01-gpu-foundations.md](../course/month-01-gpu-foundations.md)
@@ -19,11 +23,11 @@ pytest
 python examples/reference_bench.py
 ```
 
-Open the notes you already wrote in `results/` and clean them up.
+Then open the notes you already wrote in `results/` and clean them up.
 
 ## Build This
 
-Create `results/month-01-checkpoint.md` with these sections:
+Create `results/week-04-month-01-checkpoint.md` with these sections:
 
 - what you understand about CPU vs GPU now
 - what vector add taught you
@@ -32,6 +36,19 @@ Create `results/month-01-checkpoint.md` with these sections:
 - what you want Month 2 to answer
 
 Also rewrite your Week 01 and Week 02 notes so they are easier to read.
+
+## Code Sketch
+
+```python
+month_01 = {
+    "mental_model": "CPU and GPU solve different shapes of work well",
+    "first_kernel": "vector add proved the one-worker-one-output idea",
+    "indexing": "layout and worker mapping must agree",
+}
+```
+
+This sketch is correct because a checkpoint is a summary artifact, not a new
+algorithm. It captures the month in compact form before you move on.
 
 ## Write Down
 
@@ -44,7 +61,7 @@ Answer these in the checkpoint note:
 
 ## Minimum
 
-- `results/month-01-checkpoint.md` exists
+- `results/week-04-month-01-checkpoint.md` exists
 - your Week 01 and Week 02 notes are readable
 - you can explain Month 1 in five sentences
 

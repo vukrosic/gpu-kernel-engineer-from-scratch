@@ -2,40 +2,47 @@
 
 ## What This Week Is
 
-You learn to trust a clean reference before you touch a custom op. The point
-is to know what correct looks like and how to compare against it.
+You learn to trust a clean reference before you touch a custom op. The point is
+to know what correct looks like, how to compare against it, and why a baseline
+is more than just a backup plan.
 
 ## What To Read
 
 - [../course/month-09-pytorch-integration.md](../course/month-09-pytorch-integration.md)
-- [week-template.md](week-template.md)
+- [week-32-month-08-checkpoint.md](week-32-month-08-checkpoint.md)
+- [../gputriton/reference.py](../gputriton/reference.py)
+- [../tests/test_reference.py](../tests/test_reference.py)
 
 ## Exact Commands
 
 ```bash
-pytest
+pytest tests/test_reference.py tests/test_gpu_tracks.py
 python examples/reference_bench.py
 ```
 
 ## Build This
 
+Write `results/week-33-pytorch-baselines.md` with one baseline table, one note
+about why references make debugging easier, and one sentence about what the
+baseline protects you from.
+
 ## Code Sketch
 
 ```python
-# Sketch the smallest working version of this week's idea.
-# Keep it tiny: one loop, one mask, one tile, or one benchmark.
+def compare_baseline(name, reference, candidate, *inputs):
+    ref = reference(*inputs)
+    out = candidate(*inputs)
+    return name, ref.shape == out.shape
 ```
 
 Write one sentence explaining why the sketch is correct before you optimize it.
-
-Write `results/week-33-pytorch-baselines.md` with one baseline table and one
-note about why references make debugging easier.
 
 ## Write Down
 
 - What makes a baseline trustworthy?
 - What should be compared against it?
 - What is the simplest correctness check?
+- Which output property matters first: shape, dtype, or values?
 
 ## Minimum
 

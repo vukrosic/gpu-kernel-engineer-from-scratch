@@ -2,8 +2,9 @@
 
 ## What This Week Is
 
-Month 4 is a checkpoint week. You consolidate synchronization, atomics, and scan
-into a clean summary and make the course feel like a continuous path again.
+Month 4 is a checkpoint week. You consolidate synchronization, atomics, and
+scan into one clean summary and make the course feel like a continuous path
+again instead of three separate topics.
 
 ## What To Read
 
@@ -21,25 +22,21 @@ python examples/reference_bench.py
 
 ## Build This
 
+Write `results/week-16-month-04-checkpoint.md` as a Month 4 checkpoint note
+that compares barriers, atomics, and scan in one readable story.
+
 ## Code Sketch
 
 ```python
-month_4 = [
-    "barriers prevent races",
-    "atomics protect shared counters",
-    "scan keeps information flowing",
-]
+month_4 = {
+    "synchronization": "wait so shared data is ready",
+    "atomics": "protect shared counters",
+    "scan": "carry information forward across positions",
+}
 ```
 
-This sketch is correct because the checkpoint is about organizing the month,
-not adding a new kernel.
-
-Create `results/month-04-checkpoint.md` with:
-
-- the main coordination idea from Month 4
-- one thing that got clearer
-- one bug or conceptual trap you want to remember
-- one bridge sentence to Month 5
+This sketch is correct because the checkpoint is about compressing the month
+into three ideas the learner must remember, not adding a new kernel.
 
 ## Write Down
 
@@ -48,6 +45,7 @@ Answer:
 1. What does Month 4 teach about coordination?
 2. Which concept was most error-prone?
 3. What would you want to remember later?
+4. Which of the three topics feels most useful in GPU code?
 
 ## Minimum
 
@@ -70,5 +68,5 @@ Do not carry Month 4 confusion into Month 5. Use the checkpoint to reset.
 
 ## Next Week
 
-Week 17 begins softmax, which turns the parallel coordination lessons toward
+Week 17 begins softmax, which turns the coordination lessons toward
 transformer-adjacent math.

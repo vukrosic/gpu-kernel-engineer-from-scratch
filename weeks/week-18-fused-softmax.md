@@ -3,7 +3,9 @@
 ## What This Week Is
 
 The softmax math from Week 17 now becomes a performance question: can you do
-more work in one pass and move less data around?
+more work in one pass and move less data around? This is the first time the
+course pushes you to ask what can be shared inside a pipeline instead of what
+just needs to be computed.
 
 ## What To Read
 
@@ -19,6 +21,9 @@ python examples/reference_bench.py
 
 ## Build This
 
+Write `results/week-18-fused-softmax.md` with a comparison between unfused and
+fused softmax, plus one sentence about why fewer passes can help.
+
 ## Code Sketch
 
 ```python
@@ -27,7 +32,7 @@ import math
 def fused_softmax(xs):
     shift = max(xs)
     exps = []
-    total = 0
+    total = 0.0
     for x in xs:
         value = math.exp(x - shift)
         exps.append(value)
@@ -35,14 +40,8 @@ def fused_softmax(xs):
     return [value / total for value in exps]
 ```
 
-This sketch is correct because it fuses the exponentiation and summation into
-one pass while keeping the same math as the unfused version.
-
-Create `results/week-18-fused-softmax.md` with:
-
-- what “fused” means
-- why fewer passes can help
-- what steps softmax can share in one pipeline
+This sketch is correct because it keeps the same stable math as the unfused
+version while showing how the intermediate values can stay in one pipeline.
 
 ## Write Down
 
@@ -51,6 +50,7 @@ Answer:
 1. What is the benefit of fusion?
 2. Which softmax steps can be combined?
 3. Why is this a memory story as much as a math story?
+4. What intermediate value do you want to keep around instead of recomputing?
 
 ## Minimum
 

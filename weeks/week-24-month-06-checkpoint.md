@@ -8,7 +8,7 @@ someone else. This is the moment to clean up notes, examples, and your story.
 ## What To Read
 
 - [../course/month-06-matmul-foundations.md](../course/month-06-matmul-foundations.md)
-- [week-23-tiling-and-occupancy.md](week-23-tiling-and-occupancy.md)
+- [../weeks/week-23-tiling-and-occupancy.md](../weeks/week-23-tiling-and-occupancy.md)
 
 ## Exact Commands
 
@@ -19,17 +19,21 @@ python examples/reference_bench.py
 
 ## Build This
 
+Write `results/week-24-month-06-checkpoint.md` with what you can now explain
+about naive matmul, tiling, and occupancy.
+
 ## Code Sketch
 
 ```python
-# Sketch the smallest working version of this week's idea.
-# Keep it tiny: one loop, one mask, one tile, or one benchmark.
+month_6 = {
+    "naive": "one output cell at a time",
+    "tiling": "reuse shared blocks before moving on",
+    "occupancy": "a bigger tile can reduce parallel slack",
+}
 ```
 
-Write one sentence explaining why the sketch is correct before you optimize it.
-
-Write `results/month-06-checkpoint.md` with what you can now explain about
-naive matmul, tiling, and occupancy.
+This sketch is correct because the checkpoint is about organizing the month
+into the three ideas you want to remember, not adding a new kernel.
 
 ## Write Down
 

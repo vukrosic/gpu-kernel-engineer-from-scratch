@@ -6,6 +6,10 @@ You are not adding a new algorithm yet. You are learning how a group of workers
 can cooperate inside a small unit of work and why that matters for reductions,
 matmul, and later GPU kernels.
 
+Think of this as moving one layer down in the coordination stack. The group is
+small enough that the workers can act together, but the result is still part of
+a larger reduction.
+
 ## What To Read
 
 - [../course/month-03-reductions.md](../course/month-03-reductions.md)
@@ -18,7 +22,29 @@ pytest
 python examples/reference_bench.py
 ```
 
+Try a tiny grouped reduction in Python:
+
+```bash
+python - <<'PY'
+def group_reduce(values):
+    partials = []
+    for i in range(0, len(values), 2):
+        partials.append(values[i] + values[i + 1])
+    return partials
+
+values = [1, 2, 3, 4, 5, 6, 7, 8]
+print(group_reduce(values))
+PY
+```
+
 ## Build This
+
+Create `results/week-11-warp-thinking.md` with:
+
+- a sketch of a warp or small worker group
+- a short explanation of why partial work matters
+- one example of a reduction tree
+- one note on how this previews better reduction code later
 
 ## Code Sketch
 
@@ -32,13 +58,6 @@ def group_reduce(values):
 
 This sketch is correct because the group first reduces nearby values into
 partials instead of forcing one worker to do every step alone.
-
-Create `results/week-11-warp-thinking.md` with:
-
-- a sketch of a warp or small worker group
-- a short explanation of why partial work matters
-- one example of a reduction tree
-- one note on how this previews better reduction code later
 
 ## Write Down
 

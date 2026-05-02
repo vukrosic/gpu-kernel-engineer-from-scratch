@@ -2,222 +2,116 @@
 
 ## What This Week Is
 
-This is the first week of the 1-year GPU Kernels From Scratch roadmap.
+This is the first week of the year-long course, and it starts with the most
+important habit in the whole project: trust the reference before you trust the
+GPU.
 
-You are not trying to become fast yet. You are building the habit that will
-carry the whole year:
+You are not trying to get clever yet. You are building the workflow that keeps
+later kernels honest:
 
-1. understand the concept
-2. run the code
+1. understand the shape of the problem
+2. run the baseline code
 3. verify correctness
-4. measure something
-5. write down what happened
+4. record an observation
+5. write down what changed in your own words
 
-This week uses CPU/NumPy reference code on purpose. Before writing CUDA kernels,
-you need trusted baselines that future GPU kernels can be tested against.
+The week uses CPU and NumPy reference code on purpose. Before any CUDA or Triton
+work matters, you need a baseline that future kernels can be compared against.
 
-## Outcome
-
-By the end of this week, you will have:
-
-- installed and run the project
-- run the correctness tests
-- run the starter benchmark
-- written a short CPU vs GPU mental model
-- created your first benchmark note in `results/`
-- understood what Week 02 will build next
-
-## Time Budget
-
-Minimum path: 2-3 hours total.
-
-Standard path: 4-6 hours total.
-
-Stretch path: 6-8 hours total.
-
-If you are busy, do the Minimum path. Staying in motion matters more than making
-Week 01 perfect.
-
-## Day 1: Write Your Course Promise
-
-You probably arrived here from the root README. Do not loop back and read the
-same page again.
-
-Read only these two short files:
+## What You Need From The Repo
 
 - [../course/recovery-system.md](../course/recovery-system.md)
 - [../course/month-01-gpu-foundations.md](../course/month-01-gpu-foundations.md)
-
-Then write this in your own words in a notebook or `results/week-01-baseline.md`:
-
-```text
-I am taking this course to build a public GPU kernels portfolio.
-This year is about correct kernels, benchmarks, and clear explanations.
-The goal is not to memorize CUDA. The goal is to become the kind of engineer who
-can reason about GPU performance.
-```
-
-Now write your own version. Keep it short. Five sentences is enough.
-
-## Day 2: Set Up The Repo
-
-From the repo root, run:
-
-```bash
-python -m pip install -e ".[dev]"
-```
-
-Then run:
-
-```bash
-pytest
-```
-
-Expected result:
-
-```text
-4 passed
-```
-
-If tests fail, do not continue. Fix setup first.
-
-If you are using a machine without a GPU, that is fine for Week 01. This week is
-about the mental model and reference baselines.
-
-## Day 3: Run The Starter Benchmark
-
-Run:
-
-```bash
-python examples/reference_bench.py
-```
-
-You should see timings for:
-
-- `vector_add`
-- `matmul`
-- `softmax`
-- `attention`
-
-The exact numbers do not matter yet. Your job is to record them.
-
-Create a file:
-
-```text
-results/week-01-baseline.md
-```
-
-Add this:
-
-```text
-# Week 01 Baseline
-
-Machine:
-Python version:
-Command:
-
-## Results
-
-vector_add:
-matmul:
-softmax:
-attention:
-
-## Notes
-
-What surprised me:
-What I do not understand yet:
-What I want to compare when GPU kernels exist:
-```
-
-Fill it in from your run.
-
-## Day 4: Understand The Reference Code
-
-Open:
-
 - [../gputriton/reference.py](../gputriton/reference.py)
 - [../gputriton/bench.py](../gputriton/bench.py)
 - [../tests/test_reference.py](../tests/test_reference.py)
 
-Read the functions in this order:
+## Exact Commands
 
-1. `vector_add`
-2. `softmax`
-3. `matmul`
-4. `attention`
-5. `benchmark`
-6. `run_reference_benchmarks`
+From the repo root, set up the dev environment and run the checks:
 
-Write one sentence for each function:
-
-```text
-vector_add:
-softmax:
-matmul:
-attention:
-benchmark:
-run_reference_benchmarks:
+```bash
+python -m pip install -e ".[dev]"
+pytest
+python examples/reference_bench.py
 ```
 
-Do not overthink it. The goal is to know what the baseline code does.
+Then inspect the reference implementations directly:
 
-## Day 5: Learn The GPU Mental Model
+```bash
+python - <<'PY'
+import inspect
+from gputriton import reference
 
-Write this down:
-
-```text
-A CPU is optimized for complex sequential control flow.
-A GPU is optimized for doing many similar operations in parallel.
-A CUDA kernel is a function that runs many times across many GPU threads.
-Threads are grouped into blocks.
-Blocks are grouped into a grid.
-The hard part is not only writing the math. The hard part is moving memory and
-organizing parallel work efficiently.
+print(inspect.getsource(reference.vector_add))
+print(inspect.getsource(reference.softmax))
+PY
 ```
 
-Now rewrite it in your own words.
+## Build This
 
-Then answer these questions:
+Create `results/week-01-baseline.md` and turn it into a real baseline note. It
+should capture:
 
-1. Why is vector add a good first GPU kernel?
-2. Why is matmul more important for AI than vector add?
-3. Why do we need a CPU or NumPy reference before writing a GPU kernel?
-4. What does a benchmark tell us that a correctness test does not?
-5. What could go wrong if we optimize before checking correctness?
+- the commands you ran
+- the environment you ran them in
+- the reference timings you saw
+- your first plain-language CPU vs GPU explanation
+- one sentence that previews what Week 02 will test next
 
-Put your answers in `results/week-01-baseline.md`.
+## Code Sketch
 
-## Day 6: Catch Up Or Clean Up
+```python
+import time
 
-If you are behind, do only this:
-
-1. Run `pytest`.
-2. Run `python examples/reference_bench.py`.
-3. Write five sentences explaining CPU vs GPU.
-
-That is the Minimum assignment.
-
-If you are on track, clean up `results/week-01-baseline.md` so another person
-could read it.
-
-## Day 7: Portfolio Note And Rest
-
-Add this section to `results/week-01-baseline.md`:
-
-```text
-## Portfolio Note
-
-This week I set up the GPU Kernels From Scratch repo, ran the reference tests,
-and recorded baseline timings for vector add, matmul, softmax, and attention.
-The most important idea is that future GPU kernels need trusted CPU/NumPy
-baselines so I can prove correctness before optimizing performance.
+def measure(run):
+    start = time.perf_counter()
+    result = run()
+    elapsed = time.perf_counter() - start
+    return result, elapsed
 ```
 
-Rewrite that in your own voice.
+This sketch is correct because it keeps the work being measured separate from
+the act of measuring it. That separation is the first step toward trustworthy
+benchmarks.
 
-Then stop. Do not start Week 02 early unless you are genuinely excited and have
-extra energy. The course is one year long. Recovery is part of the system.
+## Write Down
+
+Answer these in your note:
+
+1. What is the simplest honest way to explain CPU vs GPU execution?
+2. Why do reference implementations come before kernels?
+3. What did the starter benchmark tell you that the tests did not?
+4. What do you want to compare once GPU code exists?
+
+## Minimum
+
+- `pytest` runs
+- `python examples/reference_bench.py` runs
+- `results/week-01-baseline.md` exists
+- you can explain the CPU vs GPU mental model in plain language
+
+## Standard
+
+- you record the reference outputs or timings from the benchmark run
+- you write a short paragraph about why baselines matter
+- you summarize the reference code in one sentence per function
+
+## Stretch
+
+- you compare two different input sizes or shapes
+- you write a short "course promise" paragraph in your own voice
+- you note one thing you still do not understand about GPU work
+
+## If You Are Behind
+
+Do the install, the tests, and the benchmark. Then write five sentences about
+why baselines matter and stop there.
+
+## Next Week
+
+Week 02 turns the mental model into the first kernel-shaped exercise: vector
+add, one output per input position, checked against the CPU reference.
 
 ## Done Checklist
 

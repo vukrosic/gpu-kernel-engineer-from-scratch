@@ -1,19 +1,21 @@
 # Benchmark Dashboard
 
-Status: scaffolded
+Status: dashboard template
 
 ## What Was Built
 
-TBD
+Describe the table or chart structure and what comparison it is meant to show.
 
 ## Correctness Check
 
-TBD
+Explain how you know the rows correspond to the right kernel, shape, or
+baseline.
 
 ## Benchmark Or Observation
 
-TBD
+Record which metric is most useful and why, even if the numbers are not filled
+in yet.
 
 ## Lesson Learned
 
-TBD
+Write the dashboard-level takeaway in one sentence.

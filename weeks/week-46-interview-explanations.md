@@ -2,8 +2,8 @@
 
 ## What This Week Is
 
-You turn the course into words you can say out loud. The goal is to explain
-the work clearly, not to memorize canned answers.
+You turn the course into words you can say out loud. The goal is to explain the
+work clearly, not to memorize canned answers.
 
 ## What To Read
 
@@ -19,14 +19,29 @@ python examples/reference_bench.py
 
 ## Build This
 
+Write three interview-style answers: one about speeding up a kernel, one about a
+memory tradeoff, and one about a bug or mismatch you solved. Keep them short
+enough to practice without notes.
+
 ## Code Sketch
 
 ```python
-# Sketch the smallest working version of this week's idea.
-# Keep it tiny: one loop, one mask, one tile, or one benchmark.
+answers = {
+    "how do you speed up attention?": [
+        "reduce memory traffic",
+        "reuse tiles or cached data",
+        "verify against a reference path",
+    ],
+    "what tradeoff did KV cache introduce?": [
+        "lower decode cost",
+        "higher memory use",
+        "more state to manage",
+    ],
+}
 ```
 
-Write one sentence explaining why the sketch is correct before you optimize it.
+The sketch is correct because it turns the week into a question-and-answer bank
+you can rehearse and refine.
 
 Write `results/week-46-interview-explanations.md` with three interview-style
 answers and one note about what you still want to practice.

@@ -3,7 +3,8 @@
 ## What This Week Is
 
 You finish the course by packaging the strongest version of the year into one
-public artifact. The goal is to make the repo easy to browse and easy to cite.
+public artifact. The goal is to make the repo easy to browse, easy to cite, and
+easy to explain in a first conversation.
 
 ## What To Read
 
@@ -19,14 +20,23 @@ python examples/reference_bench.py
 
 ## Build This
 
+Polish the final README, make sure the benchmark story is easy to find, and
+write a final summary that connects the whole course from baseline kernels to
+transformer inference and portfolio materials.
+
 ## Code Sketch
 
 ```python
-# Sketch the smallest working version of this week's idea.
-# Keep it tiny: one loop, one mask, one tile, or one benchmark.
+repo_outline = {
+    "start_here": "README with project summary",
+    "proof": "benchmark and note files",
+    "story": "resume bullets and interview answers",
+    "next": "what to keep improving after the course",
+}
 ```
 
-Write one sentence explaining why the sketch is correct before you optimize it.
+The sketch is correct because it shows the full public shape of the project,
+not just the code path.
 
 Write `results/week-48-final-capstone.md` with the final project summary, the
 best benchmark note, and the final next-step list.

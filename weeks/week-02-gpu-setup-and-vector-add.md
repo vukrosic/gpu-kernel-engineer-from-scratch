@@ -2,13 +2,15 @@
 
 ## What This Week Is
 
-Week 02 is the first hands-on step after the mental model. You are turning the
-idea of a kernel into a tiny, testable vector-add workflow and learning how to
-compare it to the CPU/NumPy baseline already in the repo.
+Week 02 is the first hands-on step after the mental model. You turn the idea of
+a kernel into a tiny, testable vector-add workflow and compare it to the
+CPU/NumPy baseline already in the repo.
+
+This is still a small problem on purpose. Vector add is the first place where
+you can see the full loop of this course: write the shape, check the result, and
+then think about how a GPU would carry the same work.
 
 ## What You Need From The Repo
-
-Open these files before you do anything else:
 
 - [../gputriton/reference.py](../gputriton/reference.py)
 - [../gputriton/bench.py](../gputriton/bench.py)
@@ -25,7 +27,7 @@ pytest
 python examples/reference_bench.py
 ```
 
-Run a tiny vector-add experiment:
+Run a tiny vector-add experiment and compare it to the reference:
 
 ```bash
 python - <<'PY'
@@ -40,13 +42,14 @@ PY
 
 ## Build This
 
-Create `results/week-02-vector-add.md` and put three things in it:
+Create `results/week-02-vector-add.md` and use it to explain:
 
 - what vector add does
 - why it is a good first kernel shape
 - what would change if the same logic ran on a GPU
+- what you would check first if the result looked wrong
 
-Then write a one-paragraph kernel sketch in the same file:
+Then write a short kernel sketch in the same file:
 
 - one input element per thread
 - one output element per thread
@@ -54,12 +57,9 @@ Then write a one-paragraph kernel sketch in the same file:
 - one memory read from `b`
 - one memory write to the output
 
-If you have a CUDA environment, you can optionally write the same idea as a
-scratch kernel, but the repo does not require that yet.
-
-On a GPU machine, use `cuda/vector_add.cu` for the CUDA version and
-`triton_kernels/vector_add.py` for the Triton version. On this Mac, stick to
-the reference path and the written sketch.
+If you have a CUDA environment, you can also sketch the same idea in
+`cuda/vector_add.cu` or `triton_kernels/vector_add.py`, but the week is still
+fully valid if you stay on the reference path.
 
 ## Code Sketch
 
@@ -100,7 +100,7 @@ Answer these in your note:
 
 - you write a CUDA-style pseudocode version of vector add
 - you compare the vector-add benchmark to the matmul benchmark from Week 01
-- you explain why “easy math” does not mean “easy GPU performance”
+- you explain why "easy math" does not mean "easy GPU performance"
 
 ## If You Are Behind
 

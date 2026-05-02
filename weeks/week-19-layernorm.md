@@ -3,12 +3,15 @@
 ## What This Week Is
 
 LayerNorm is the other major normalization pattern in this part of the course.
-It is useful because it mixes reduction thinking with per-element output.
+It is useful because it mixes reduction thinking with per-element output, which
+makes it a nice bridge between the math of softmax and the later transformer
+kernels.
 
 ## What To Read
 
 - [../course/month-05-softmax-and-normalization.md](../course/month-05-softmax-and-normalization.md)
 - [../weeks/week-18-fused-softmax.md](../weeks/week-18-fused-softmax.md)
+- [../gputriton/reference.py](../gputriton/reference.py)
 - [../cuda/layernorm.cu](../cuda/layernorm.cu)
 - [../triton_kernels/layernorm.py](../triton_kernels/layernorm.py)
 
@@ -20,6 +23,9 @@ python examples/reference_bench.py
 ```
 
 ## Build This
+
+Write `results/week-19-layernorm.md` with a plain explanation of what LayerNorm
+does, which parts are reduction-like, and which parts are elementwise.
 
 ## Code Sketch
 
@@ -33,16 +39,6 @@ def layernorm(xs, eps=1e-5):
 This sketch is correct because it normalizes the whole row with a shared mean
 and variance before returning one adjusted value per input.
 
-Create `results/week-19-layernorm.md` with:
-
-- what LayerNorm does
-- which parts are reduction-like
-- which parts are elementwise
-- why it shows up in deep learning code
-
-The implementation track is `gputriton/reference.py` first, then the CUDA and
-Triton starter files listed above.
-
 ## Write Down
 
 Answer:
@@ -50,6 +46,7 @@ Answer:
 1. What does LayerNorm normalize?
 2. Why is it both reduction-like and elementwise?
 3. Why does normalization help model training?
+4. Where does the epsilon term matter?
 
 ## Minimum
 

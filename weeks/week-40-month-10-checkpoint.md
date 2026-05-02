@@ -2,8 +2,8 @@
 
 ## What This Week Is
 
-You stop and package the transformer-kernel month. The goal is to turn the
-pieces into a short story you can reuse later.
+You stop and package the transformer-kernel month. The goal is to turn GELU
+fusion, RMSNorm, and attention pieces into a short story you can reuse later.
 
 ## What To Read
 
@@ -19,17 +19,25 @@ python examples/reference_bench.py
 
 ## Build This
 
+Write the month 10 checkpoint note and summarize the three most important ideas
+from the month. Keep the summary short enough that you could read it out loud
+in one minute.
+
 ## Code Sketch
 
 ```python
-# Sketch the smallest working version of this week's idea.
-# Keep it tiny: one loop, one mask, one tile, or one benchmark.
+month_10_takeaways = [
+    ("GELU fusion", "remove one extra write"),
+    ("RMSNorm", "one reduction and one scale"),
+    ("attention pieces", "score, mask, softmax, value mix"),
+]
 ```
 
-Write one sentence explaining why the sketch is correct before you optimize it.
+The sketch is correct because it preserves the three lessons in the same order
+you would explain them in an interview or README.
 
-Write `results/month-10-checkpoint.md` with the three things you now explain
-best about transformer kernels.
+Write `results/month-10-checkpoint.md` with the three most important things you
+learned in Month 10.
 
 ## Write Down
 

@@ -3,7 +3,8 @@
 ## What This Week Is
 
 You turn the year of work into a clear project story for a resume and GitHub
-profile. The goal is to make the output easy for other people to understand.
+profile. The goal is to make the output easy for another engineer to scan and
+trust.
 
 ## What To Read
 
@@ -19,14 +20,22 @@ python examples/reference_bench.py
 
 ## Build This
 
+Draft three resume bullets and one short project summary paragraph. Make the
+bullets specific enough to show the kernels, the validation work, and the shape
+of the performance story.
+
 ## Code Sketch
 
 ```python
-# Sketch the smallest working version of this week's idea.
-# Keep it tiny: one loop, one mask, one tile, or one benchmark.
+story = {
+    "problem": "make transformer-adjacent kernels easier to understand and measure",
+    "approach": "build reference-first implementations, then simplify or fuse them",
+    "proof": "keep benchmarks, notes, and correctness checks together",
+}
 ```
 
-Write one sentence explaining why the sketch is correct before you optimize it.
+The sketch is correct because it captures the same three claims a resume reader
+needs: what you built, how you proved it, and why it matters.
 
 Write `results/week-47-resume-and-story.md` with three resume bullets and one
 short project summary paragraph.

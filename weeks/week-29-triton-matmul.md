@@ -2,23 +2,30 @@
 
 ## What This Week Is
 
-You map matrix multiplication onto Triton blocks. The goal is to see how the
-same math from Month 6 becomes a kernel-shaped implementation strategy.
+You map matrix multiplication onto Triton blocks. The point is to see how the
+same math from Month 6 becomes a tile-shaped implementation strategy, and how
+the mental model now includes both indexing and reuse.
 
 ## What To Read
 
 - [../course/month-08-triton-matmul-and-tuning.md](../course/month-08-triton-matmul-and-tuning.md)
 - [week-24-month-06-checkpoint.md](week-24-month-06-checkpoint.md)
 - [../triton_kernels/matmul.py](../triton_kernels/matmul.py)
+- [../gputriton/reference.py](../gputriton/reference.py)
+- [../cuda/naive_matmul.cu](../cuda/naive_matmul.cu)
 
 ## Exact Commands
 
 ```bash
-pytest
+pytest tests/test_reference.py tests/test_gpu_tracks.py
 python examples/reference_bench.py
 ```
 
 ## Build This
+
+Write `results/week-29-triton-matmul.md` with one tile sketch, one note about
+how Triton expresses the same idea as the earlier matmul weeks, and one
+comparison point to the CUDA starter.
 
 ## Code Sketch
 
@@ -34,17 +41,12 @@ def matmul_tile(a_tile, b_tile):
 
 Write one sentence explaining why the sketch is correct before you optimize it.
 
-Write `results/week-29-triton-matmul.md` with a tile sketch and one note on
-how Triton expresses the same idea as the earlier matmul weeks.
-
-Use `gputriton/reference.py` and `cuda/naive_matmul.cu` as the comparison
-points for the Triton version.
-
 ## Write Down
 
 - What is shared between CUDA and Triton matmul thinking?
 - What changes in the code shape?
 - What should be benchmarked later?
+- Which part of the tile deserves the most reuse?
 
 ## Minimum
 

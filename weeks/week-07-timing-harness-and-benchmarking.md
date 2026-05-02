@@ -6,6 +6,9 @@ Week 07 turns benchmarking into a habit instead of a guess. You build a tiny
 timing harness, learn how to repeat measurements, and see why a single number is
 usually not enough.
 
+The goal is discipline, not glamour. A good benchmark is small, repeatable, and
+boring in the best possible way.
+
 ## What You Need From The Repo
 
 - [../gputriton/bench.py](../gputriton/bench.py)

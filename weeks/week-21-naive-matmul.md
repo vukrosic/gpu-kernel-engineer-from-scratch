@@ -4,12 +4,12 @@
 
 You turn two small matrices into a readable baseline matrix multiply. The goal
 is correctness first: understand the loops, the indices, and the shape of the
-result before any tiling.
+result before any tiling or tuning.
 
 ## What To Read
 
 - [../course/month-06-matmul-foundations.md](../course/month-06-matmul-foundations.md)
-- [week-template.md](week-template.md)
+- [../gputriton/reference.py](../gputriton/reference.py)
 - [../cuda/naive_matmul.cu](../cuda/naive_matmul.cu)
 - [../triton_kernels/matmul.py](../triton_kernels/matmul.py)
 
@@ -21,6 +21,9 @@ python examples/reference_bench.py
 ```
 
 ## Build This
+
+Write `results/week-21-naive-matmul.md` with the shapes you tried, the loop
+order you used, and one note about correctness.
 
 ## Code Sketch
 
@@ -38,20 +41,17 @@ def matmul_reference(a, b):
     return out
 ```
 
-Write one sentence explaining why the sketch is correct before you optimize it.
-
-Write `results/week-21-naive-matmul.md` with the shapes you tried, the loop
-order you used, and one note about correctness.
-
-Use `gputriton/reference.py` as the baseline, then compare the lesson sketch
-to `cuda/naive_matmul.cu` and the Triton matmul implementation later in the
-course.
+This sketch is correct because each output cell collects the full dot product
+for one row of `a` and one column of `b` before storing the answer.
 
 ## Write Down
 
-- How does each output cell get computed?
-- What is slow about the naive version?
-- What would you change next week?
+Answer:
+
+1. How does each output cell get computed?
+2. What is slow about the naive version?
+3. What would you change next week?
+4. What shape checks do you want to keep in mind?
 
 ## Minimum
 

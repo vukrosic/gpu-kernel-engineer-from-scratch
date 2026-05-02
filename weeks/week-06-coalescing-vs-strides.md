@@ -6,6 +6,9 @@ This week turns memory into a shape problem. The work is similar to Week 05, but
 now you focus on whether access is contiguous or strided and why that changes
 performance behavior.
 
+You are still doing simple operations. The point is to feel that memory layout
+is not a detail; it is part of the algorithm.
+
 ## What You Need From The Repo
 
 - [../gputriton/bench.py](../gputriton/bench.py)
@@ -45,6 +48,19 @@ Create `results/week-06-coalescing-vs-strides.md` and record:
 - what strided means
 - which experiment was faster and why you think that happened
 - one sketch of how a GPU would feel the difference
+
+## Code Sketch
+
+```python
+def copy_strided(x, step=2):
+    out = []
+    for i in range(0, len(x), step):
+        out.append(x[i])
+    return out
+```
+
+This sketch is correct because it follows the stride exactly. It also makes the
+access pattern visible, which is the point of the week.
 
 ## Write Down
 

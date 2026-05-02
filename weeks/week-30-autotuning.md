@@ -3,21 +3,27 @@
 ## What This Week Is
 
 You learn why one matmul kernel is rarely the final answer. This week is about
-trying more than one configuration and recording the result clearly.
+trying more than one configuration, writing the comparison down cleanly, and
+being honest about what a search space can and cannot prove.
 
 ## What To Read
 
 - [../course/month-08-triton-matmul-and-tuning.md](../course/month-08-triton-matmul-and-tuning.md)
 - [week-29-triton-matmul.md](week-29-triton-matmul.md)
+- [../triton_kernels/matmul.py](../triton_kernels/matmul.py)
 
 ## Exact Commands
 
 ```bash
-pytest
+pytest tests/test_reference.py tests/test_gpu_tracks.py
 python examples/reference_bench.py
 ```
 
 ## Build This
+
+Write `results/week-30-autotuning.md` with two or three candidate settings, one
+simple comparison table, and one note about which setting you would expect to
+try first if you had to choose before measuring.
 
 ## Code Sketch
 
@@ -30,14 +36,12 @@ candidate_settings = [
 
 Write one sentence explaining why the sketch is correct before you optimize it.
 
-Write `results/week-30-autotuning.md` with two or three candidate settings and
-one note about which one would likely win.
-
 ## Write Down
 
 - What changes when you tune?
 - What costs make tuning worth it?
 - How would you compare candidates fairly?
+- Which parameter is the easiest one to misread?
 
 ## Minimum
 

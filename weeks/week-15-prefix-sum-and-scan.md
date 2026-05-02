@@ -3,8 +3,9 @@
 ## What This Week Is
 
 Scan is one of the classic building blocks in parallel programming. It looks
-like a simple cumulative sum, but it teaches you how information can flow across
-many positions instead of only collapsing into one result.
+like a simple cumulative sum, but it teaches you how information can flow
+across many positions instead of only collapsing into one result. That makes
+it a useful bridge between reductions and more structured GPU algorithms.
 
 ## What To Read
 
@@ -19,6 +20,10 @@ python examples/reference_bench.py
 ```
 
 ## Build This
+
+Write `results/week-15-scan.md` with a hand-worked scan example, a clear note
+about inclusive versus exclusive scan, and one sentence about why scan is a
+useful GPU pattern.
 
 ## Code Sketch
 
@@ -35,12 +40,6 @@ def prefix_sum(values):
 This sketch is correct because it records the running total at every step, so
 the output keeps the same length as the input.
 
-Create `results/week-15-prefix-sum.md` with:
-
-- a hand-worked prefix sum example
-- the difference between inclusive and exclusive scan
-- one note on why scan is useful in GPU algorithms
-
 ## Write Down
 
 Answer:
@@ -48,6 +47,7 @@ Answer:
 1. What does a scan produce?
 2. Why is it different from a reduction?
 3. Why do parallel systems care about scan?
+4. What is one place where inclusive and exclusive scan differ?
 
 ## Minimum
 

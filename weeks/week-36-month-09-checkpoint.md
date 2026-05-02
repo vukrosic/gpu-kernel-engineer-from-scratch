@@ -2,8 +2,9 @@
 
 ## What This Week Is
 
-You stop and package the integration month. The point is to decide what you
-can now explain about baselines, wrappers, and testing.
+You stop and package the integration month. The point is to decide what you can
+now explain about baselines, wrappers, and testing, and to turn that into a
+clean story a reviewer could follow.
 
 ## What To Read
 
@@ -13,29 +14,33 @@ can now explain about baselines, wrappers, and testing.
 ## Exact Commands
 
 ```bash
-pytest
+pytest tests/test_reference.py tests/test_gpu_tracks.py
 python examples/reference_bench.py
 ```
 
 ## Build This
 
+Write `results/month-09-checkpoint.md` with the three clearest lessons from
+Month 9 and one sentence about how custom kernels fit into a PyTorch workflow.
+
 ## Code Sketch
 
 ```python
-# Sketch the smallest working version of this week's idea.
-# Keep it tiny: one loop, one mask, one tile, or one benchmark.
+summary = {
+    "baseline": "reference first, then compare",
+    "wrapper": "small boundary, visible kernel",
+    "tests": "shape, dtype, and edge cases all matter",
+}
 ```
 
 Write one sentence explaining why the sketch is correct before you optimize it.
-
-Write `results/month-09-checkpoint.md` with the three clearest lessons from
-Month 9.
 
 ## Write Down
 
 - What is easier to explain now?
 - What still needs more practice?
 - What should Month 10 focus on?
+- What is the one integration lesson you would keep in a summary note?
 
 ## Minimum
 

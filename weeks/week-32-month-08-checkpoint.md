@@ -3,7 +3,8 @@
 ## What This Week Is
 
 You stop and turn Month 8 into a clean portfolio checkpoint. The goal is to
-show that you can explain tuning, matmul, and batching without extra noise.
+show that you can explain tuning, matmul, and batching without extra noise, and
+that you can say which choice mattered more than the others.
 
 ## What To Read
 
@@ -13,29 +14,33 @@ show that you can explain tuning, matmul, and batching without extra noise.
 ## Exact Commands
 
 ```bash
-pytest
+pytest tests/test_reference.py tests/test_gpu_tracks.py
 python examples/reference_bench.py
 ```
 
 ## Build This
 
+Write `results/month-08-checkpoint.md` with the three most important things you
+learned in Month 8 and one short portfolio note about tuning or batching.
+
 ## Code Sketch
 
 ```python
-# Sketch the smallest working version of this week's idea.
-# Keep it tiny: one loop, one mask, one tile, or one benchmark.
+summary = {
+    "tiling": "one tile can own a reusable chunk of matmul",
+    "tuning": "different settings deserve separate comparison",
+    "batching": "the batch dimension repeats the same kernel logic",
+}
 ```
 
 Write one sentence explaining why the sketch is correct before you optimize it.
-
-Write `results/month-08-checkpoint.md` with the three most important things
-you learned in Month 8.
 
 ## Write Down
 
 - What now feels natural?
 - What still needs repetition?
 - What should Month 9 focus on?
+- What is the one matmul idea you would keep in a summary note?
 
 ## Minimum
 

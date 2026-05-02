@@ -6,6 +6,9 @@ Week 10 is the first step from naive reductions toward performance-aware
 reductions. You think about a block of work, partial sums, and the idea that
 workers can cooperate on an intermediate result before writing one final answer.
 
+The lesson is about structure, not syntax. You are learning to split the work
+into local cooperation and a smaller final combine step.
+
 ## What You Need From The Repo
 
 - [../course/month-03-reductions.md](../course/month-03-reductions.md)
@@ -42,7 +45,7 @@ python examples/reference_bench.py
 
 ## Build This
 
-Create `results/week-10-shared-memory-reductions.md` and include:
+Create `results/week-10-shared-reductions.md` and include:
 
 - a sketch of a block-level reduction
 - the idea of partial sums and a final combine step
@@ -89,7 +92,7 @@ Answer these in the note:
 
 - you draw the reduction in three layers: input, partials, final answer
 - you write a short paragraph about why this is a preview of matmul tiling
-- you explain what “shared memory” is trying to avoid
+- you explain what "shared memory" is trying to avoid
 
 ## If You Are Behind
 

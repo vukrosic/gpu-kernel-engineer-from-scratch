@@ -6,6 +6,10 @@ Month 2 begins with the real bottleneck theme: memory movement. Before talking
 about fancy kernels, you learn to look at copy, scale, and axpy-style work and
 ask how much data moves.
 
+This week is where "faster math" stops being the whole story. On real hardware,
+the amount of data you move can matter more than the number of floating-point
+operations you do.
+
 ## What You Need From The Repo
 
 - [../gputriton/bench.py](../gputriton/bench.py)
@@ -46,7 +50,7 @@ Create `results/week-05-memory-bandwidth.md` and record:
 - the scale timing
 - the axpy timing
 - what you think changed between them
-- what “memory bandwidth” means in plain language
+- what "memory bandwidth" means in plain language
 
 Then write a short note that answers:
 
@@ -89,7 +93,7 @@ Answer these in the note:
 
 - you compute a rough bytes-moved estimate for each experiment
 - you compare the results to the vector-add benchmark from Week 02
-- you explain why “more math” is not always the same as “more cost”
+- you explain why "more math" is not always the same as "more cost"
 
 ## If You Are Behind
 

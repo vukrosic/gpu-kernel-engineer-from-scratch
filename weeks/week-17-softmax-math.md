@@ -3,7 +3,8 @@
 ## What This Week Is
 
 You are starting Month 5, and the goal is to understand the math of softmax
-before talking about fused kernels or performance.
+before talking about fused kernels or performance. The point is to see how raw
+scores become probabilities without losing numerical stability along the way.
 
 ## What To Read
 
@@ -18,6 +19,10 @@ python examples/reference_bench.py
 ```
 
 ## Build This
+
+Write `results/week-17-softmax-math.md` with a tiny hand-worked example, a
+plain explanation of the max-shift trick, and one sentence about why the
+outputs sum to 1.
 
 ## Code Sketch
 
@@ -34,16 +39,6 @@ def softmax(xs):
 This sketch is correct because subtracting the max keeps the exponentials
 stable while preserving the final normalized probabilities.
 
-Create `results/week-17-softmax-math.md` and include:
-
-- a tiny hand-worked softmax example
-- why subtracting the max helps numerical stability
-- why softmax output sums to 1
-
-On the implementation track, compare the reference path in
-`gputriton/reference.py` with the starter kernels in `cuda/softmax.cu` and
-`triton_kernels/softmax.py`.
-
 ## Write Down
 
 Answer:
@@ -51,6 +46,7 @@ Answer:
 1. What does softmax turn scores into?
 2. Why do we subtract the max?
 3. Why is softmax common in classification and transformers?
+4. What does it mean for the outputs to sum to 1?
 
 ## Minimum
 

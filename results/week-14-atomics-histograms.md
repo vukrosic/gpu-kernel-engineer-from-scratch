@@ -1,23 +1,39 @@
 # Week 14
 
-Status: scaffolded
+Status: writing template
+
+## What To Capture
+
+- one counter that many workers want to update
+- one histogram example with a small number of bins
+- one sentence on the tradeoff between correctness and contention
 
 ## What Was Built
 
-TBD
+Describe the histogram or counting example you used. Name the bins, the input
+shape, and where the shared update happens.
 
 ## Correctness Check
 
-TBD
+Record what the atomic protects. If you can, note whether a private-counter
+approach and a shared-counter approach would produce the same counts.
 
 ## Benchmark Or Observation
 
-TBD
+If you measured anything, note whether skewed inputs made one bucket hot or
+whether the contention changed the shape of the run. If you did not measure,
+write down the comparison you would make next.
 
 ## Lesson Learned
 
-TBD
+Summarize why atomics are simple to reason about but can get expensive.
 
 ## Limitation Or Next Step
 
-TBD
+Write one line about when you would stop using atomics as the default answer.
+
+## Write-Back Prompts
+
+1. What exactly does the atomic protect?
+2. Why is a histogram the easiest way to see the problem?
+3. When would you still choose atomics?

@@ -3,12 +3,13 @@
 ## What This Week Is
 
 You learn how to collect the work into a simple benchmark dashboard. The goal
-is to make your progress visible without making it complicated.
+is to make your progress visible without turning the repo into a spreadsheet
+graveyard.
 
 ## What To Read
 
 - [../course/month-12-portfolio-and-interviews.md](../course/month-12-portfolio-and-interviews.md)
-- [week-template.md](week-template.md)
+- [week-44-month-11-checkpoint.md](week-44-month-11-checkpoint.md)
 
 ## Exact Commands
 
@@ -19,14 +20,33 @@ python examples/reference_bench.py
 
 ## Build This
 
+Create a one-page dashboard structure that records kernel name, input shape,
+baseline, measured result, and the note you want future-you to remember. Leave
+the values blank if you have not run them yet, but make the columns final.
+
 ## Code Sketch
 
 ```python
-# Sketch the smallest working version of this week's idea.
-# Keep it tiny: one loop, one mask, one tile, or one benchmark.
+rows = [
+    {
+        "kernel": "gelu fusion",
+        "shape": "batch x hidden",
+        "baseline": "unfused reference",
+        "result": "",
+        "note": "one fewer pass over activations",
+    },
+    {
+        "kernel": "rmsnorm",
+        "shape": "batch x hidden",
+        "baseline": "layernorm reference",
+        "result": "",
+        "note": "one reduction and one scale",
+    },
+]
 ```
 
-Write one sentence explaining why the sketch is correct before you optimize it.
+The sketch is correct because it records the comparison structure first, which
+is the part you need before any real numbers can mean something.
 
 Write `results/week-45-benchmark-dashboard.md` with one dashboard sketch and
 one note about what should be tracked every month.

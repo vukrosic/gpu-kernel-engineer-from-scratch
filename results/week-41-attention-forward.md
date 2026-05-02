@@ -1,23 +1,27 @@
 # Week 41
 
-Status: scaffolded
+Status: writing template
 
 ## What Was Built
 
-TBD
+Describe the simplified attention forward pass and the reference path you used
+to compare it.
 
 ## Correctness Check
 
-TBD
+State how you checked the scores, mask, softmax, and output mix on at least one
+small example.
 
 ## Benchmark Or Observation
 
-TBD
+Record how the behavior changed across two sequence lengths or two shapes, even
+if the result is qualitative.
 
 ## Lesson Learned
 
-TBD
+Write the cleanest sentence you can about where the math is easiest to verify.
 
 ## Limitation Or Next Step
 
-TBD
+Name the next version you would try, such as batching, multi-head support, or a
+more explicit causal mask.

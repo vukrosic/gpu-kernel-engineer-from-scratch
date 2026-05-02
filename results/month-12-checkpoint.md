@@ -1,23 +1,26 @@
 # Month 12 Checkpoint
 
-Status: scaffolded
+Status: month checkpoint template
 
 ## Summary
 
-TBD
+Summarize the benchmark dashboard, interview explanations, and resume-story work
+in three concise sentences.
 
 ## Best Result
 
-TBD
+Name the strongest portfolio artifact from Month 12 and explain why it is the
+one to show first.
 
 ## Hardest Bug
 
-TBD
+Describe the hardest editing or clarity issue you had to fix while packaging
+the repo.
 
 ## Interview Explanation
 
-TBD
+Write the 60-second explanation you would give for the whole project.
 
 ## Portfolio Link
 
-TBD
+Record the exact file or section a reviewer should open first.

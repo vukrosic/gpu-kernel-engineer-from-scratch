@@ -8,7 +8,7 @@ the first step from "it works" to "it is shaped for performance."
 ## What To Read
 
 - [../course/month-06-matmul-foundations.md](../course/month-06-matmul-foundations.md)
-- [week-21-naive-matmul.md](week-21-naive-matmul.md)
+- [../weeks/week-21-naive-matmul.md](../weeks/week-21-naive-matmul.md)
 
 ## Exact Commands
 
@@ -19,11 +19,13 @@ python examples/reference_bench.py
 
 ## Build This
 
+Write `results/week-22-tiled-matmul.md` with a sketch of your tile layout and
+one note about how tiling changes reuse.
+
 ## Code Sketch
 
 ```python
 def tiled_block(a, b, row0, col0, tile_m=4, tile_n=4, tile_k=2):
-    # Reuse the same small submatrices before moving on.
     acc = [[0.0 for _ in range(tile_n)] for _ in range(tile_m)]
     for k0 in range(0, len(a[0]), tile_k):
         for i in range(tile_m):
@@ -33,16 +35,17 @@ def tiled_block(a, b, row0, col0, tile_m=4, tile_n=4, tile_k=2):
     return acc
 ```
 
-Write one sentence explaining why the sketch is correct before you optimize it.
-
-Write `results/week-22-tiled-matmul.md` with a sketch of your tile layout and
-one note about how tiling changes reuse.
+This sketch is correct because it reuses the same small submatrices before
+moving on, which is the heart of tiling.
 
 ## Write Down
 
-- What is a tile?
-- What is reused inside a tile?
-- What stays the same as the naive version?
+Answer:
+
+1. What is a tile?
+2. What is reused inside a tile?
+3. What stays the same as the naive version?
+4. Which dimensions are easiest to visualize?
 
 ## Minimum
 

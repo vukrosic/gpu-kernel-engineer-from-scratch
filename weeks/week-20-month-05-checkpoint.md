@@ -21,6 +21,9 @@ python examples/reference_bench.py
 
 ## Build This
 
+Write `results/week-20-month-05-checkpoint.md` as a Month 5 checkpoint note
+that compares softmax, fusion, and LayerNorm in one readable summary.
+
 ## Code Sketch
 
 ```python
@@ -34,13 +37,6 @@ month_5 = {
 This sketch is correct because a checkpoint should compress the month into the
 three ideas the learner must remember.
 
-Create `results/month-05-checkpoint.md` with:
-
-- the biggest normalization lesson you learned
-- one thing that became clearer about fusion
-- one sentence about why these ideas matter for transformers
-- one bridge sentence to matmul
-
 ## Write Down
 
 Answer:
@@ -48,6 +44,7 @@ Answer:
 1. What is the main lesson from Month 5?
 2. Which normalization concept felt most important?
 3. How do softmax and LayerNorm fit the roadmap?
+4. What changed in your thinking about memory traffic?
 
 ## Minimum
 

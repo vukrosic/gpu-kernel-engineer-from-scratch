@@ -2,23 +2,28 @@
 
 ## What This Week Is
 
-You take the softmax idea and express it as a Triton-shaped kernel. The point
-is to understand where numerically stable softmax work gets fused together.
+You take the softmax idea and express it as a Triton-shaped kernel. The main
+lesson is where numerically stable softmax work gets fused together and where
+the row-wise reduction stops being abstract.
 
 ## What To Read
 
 - [../course/month-07-triton-for-ai-kernels.md](../course/month-07-triton-for-ai-kernels.md)
 - [week-26-triton-blocks-and-masks.md](week-26-triton-blocks-and-masks.md)
 - [../triton_kernels/softmax.py](../triton_kernels/softmax.py)
+- [../gputriton/reference.py](../gputriton/reference.py)
 
 ## Exact Commands
 
 ```bash
-pytest
+pytest tests/test_reference.py tests/test_gpu_tracks.py
 python examples/reference_bench.py
 ```
 
 ## Build This
+
+Write `results/week-27-triton-softmax.md` with the three softmax steps, one
+stability note, and one sentence about where a Triton kernel can reuse work.
 
 ## Code Sketch
 
@@ -34,17 +39,12 @@ def softmax_row(xs):
 
 Write one sentence explaining why the sketch is correct before you optimize it.
 
-Write `results/week-27-triton-softmax.md` with the softmax steps and one note
-about stability or reuse.
-
-Compare the Triton starter in `triton_kernels/softmax.py` against the NumPy
-reference in `gputriton/reference.py`.
-
 ## Write Down
 
 - What are the three softmax steps?
 - Why is stability important?
 - Where can the work be fused?
+- Which part is the row-wise reduction?
 
 ## Minimum
 

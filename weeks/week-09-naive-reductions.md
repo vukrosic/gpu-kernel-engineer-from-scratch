@@ -5,6 +5,9 @@
 Week 09 starts Month 3. You move from memory movement into reductions: turning
 many values into fewer values by summing or maximizing over a dimension.
 
+The important shift is conceptual. A reduction is not "one output per input"
+anymore; it is a cooperative collapse from many values down to one.
+
 ## What You Need From The Repo
 
 - [../gputriton/reference.py](../gputriton/reference.py)

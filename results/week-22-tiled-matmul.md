@@ -1,23 +1,55 @@
 # Week 22
 
-Status: scaffolded
+Status: writing template
+
+## What To Capture
+
+- one tile diagram
+- one note about reuse
+- one comparison between tiled and naive matmul
+- one tradeoff you noticed
+
+## Tile Sketch
+
+```text
+A tile:
+[   ][   ]
+[   ][   ]
+
+B tile:
+[   ][   ]
+[   ][   ]
+
+Output tile:
+[   ][   ]
+[   ][   ]
+```
 
 ## What Was Built
 
-TBD
+Describe the tiled block or kernel you wrote or studied. Name the tile sizes
+and the area of the output they cover.
 
 ## Correctness Check
 
-TBD
+Record why the tile accumulation should still match the naive result. If you
+compared against the reference, say what matched.
 
 ## Benchmark Or Observation
 
-TBD
+If you measured anything, note whether the tile changed reuse or data movement.
+If you did not measure, write the comparison you would make next.
 
 ## Lesson Learned
 
-TBD
+Summarize why tiling changes the shape of the work.
 
 ## Limitation Or Next Step
 
-TBD
+Write one sentence about what tile size tradeoff you want to explore next.
+
+## Write-Back Prompts
+
+1. What is a tile?
+2. What is reused inside a tile?
+3. What stays the same as the naive version?

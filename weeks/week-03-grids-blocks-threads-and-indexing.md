@@ -6,6 +6,10 @@ Week 03 teaches you how to think about work assignment. The math is still tiny,
 but the indexing model becomes the star: how many workers, how they map to data,
 and how elementwise kernels stay correct.
 
+This is where the course stops feeling like "just arrays" and starts feeling
+like a parallel system. If the index math is wrong, the kernel is wrong even if
+the arithmetic is perfect.
+
 ## What You Need From The Repo
 
 - [../gputriton/reference.py](../gputriton/reference.py)
@@ -13,6 +17,8 @@ and how elementwise kernels stay correct.
 - [../weeks/week-02-gpu-setup-and-vector-add.md](../weeks/week-02-gpu-setup-and-vector-add.md)
 
 ## Exact Commands
+
+Explore row-major layout and slicing:
 
 ```bash
 python - <<'PY'
@@ -38,7 +44,7 @@ python examples/reference_bench.py
 Create `results/week-03-indexing.md` and write:
 
 - how a 2D array is laid out in memory
-- what “one worker per element” means
+- what "one worker per element" means
 - how add, multiply, square, and ReLU fit the same indexing pattern
 - how the idea of blocks and threads changes the way you think about a kernel
 

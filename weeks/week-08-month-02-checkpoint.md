@@ -5,6 +5,10 @@
 Week 08 is a packaging week. You are not learning a new memory concept. You are
 wrapping Month 2 into a clean summary so the next month can start fresh.
 
+The checkpoint should show that you know the difference between a noisy number
+and a useful measurement, and that you can explain why memory movement kept
+showing up in different disguises.
+
 ## What You Need From The Repo
 
 - [../course/month-02-memory-and-benchmarking.md](../course/month-02-memory-and-benchmarking.md)
@@ -23,13 +27,27 @@ Then open the notes you wrote in Weeks 05-07 and clean them up.
 
 ## Build This
 
-Create `results/month-02-checkpoint.md` with these sections:
+Create `results/week-08-month-02-checkpoint.md` with these sections:
 
 - the biggest memory lesson you learned
 - one experiment that showed a clear difference
 - one thing you now trust more about benchmarking
 - one thing you still want to improve
 - one sentence about how Month 3 will change the problem
+
+## Code Sketch
+
+```python
+month_02 = {
+    "lesson": "memory movement often dominates the work",
+    "comparison": "contiguous versus strided access",
+    "habit": "repeat timings and trust the median",
+    "next": "reductions",
+}
+```
+
+This sketch is correct because the checkpoint is a summary artifact, not a new
+algorithm. It exists to turn observations into a story you can reuse.
 
 ## Write Down
 
@@ -42,7 +60,7 @@ Answer these in the checkpoint note:
 
 ## Minimum
 
-- `results/month-02-checkpoint.md` exists
+- `results/week-08-month-02-checkpoint.md` exists
 - Weeks 05-07 notes are readable
 - you can explain Month 2 in five sentences
 
@@ -55,7 +73,7 @@ Answer these in the checkpoint note:
 ## Stretch
 
 - you turn the Month 2 checkpoint into three resume bullets
-- you add one section called “what I would do differently”
+- you add one section called "what I would do differently"
 - you write a short bridge paragraph from memory to reductions
 
 ## If You Are Behind
