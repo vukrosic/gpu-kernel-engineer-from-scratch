@@ -1,5 +1,7 @@
 # Week 01 Baseline
 
+Status: scaffolded
+
 ## What Was Built
 
 Write a short baseline note that captures your setup, the reference benchmark
