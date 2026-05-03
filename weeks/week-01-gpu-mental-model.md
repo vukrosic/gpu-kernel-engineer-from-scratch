@@ -28,19 +28,9 @@ The workflow is:
 5. write down what happened
 ```
 
-That workflow will repeat all year. CUDA, Triton, matmul, softmax, layer norm,
-and attention all use the same discipline:
-
-```text
-simple reference first
-correctness second
-performance third
-explanation always
-```
-
 For Week 01, the trusted implementation is CPU/NumPy code. NumPy is not the
-final destination of the course. It is the baseline that lets you know what the
-answer should be.
+final destination of the course. It is just the baseline that tells you what the
+answer should be before you write GPU code.
 
 ## Step 2: Learn The CPU vs GPU Mental Model
 
@@ -233,13 +223,12 @@ vector_add: adds matching positions from two arrays.
 softmax: converts a row of scores into normalized probabilities.
 ```
 
-## Step 7: Do The Week 01 Assignment
+## Step 7: Do The Week 01 Task
 
-This is the only thing you need to produce this week:
+Your task is to produce one short baseline note:
 
 ```text
-a short baseline note that proves you ran the repo, inspected the reference,
-and can explain why correctness comes before speed
+results/week-01-baseline.md
 ```
 
 Run this command:
@@ -248,7 +237,7 @@ Run this command:
 python examples/reference_bench.py
 ```
 
-Then update `results/week-01-baseline.md` with this structure:
+Then update the note with this structure:
 
 ```markdown
 # Week 01 Baseline
@@ -294,26 +283,12 @@ Answer these two questions:
 ## One Thing Still Fuzzy
 
 Write one concept you want to understand better.
-
-## Next Week
-
-What do you expect the first GPU vector-add kernel to prove?
 ```
 
-Keep the note short. The goal is not to write an essay. The goal is to make
-your first artifact reviewable.
-
-## Step 8: Submit This For Review
-
-Post this in Skool or keep it in your result note:
+Keep it short. If you post in Skool, use this format:
 
 ```text
 Week 01 Submission
-
-Commands I ran:
-- python -m pip install -e ".[dev]"
-- pytest
-- python examples/reference_bench.py
 
 Correctness result:
 
@@ -336,4 +311,4 @@ You are done when:
 - your note explains CPU vs GPU in plain language
 - your note names one thing you still do not understand
 
-Stop there. Week 02 is where you write the first GPU-shaped vector-add kernel.
+Stop there.
