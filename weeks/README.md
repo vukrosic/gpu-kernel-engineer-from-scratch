@@ -21,8 +21,8 @@ Each week should have one Markdown file that can be followed from top to bottom:
 - [Week 06: Coalescing Vs Strides](week-06-coalescing-vs-strides.md)
 - [Week 07: Timing Harness And Benchmarking](week-07-timing-harness-and-benchmarking.md)
 - [Week 08: Reading Performance Results](week-08-reading-performance-results.md)
-- [Week 09: Naive Reductions](week-09-naive-reductions.md)
-- [Week 10: Shared Memory Reductions](week-10-shared-memory-reductions.md)
+- [Week 09: Reductions Mental Model](week-09-reductions-mental-model.md)
+- [Week 10: Naive Reduction Kernels](week-10-naive-reduction-kernels.md)
 
 ## How To Use This Folder
 

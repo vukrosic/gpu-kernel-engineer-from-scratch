@@ -11,8 +11,8 @@ thinking, and warp-level thinking should all be present as one connected arc.
 ## What To Read
 
 - [../course/month-03-reductions.md](../course/month-03-reductions.md)
-- [../weeks/week-09-naive-reductions.md](../weeks/week-09-naive-reductions.md)
-- [../weeks/week-10-shared-memory-reductions.md](../weeks/week-10-shared-memory-reductions.md)
+- [../weeks/week-09-reductions-mental-model.md](../weeks/week-09-reductions-mental-model.md)
+- [../weeks/week-10-naive-reduction-kernels.md](../weeks/week-10-naive-reduction-kernels.md)
 - [../weeks/week-11-warp-level-thinking.md](../weeks/week-11-warp-level-thinking.md)
 
 ## Exact Commands

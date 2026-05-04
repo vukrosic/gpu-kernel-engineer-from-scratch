@@ -86,10 +86,10 @@ Month 2: Memory And Benchmarking
 - Week 08: Reading performance results
 
 Month 3: Reductions
-- Week 09: Row sum and row max
-- Week 10: Shared-memory reductions
-- Week 11: Warp-level thinking
-- Week 12: Reduction checkpoint
+- Week 09: Reductions mental model
+- Week 10: Naive reduction kernels
+- Week 11: Shared reduction thinking
+- Week 12: Warp-level thinking
 
 Month 4: Scans, Atomics, Synchronization
 - Week 13: Barriers and race conditions

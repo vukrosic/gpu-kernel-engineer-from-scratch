@@ -13,7 +13,7 @@ a larger reduction.
 ## What To Read
 
 - [../course/month-03-reductions.md](../course/month-03-reductions.md)
-- [../weeks/week-10-shared-memory-reductions.md](../weeks/week-10-shared-memory-reductions.md)
+- [../weeks/week-10-naive-reduction-kernels.md](../weeks/week-10-naive-reduction-kernels.md)
 
 ## Exact Commands
 
