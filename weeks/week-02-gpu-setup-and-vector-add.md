@@ -476,6 +476,6 @@ Stretch:
 
 ## Next Week
 
-Week 03 keeps the same indexing idea and expands it into grids, blocks, threads,
-and several elementwise kernels. Week 02 is the seed: compute the global index,
-guard the bounds, read inputs, write output.
+Week 03 keeps the same indexing idea and expands it into tensor shapes,
+row-major layout, strides, and flat memory addresses. Week 02 is the seed:
+compute the global index, guard the bounds, read inputs, write output.

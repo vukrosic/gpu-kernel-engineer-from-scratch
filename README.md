@@ -76,8 +76,8 @@ There are 48 weekly files because 12 months x 4 weeks = 48 weeks.
 Month 1: GPU Foundations
 - Week 01: GPU mental model and baseline
 - Week 02: CUDA setup and vector add
-- Week 03: Grids, blocks, threads, indexing
-- Week 04: Checkpoint and Month 1 writeup
+- Week 03: Tensor shapes, memory layout, indexing
+- Week 04: Elementwise kernel patterns
 
 Month 2: Memory And Benchmarking
 - Week 05: Global memory bandwidth

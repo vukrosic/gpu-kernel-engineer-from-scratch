@@ -1,7 +1,7 @@
 # 12-Month Syllabus
 
-This is the full GPU Kernels From Scratch roadmap. Each month has three build
-weeks and one checkpoint week.
+This is the full GPU Kernels From Scratch roadmap. The early course favors
+short lessons that build one concept at a time.
 
 ## Month 1: GPU Foundations
 
@@ -11,8 +11,8 @@ Goal: understand the GPU programming model and write the first correct kernels.
 | --- | --- | --- | --- |
 | 1 | GPU mental model | Explain CPU vs GPU execution and run the starter benchmark. | "Why GPUs are fast for parallel workloads." |
 | 2 | CUDA setup and first kernel | Write vector add and compare against a CPU reference. | `vector_add` test and benchmark table. |
-| 3 | Grids, blocks, threads, and indexing | Build add, multiply, square, and ReLU kernels. | Elementwise kernel suite. |
-| 4 | Checkpoint | Clean code, rerun benchmarks, explain indexing from memory. | Month 1 README section. |
+| 3 | Tensor shapes, memory layout, and indexing | Understand row-major layout, flattening, strides, and tensor indexing. | Tensor indexing explanation. |
+| 4 | Elementwise kernel patterns | Read copy, scale, square, ReLU, add, and axpy-shaped kernels. | Elementwise kernel pattern explanation. |
 
 Minimum viable month: one correct vector add kernel, one test, one benchmark.
 
