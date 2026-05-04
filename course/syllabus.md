@@ -24,7 +24,7 @@ Goal: learn why memory movement dominates many kernels.
 | --- | --- | --- | --- |
 | 5 | Memory bandwidth and AXPY | Understand bytes moved, bandwidth, and low arithmetic intensity. | Memory bandwidth explanation. |
 | 6 | Coalescing vs strides | Understand contiguous access, strided access, warps, and memory coalescing. | Coalescing explanation. |
-| 7 | Timing correctly | Use reliable warmup and repeated measurements. | Benchmark harness. |
+| 7 | Timing harness and benchmarking | Understand warmups, repeats, synchronization, median timing, and fair comparisons. | Timing reliability explanation. |
 | 8 | Checkpoint | Write a memory bandwidth report. | "What I learned about GPU memory." |
 
 Minimum viable month: one reliable benchmark harness and one bandwidth comparison.

@@ -82,7 +82,7 @@ Month 1: GPU Foundations
 Month 2: Memory And Benchmarking
 - Week 05: Memory bandwidth and AXPY
 - Week 06: Coalescing vs strides
-- Week 07: Reliable timing harness
+- Week 07: Timing harness and benchmarking
 - Week 08: Memory bandwidth report
 
 Month 3: Reductions
