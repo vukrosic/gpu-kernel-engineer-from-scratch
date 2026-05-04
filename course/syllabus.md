@@ -23,7 +23,7 @@ Goal: learn why memory movement dominates many kernels.
 | Week | Topic | Assignment | Portfolio Artifact |
 | --- | --- | --- | --- |
 | 5 | Memory bandwidth and AXPY | Understand bytes moved, bandwidth, and low arithmetic intensity. | Memory bandwidth explanation. |
-| 6 | Memory coalescing | Compare coalesced and strided access. | Chart showing performance difference. |
+| 6 | Coalescing vs strides | Understand contiguous access, strided access, warps, and memory coalescing. | Coalescing explanation. |
 | 7 | Timing correctly | Use reliable warmup and repeated measurements. | Benchmark harness. |
 | 8 | Checkpoint | Write a memory bandwidth report. | "What I learned about GPU memory." |
 
