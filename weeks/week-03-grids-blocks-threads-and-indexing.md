@@ -1,287 +1,28 @@
-# Week 03: Grids, Blocks, Threads, And Indexing
+# Week 03: Tensor Shapes, Memory Layout, And Indexing
 
-Week 03 is about one idea:
-
-```text
-Every GPU thread needs to know which piece of data it owns.
-```
-
-The math can be simple. The indexing cannot be vague.
-
-In Week 02, vector add looked like this:
-
-```text
-out[i] = a[i] + b[i]
-```
-
-This week explains how a GPU thread gets its `i`.
-
-## The GPU Work Model
-
-A CUDA kernel launches many threads at once.
-
-Those threads are grouped like this:
-
-```text
-grid
-  block 0
-    thread 0
-    thread 1
-    thread 2
-    ...
-  block 1
-    thread 0
-    thread 1
-    thread 2
-    ...
-```
-
-Use this plain-language version:
-
-```text
-thread = one worker
-block  = a group of workers
-grid   = all workers launched for one kernel
-```
-
-A kernel does not automatically know which array element each thread should
-handle. You write that mapping yourself.
-
-That mapping is indexing.
-
-## One Thread, One Output Element
-
-The first useful pattern is:
-
-```text
-one thread computes one output element
-```
-
-For vector add:
-
-```text
-thread 0 computes out[0]
-thread 1 computes out[1]
-thread 2 computes out[2]
-thread 3 computes out[3]
-```
-
-Each thread performs the same instruction, but on a different index:
-
-```cpp
-out[i] = a[i] + b[i];
-```
-
-The important question is:
-
-```text
-How does the thread compute i?
-```
-
-## The 1D Index Formula
-
-CUDA gives each thread a few built-in values.
-
-For now, focus on these three:
-
-```cpp
-blockIdx.x
-threadIdx.x
-blockDim.x
-```
-
-They mean:
-
-```text
-blockIdx.x   = which block am I in?
-threadIdx.x  = which thread am I inside this block?
-blockDim.x   = how many threads are in each block?
-```
-
-The standard 1D index formula is:
+Week 02 introduced the first 1D kernel pattern:
 
 ```cpp
 int i = blockIdx.x * blockDim.x + threadIdx.x;
 ```
 
-Read it as:
+Week 03 moves past that first formula.
+
+The new idea is:
 
 ```text
-skip the threads in previous blocks,
-then add my position inside this block
+Tensors have shapes, but GPU memory is flat.
 ```
 
-Example with `blockDim.x = 4`:
+A matrix may look 2D in Python. A batch of images may look 4D in PyTorch. But
+inside a CUDA kernel, the data usually arrives as a pointer to one long block of
+memory.
 
-```text
-block 0, thread 0 -> i = 0 * 4 + 0 = 0
-block 0, thread 1 -> i = 0 * 4 + 1 = 1
-block 0, thread 2 -> i = 0 * 4 + 2 = 2
-block 0, thread 3 -> i = 0 * 4 + 3 = 3
+Indexing is how you connect the logical tensor shape to the flat memory address.
 
-block 1, thread 0 -> i = 1 * 4 + 0 = 4
-block 1, thread 1 -> i = 1 * 4 + 1 = 5
-block 1, thread 2 -> i = 1 * 4 + 2 = 6
-block 1, thread 3 -> i = 1 * 4 + 3 = 7
-```
+## Shape Is Not Storage
 
-So blocks and threads become one continuous sequence of element indices.
-
-## A Kernel-Shaped Version
-
-This is the core of a 1D elementwise CUDA kernel:
-
-```cpp
-__global__ void add_kernel(const float* a, const float* b, float* out, int n) {
-    int i = blockIdx.x * blockDim.x + threadIdx.x;
-
-    if (i < n) {
-        out[i] = a[i] + b[i];
-    }
-}
-```
-
-Line by line:
-
-```cpp
-int i = blockIdx.x * blockDim.x + threadIdx.x;
-```
-
-This gives the current thread a global element index.
-
-```cpp
-if (i < n) {
-```
-
-This prevents extra threads from touching memory outside the array.
-
-```cpp
-out[i] = a[i] + b[i];
-```
-
-This is the actual work for one element.
-
-Most beginner elementwise kernels have this shape:
-
-```text
-compute index
-check bounds
-read input
-write output
-```
-
-## Why The Bounds Check Matters
-
-Suppose the input has `10` elements and each block has `4` threads.
-
-You cannot launch `2.5` blocks, so you launch `3` blocks:
-
-```text
-3 blocks * 4 threads = 12 threads
-```
-
-But valid indices are only:
-
-```text
-0, 1, 2, 3, 4, 5, 6, 7, 8, 9
-```
-
-Threads with index `10` and `11` exist, but they do not own real data.
-
-That is why this guard is not optional:
-
-```cpp
-if (i < n) {
-    out[i] = a[i] + b[i];
-}
-```
-
-Without it, the kernel may read or write beyond the end of the array. That is a
-correctness bug, not just a performance issue.
-
-## How Many Blocks To Launch
-
-The CPU launches the kernel and chooses the grid size.
-
-Common launch setup:
-
-```cpp
-int threads_per_block = 256;
-int blocks = (n + threads_per_block - 1) / threads_per_block;
-```
-
-The formula rounds up.
-
-For `n = 1000`:
-
-```text
-blocks = (1000 + 256 - 1) / 256
-blocks = 1255 / 256
-blocks = 4
-```
-
-Four blocks create:
-
-```text
-4 * 256 = 1024 threads
-```
-
-The extra `24` threads are harmless because of the bounds check.
-
-Then the launch looks like:
-
-```cpp
-add_kernel<<<blocks, threads_per_block>>>(d_a, d_b, d_out, n);
-```
-
-Read the triple angle brackets as:
-
-```text
-launch this kernel with this many blocks and this many threads per block
-```
-
-## The Same Pattern Works For Many Operations
-
-Once each thread has an index, the math can change while the structure stays
-the same.
-
-Vector add:
-
-```cpp
-out[i] = a[i] + b[i];
-```
-
-Multiply:
-
-```cpp
-out[i] = a[i] * b[i];
-```
-
-Square:
-
-```cpp
-out[i] = x[i] * x[i];
-```
-
-ReLU:
-
-```cpp
-out[i] = x[i] > 0.0f ? x[i] : 0.0f;
-```
-
-These are all elementwise kernels.
-
-They differ in the operation, but they share the same indexing pattern:
-
-```text
-one thread owns one output position
-```
-
-## From 1D Vectors To 2D Matrices
-
-GPU memory is linear. Even a 2D matrix is stored as a 1D sequence.
-
-For a matrix with `3` rows and `4` columns:
+This matrix has shape `3 x 4`:
 
 ```text
 [
@@ -291,54 +32,187 @@ For a matrix with `3` rows and `4` columns:
 ]
 ```
 
-Row-major layout stores the first row, then the second row, then the third row:
+As a human, you see rows and columns.
+
+In memory, the values are commonly stored as one flat sequence:
 
 ```text
 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11
 ```
 
-To convert `(row, col)` into a flat index:
+The shape tells you how to interpret the sequence.
+
+The memory itself is still linear.
+
+## Row-Major Layout
+
+Most C, C++, NumPy, and PyTorch tensors use row-major layout when they are
+contiguous.
+
+Row-major means:
+
+```text
+store row 0
+then row 1
+then row 2
+...
+```
+
+For a matrix with `height = 3` and `width = 4`:
+
+```text
+row 0 -> flat positions 0, 1, 2, 3
+row 1 -> flat positions 4, 5, 6, 7
+row 2 -> flat positions 8, 9, 10, 11
+```
+
+The formula is:
 
 ```cpp
 int index = row * width + col;
 ```
 
-For `row = 2`, `col = 1`, and `width = 4`:
+That formula says:
 
 ```text
-index = 2 * 4 + 1 = 9
+skip all previous rows, then move to the column inside this row
 ```
 
-So this matrix position:
+Example:
 
 ```text
-matrix[2][1]
+row = 2
+col = 1
+width = 4
+
+index = row * width + col
+index = 2 * 4 + 1
+index = 9
 ```
 
-maps to this flat memory position:
+So:
 
 ```text
-matrix[9]
+matrix[2][1] maps to matrix[9]
 ```
 
-## 2D Indexing In A Kernel
+## Why Width Matters
 
-For a 2D problem, you can give each thread a row and a column.
+The width is the number of elements in one full row.
 
-The formulas look like this:
+That is why this is correct:
+
+```cpp
+int index = row * width + col;
+```
+
+And this is wrong:
+
+```cpp
+int index = row + col;
+```
+
+For `(row = 2, col = 1)`, `row + col` gives:
+
+```text
+2 + 1 = 3
+```
+
+But position `3` is still in the first row.
+
+The correct flat position is `9`.
+
+This is the kind of bug that can make a kernel compile, run, and silently write
+the wrong result.
+
+## From Flat Index Back To Row And Column
+
+Sometimes a kernel starts with one flat thread index and needs to recover the
+2D position.
+
+Given:
+
+```cpp
+int i = blockIdx.x * blockDim.x + threadIdx.x;
+```
+
+You can recover row and column with:
+
+```cpp
+int row = i / width;
+int col = i % width;
+```
+
+For `i = 9` and `width = 4`:
+
+```text
+row = 9 / 4 = 2
+col = 9 % 4 = 1
+```
+
+So flat index `9` means:
+
+```text
+row 2, column 1
+```
+
+This pair of formulas is the inverse of row-major flattening:
+
+```cpp
+int i = row * width + col;
+int row = i / width;
+int col = i % width;
+```
+
+## Two Ways To Cover A Matrix
+
+There are two common ways to map threads to a 2D matrix.
+
+The first way is to use a flat 1D launch and convert `i` into `(row, col)`.
+
+```cpp
+int i = blockIdx.x * blockDim.x + threadIdx.x;
+
+if (i < height * width) {
+    int row = i / width;
+    int col = i % width;
+    out[i] = x[i];
+}
+```
+
+This is simple and works well for many elementwise operations.
+
+The second way is to use a 2D launch, where CUDA gives you an `x` direction and
+a `y` direction.
 
 ```cpp
 int col = blockIdx.x * blockDim.x + threadIdx.x;
 int row = blockIdx.y * blockDim.y + threadIdx.y;
 ```
 
-Then convert the row and column to one flat index:
+Then you flatten the 2D position:
 
 ```cpp
 int i = row * width + col;
 ```
 
-A kernel-shaped version:
+The 2D version often reads more naturally for matrix-shaped work.
+
+## A 2D ReLU Kernel
+
+ReLU is a simple elementwise operation:
+
+```text
+out = max(x, 0)
+```
+
+For a matrix, each output element depends on one input element:
+
+```text
+out[row, col] = max(x[row, col], 0)
+```
+
+In CUDA-shaped code:
 
 ```cpp
 __global__ void relu_2d_kernel(const float* x, float* out, int height, int width) {
@@ -352,86 +226,213 @@ __global__ void relu_2d_kernel(const float* x, float* out, int height, int width
 }
 ```
 
-The structure is still simple:
+The important part is not ReLU. The important part is the mapping:
 
 ```text
-compute row and column
-check bounds
-convert to flat index
-read input
-write output
+thread position -> row and column -> flat memory index
 ```
 
-## 1D Launch Versus 2D Launch
+## Launch Shape For A 2D Kernel
 
-A 1D launch is enough for a flat vector:
-
-```cpp
-int threads = 256;
-int blocks = (n + threads - 1) / threads;
-```
-
-A 2D launch is easier to read for matrix-shaped work:
+A 2D kernel usually uses `dim3`.
 
 ```cpp
 dim3 threads(16, 16);
+```
+
+This means each block has:
+
+```text
+16 threads in x
+16 threads in y
+16 * 16 = 256 total threads
+```
+
+The grid must cover the full matrix:
+
+```cpp
 dim3 blocks(
     (width + threads.x - 1) / threads.x,
     (height + threads.y - 1) / threads.y
 );
 ```
 
-That creates blocks with:
+The `x` dimension covers columns.
+
+The `y` dimension covers rows.
+
+For `width = 1000` and `threads.x = 16`:
 
 ```text
-16 * 16 = 256 threads per block
+blocks.x = (1000 + 16 - 1) / 16 = 63
 ```
 
-Each thread gets one `(row, col)` position.
+For `height = 600` and `threads.y = 16`:
 
-The `x` direction usually maps to columns. The `y` direction usually maps to
-rows.
+```text
+blocks.y = (600 + 16 - 1) / 16 = 38
+```
 
-## Indexing Bugs To Recognize
+The launch creates a little extra coverage at the edges. The bounds check
+handles those extra threads:
 
-Most early CUDA bugs are indexing bugs.
+```cpp
+if (row < height && col < width) {
+```
+
+## Strides
+
+So far, the lesson used contiguous row-major tensors.
+
+A contiguous `height x width` matrix has this stride pattern:
+
+```text
+row stride = width
+col stride = 1
+```
+
+That means:
+
+```cpp
+int index = row * width + col;
+```
+
+Can also be written as:
+
+```cpp
+int index = row * row_stride + col * col_stride;
+```
+
+For a contiguous matrix:
+
+```cpp
+int row_stride = width;
+int col_stride = 1;
+```
+
+Strides tell you how far to move in flat memory when one logical index changes.
+
+Move one column:
+
+```text
+index changes by 1
+```
+
+Move one row:
+
+```text
+index changes by width
+```
+
+This idea becomes important when tensors are sliced, transposed, or viewed
+without copying data.
+
+## Batch Dimensions
+
+Deep learning tensors often have more than two dimensions.
+
+For example, a batch of vectors might have shape:
+
+```text
+batch x features
+```
+
+If `batch = 3` and `features = 4`, the logical tensor looks like:
+
+```text
+sample 0: feature 0, feature 1, feature 2, feature 3
+sample 1: feature 0, feature 1, feature 2, feature 3
+sample 2: feature 0, feature 1, feature 2, feature 3
+```
+
+The flat index formula is the same as a matrix:
+
+```cpp
+int index = batch_id * features + feature_id;
+```
+
+For images, a common shape is:
+
+```text
+N x C x H x W
+```
+
+That means:
+
+```text
+N = batch
+C = channels
+H = height
+W = width
+```
+
+For contiguous `NCHW` layout, the flat index is:
+
+```cpp
+int index = ((n * C + c) * H + h) * W + w;
+```
+
+Read it from left to right:
+
+```text
+choose the batch
+then the channel
+then the row
+then the column
+```
+
+The formula looks bigger, but it is still the same idea:
+
+```text
+logical tensor position -> flat memory position
+```
+
+## Indexing Controls Correctness
+
+In a GPU kernel, wrong indexing usually means wrong data.
 
 Common mistakes:
 
 ```text
-forgetting the bounds check
-using blockIdx.x when you meant threadIdx.x
-using height where you meant width
-writing row + col instead of row * width + col
-launching too few blocks
-having two threads write the same output index
+using height where width belongs
+forgetting the channel dimension
+using row + col instead of row * width + col
+mixing up x and y dimensions
+writing outside the valid shape
+having multiple threads write the same output element
 ```
 
-The dangerous part is that a kernel can compile and still be wrong.
+These bugs are dangerous because the code may still compile.
 
-That is why reference implementations matter. A CPU or NumPy reference gives you
-the expected output, so the GPU result has something honest to match.
+The kernel may even look fast.
 
-## The Core Mental Model
+But speed does not matter if the thread-to-data mapping is wrong.
 
-Do not think of a GPU kernel as one function call doing one thing.
+## The Mental Model
 
-Think of it as many workers running the same function at the same time.
-
-Each worker asks:
+When reading a kernel for a matrix or tensor, ask:
 
 ```text
-Where am I in the grid?
-Which data element do I own?
-Am I inside the valid input range?
-What output should I write?
+What is the logical shape?
+What logical element does this thread own?
+How is that logical element converted into a flat index?
+What bounds check protects the edge?
+Does each output element get written exactly once?
 ```
 
-For elementwise kernels, the clean answer is:
+For a 2D elementwise kernel, the clean answer is:
 
 ```text
-one valid thread writes one valid output element
+one valid thread owns one valid row-column position
 ```
 
-Once that is clear, vector add, multiply, square, ReLU, and many preprocessing
-operations become variations of the same idea.
+Then the flat index connects that position to memory:
+
+```cpp
+int i = row * width + col;
+```
+
+That is the real lesson of Week 03.
+
+You are not just launching more threads. You are making a precise contract
+between tensor shape, thread position, and memory address.
