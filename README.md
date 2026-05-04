@@ -80,7 +80,7 @@ Month 1: GPU Foundations
 - Week 04: Elementwise kernel patterns
 
 Month 2: Memory And Benchmarking
-- Week 05: Global memory bandwidth
+- Week 05: Memory bandwidth and AXPY
 - Week 06: Coalesced vs strided access
 - Week 07: Reliable timing harness
 - Week 08: Memory bandwidth report

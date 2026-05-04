@@ -17,7 +17,7 @@ Each week should have one Markdown file that can be followed from top to bottom:
 - [Week 02: GPU Setup And Vector Add](week-02-gpu-setup-and-vector-add.md)
 - [Week 03: Tensor Shapes, Memory Layout, And Indexing](week-03-grids-blocks-threads-and-indexing.md)
 - [Week 04: Elementwise Kernel Patterns](week-04-elementwise-kernel-patterns.md)
-- [Week 05: Memory Bandwidth And Axpy](week-05-memory-bandwidth-and-axpy.md)
+- [Week 05: Memory Bandwidth And AXPY](week-05-memory-bandwidth-and-axpy.md)
 - [Week 06: Coalescing Vs Strides](week-06-coalescing-vs-strides.md)
 - [Week 07: Timing Harness And Benchmarking](week-07-timing-harness-and-benchmarking.md)
 - [Week 08: Month 02 Checkpoint](week-08-month-02-checkpoint.md)
