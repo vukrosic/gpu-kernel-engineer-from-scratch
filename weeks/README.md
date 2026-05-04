@@ -20,7 +20,7 @@ Each week should have one Markdown file that can be followed from top to bottom:
 - [Week 05: Memory Bandwidth And AXPY](week-05-memory-bandwidth-and-axpy.md)
 - [Week 06: Coalescing Vs Strides](week-06-coalescing-vs-strides.md)
 - [Week 07: Timing Harness And Benchmarking](week-07-timing-harness-and-benchmarking.md)
-- [Week 08: Month 02 Checkpoint](week-08-month-02-checkpoint.md)
+- [Week 08: Reading Performance Results](week-08-reading-performance-results.md)
 - [Week 09: Naive Reductions](week-09-naive-reductions.md)
 - [Week 10: Shared Memory Reductions](week-10-shared-memory-reductions.md)
 

@@ -83,7 +83,7 @@ Month 2: Memory And Benchmarking
 - Week 05: Memory bandwidth and AXPY
 - Week 06: Coalescing vs strides
 - Week 07: Timing harness and benchmarking
-- Week 08: Memory bandwidth report
+- Week 08: Reading performance results
 
 Month 3: Reductions
 - Week 09: Row sum and row max

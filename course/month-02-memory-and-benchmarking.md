@@ -11,7 +11,7 @@ Learn why memory movement dominates many GPU kernels and how to measure it.
 | 5 | Memory bandwidth and AXPY | Understand bytes moved, bandwidth, and low arithmetic intensity. | You can explain why simple elementwise kernels are often memory-bound. |
 | 6 | Coalescing vs strides | Understand contiguous access, strided access, warps, and memory coalescing. | You can explain why nearby threads should access nearby memory. |
 | 7 | Timing harness and benchmarking | Understand warmups, repeats, synchronization, median timing, and fair comparisons. | You can explain why naive timing can lie. |
-| 8 | Checkpoint | Memory bandwidth report. | Results are documented. |
+| 8 | Reading performance results | Understand result tables, bandwidth estimates, fair comparisons, and honest conclusions. | You can explain what a performance number does and does not prove. |
 
 ## Minimum Viable Month
 
