@@ -10,7 +10,7 @@ building the habit of thinking about correctness before throughput.
 ## What To Read
 
 - [../course/month-04-scans-atomics-synchronization.md](../course/month-04-scans-atomics-synchronization.md)
-- [../weeks/week-12-month-03-checkpoint.md](../weeks/week-12-month-03-checkpoint.md)
+- [../weeks/week-12-warp-level-reductions.md](../weeks/week-12-warp-level-reductions.md)
 
 ## Exact Commands
 

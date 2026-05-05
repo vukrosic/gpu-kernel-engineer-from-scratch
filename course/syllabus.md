@@ -38,7 +38,7 @@ Goal: build kernels where many values combine into fewer values.
 | 9 | Reductions mental model | Understand sum, max, axes, output shape, and coordination. | Reductions explanation. |
 | 10 | Naive reduction kernels | Read one-thread-per-output row sum and row max kernels. | Naive reduction explanation. |
 | 11 | Block-level reductions with shared memory | Explain how one block cooperates through shared memory to reduce one output region. | Shared-memory reduction explanation. |
-| 12 | Warp-level thinking | Understand how warp execution changes reduction design. | Warp-level reduction explanation. |
+| 12 | Warp-level reductions | Understand how warp execution and shuffle operations change reduction design. | Warp-level reduction explanation. |
 
 Quarterly reset: review Months 1-3, fix broken tests, and record a walkthrough.
 

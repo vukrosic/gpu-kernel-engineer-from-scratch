@@ -89,7 +89,7 @@ Month 3: Reductions
 - Week 09: Reductions mental model
 - Week 10: Naive reduction kernels
 - Week 11: Block-level reductions with shared memory
-- Week 12: Warp-level thinking
+- Week 12: Warp-level reductions
 
 Month 4: Scans, Atomics, Synchronization
 - Week 13: Barriers and race conditions

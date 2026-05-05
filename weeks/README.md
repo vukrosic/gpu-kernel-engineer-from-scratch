@@ -24,6 +24,7 @@ Each week should have one Markdown file that can be followed from top to bottom:
 - [Week 09: Reductions Mental Model](week-09-reductions-mental-model.md)
 - [Week 10: Naive Reduction Kernels](week-10-naive-reduction-kernels.md)
 - [Week 11: Block-Level Reductions With Shared Memory](week-11-block-level-reductions-with-shared-memory.md)
+- [Week 12: Warp-Level Reductions](week-12-warp-level-reductions.md)
 
 ## How To Use This Folder
 
@@ -49,7 +50,6 @@ commands, a build target, a note file, a code sketch, and a next-week preview.
 The rest of the year is scaffolded here so the 12-month roadmap is visible at a
 glance:
 
-- Month 03: [Week 12](week-12-month-03-checkpoint.md)
 - Month 04: [Week 13](week-13-synchronization-and-barriers.md), [Week 14](week-14-atomics-and-histograms.md), [Week 15](week-15-prefix-sum-and-scan.md), [Week 16](week-16-month-04-checkpoint.md)
 - Month 05: [Week 17](week-17-softmax-math.md), [Week 18](week-18-fused-softmax.md), [Week 19](week-19-layernorm.md), [Week 20](week-20-month-05-checkpoint.md)
 - Month 06: [Week 21](week-21-naive-matmul.md), [Week 22](week-22-tiled-matmul.md), [Week 23](week-23-tiling-and-occupancy.md), [Week 24](week-24-month-06-checkpoint.md)
