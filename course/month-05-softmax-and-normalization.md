@@ -8,7 +8,7 @@ Build transformer-adjacent kernels that appear in real AI systems.
 
 | Week | Topic | Main Build | Done When |
 | --- | --- | --- | --- |
-| 17 | Softmax math | Numerically stable row-wise softmax. | Matches NumPy or PyTorch. |
+| 17 | Softmax math for kernels | Understand stable row-wise softmax as max, exp, sum, and divide. | You can explain the kernel-shaped softmax pipeline. |
 | 18 | Fused softmax | Combine max, exp, sum, and divide. | Benchmark compares fused and unfused. |
 | 19 | LayerNorm | Forward LayerNorm. | Correctness and timing are documented. |
 | 20 | Checkpoint | Normalization systems note. | You can explain why normalization appears in transformers. |

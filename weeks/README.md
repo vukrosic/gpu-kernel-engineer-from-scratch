@@ -2,14 +2,13 @@
 
 This is the main course path.
 
-Each week should have one Markdown file that can be followed from top to bottom:
+Each week should have one Markdown file that can be read from top to bottom:
 
 - what to learn
-- what to run
-- what to build
-- what to write down
-- what counts as done
-- what to skip if you are behind
+- the mental model
+- small code-shaped examples
+- how the idea connects to previous weeks
+- how the idea prepares the next week
 
 ## Available Weeks
 
@@ -25,6 +24,11 @@ Each week should have one Markdown file that can be followed from top to bottom:
 - [Week 10: Naive Reduction Kernels](week-10-naive-reduction-kernels.md)
 - [Week 11: Block-Level Reductions With Shared Memory](week-11-block-level-reductions-with-shared-memory.md)
 - [Week 12: Warp-Level Reductions](week-12-warp-level-reductions.md)
+- [Week 13: Synchronization And Barriers](week-13-synchronization-and-barriers.md)
+- [Week 14: Atomics And Contention](week-14-atomics-and-contention.md)
+- [Week 15: Prefix Sum And Scan Mental Model](week-15-prefix-sum-scan-mental-model.md)
+- [Week 16: Parallel Scan Implementation](week-16-parallel-scan-implementation.md)
+- [Week 17: Softmax Math For Kernels](week-17-softmax-math-for-kernels.md)
 
 ## How To Use This Folder
 
@@ -33,25 +37,19 @@ Start with the first incomplete week. Do not jump around unless you are reviewin
 For each week:
 
 1. Open the week file.
-2. Follow it from top to bottom.
-3. Create the requested `results/` note.
-4. Stop when the Done Checklist is complete.
-5. Move to the next week.
+2. Read it from top to bottom.
+3. Use the matching `results/` note to capture the main takeaway.
+4. Move to the next week.
 
-If a week feels too large, do the Minimum checklist. If you have extra time, do
-Standard or Stretch.
-
-Every week file is written to be followable top to bottom. Many of the later
-weeks are shorter outline lessons, but they still include the same shape:
-commands, a build target, a note file, a code sketch, and a next-week preview.
+The rewritten weeks are lessons first. The matching result files are lightweight
+notes for preserving the core idea.
 
 ## Year Scaffold
 
 The rest of the year is scaffolded here so the 12-month roadmap is visible at a
 glance:
 
-- Month 04: [Week 13](week-13-synchronization-and-barriers.md), [Week 14](week-14-atomics-and-histograms.md), [Week 15](week-15-prefix-sum-and-scan.md), [Week 16](week-16-month-04-checkpoint.md)
-- Month 05: [Week 17](week-17-softmax-math.md), [Week 18](week-18-fused-softmax.md), [Week 19](week-19-layernorm.md), [Week 20](week-20-month-05-checkpoint.md)
+- Month 05: [Week 18](week-18-fused-softmax.md), [Week 19](week-19-layernorm.md), [Week 20](week-20-month-05-checkpoint.md)
 - Month 06: [Week 21](week-21-naive-matmul.md), [Week 22](week-22-tiled-matmul.md), [Week 23](week-23-tiling-and-occupancy.md), [Week 24](week-24-month-06-checkpoint.md)
 - Month 07: [Week 25](week-25-triton-mental-model.md), [Week 26](week-26-triton-blocks-and-masks.md), [Week 27](week-27-triton-softmax.md), [Week 28](week-28-month-07-checkpoint.md)
 - Month 08: [Week 29](week-29-triton-matmul.md), [Week 30](week-30-autotuning.md), [Week 31](week-31-batched-matmul.md), [Week 32](week-32-month-08-checkpoint.md)
@@ -63,4 +61,4 @@ glance:
 ## Rule
 
 When in doubt, follow the current week file. The syllabus is the map. The week
-file is the actual checklist.
+file is the actual lesson.

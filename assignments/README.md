@@ -22,13 +22,13 @@ Every assignment has three levels so you can stay in motion.
 | 8 | Month 2 checkpoint | Memory bandwidth writeup. |
 | 9 | Row reductions | Row sum and row max correctness. |
 | 10 | Shared reductions | One optimized reduction variant. |
-| 11 | Warp thinking | Warp-level explanation and small experiment. |
-| 12 | Month 3 checkpoint | Reduction benchmark report. |
-| 13 | Synchronization | Barrier example and race-condition note. |
-| 14 | Atomics | Histogram or counter kernel. |
-| 15 | Scan | Small block-level scan. |
-| 16 | Month 4 checkpoint | Synchronization interview notes. |
-| 17 | Safe softmax | Numerically stable row softmax. |
+| 11 | Block-level reductions with shared memory | Shared-memory reduction explanation. |
+| 12 | Warp-level reductions | Warp shuffle reduction explanation. |
+| 13 | Synchronization and barriers | Barrier and race-condition explanation. |
+| 14 | Atomics and contention | Atomic update and contention explanation. |
+| 15 | Prefix sum and scan mental model | Inclusive vs exclusive scan explanation. |
+| 16 | Parallel scan implementation | Staged block scan explanation. |
+| 17 | Softmax math for kernels | Numerically stable softmax explanation. |
 | 18 | Fused softmax | One fused softmax benchmark. |
 | 19 | LayerNorm | Forward LayerNorm correctness. |
 | 20 | Month 5 checkpoint | Normalization systems note. |

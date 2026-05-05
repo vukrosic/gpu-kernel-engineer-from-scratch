@@ -48,10 +48,10 @@ Goal: understand coordination between threads.
 
 | Week | Topic | Assignment | Portfolio Artifact |
 | --- | --- | --- | --- |
-| 13 | Synchronization | Use barriers safely inside a block. | Race-condition bug diary. |
-| 14 | Atomics | Build a histogram or counting kernel. | Atomic kernel with tests. |
-| 15 | Prefix sum / scan | Implement a small block-level scan. | Scan explanation and benchmark. |
-| 16 | Checkpoint | Compare reductions, atomics, and scans. | Synchronization interview notes. |
+| 13 | Synchronization and barriers | Understand block-local barriers and race conditions. | Synchronization explanation. |
+| 14 | Atomics and contention | Understand atomic updates, histograms, and hot counters. | Atomic contention explanation. |
+| 15 | Prefix sum and scan mental model | Understand inclusive scan, exclusive scan, and offsets. | Scan mental model explanation. |
+| 16 | Parallel scan implementation | Understand staged block scan with shared memory and barriers. | Parallel scan explanation. |
 
 Minimum viable month: one atomic kernel and one clear explanation.
 
@@ -61,7 +61,7 @@ Goal: build transformer-adjacent kernels people recognize.
 
 | Week | Topic | Assignment | Portfolio Artifact |
 | --- | --- | --- | --- |
-| 17 | Softmax math | Implement safe row-wise softmax from a reference. | Softmax test against PyTorch or NumPy. |
+| 17 | Softmax math for kernels | Understand stable row-wise softmax as max, exp, sum, and divide. | Kernel-shaped softmax explanation. |
 | 18 | Fused softmax | Combine max, exp, sum, and divide in one kernel. | Fused softmax benchmark. |
 | 19 | LayerNorm | Implement forward LayerNorm. | LayerNorm correctness and timing. |
 | 20 | Checkpoint | Explain why normalization appears in transformers. | Kernel-to-transformers note. |

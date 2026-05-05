@@ -92,13 +92,13 @@ Month 3: Reductions
 - Week 12: Warp-level reductions
 
 Month 4: Scans, Atomics, Synchronization
-- Week 13: Barriers and race conditions
-- Week 14: Atomics and histograms
-- Week 15: Prefix sum and scan
-- Week 16: Synchronization checkpoint
+- Week 13: Synchronization and barriers
+- Week 14: Atomics and contention
+- Week 15: Prefix sum and scan mental model
+- Week 16: Parallel scan implementation
 
 Month 5: Softmax And Normalization
-- Week 17: Safe row-wise softmax
+- Week 17: Softmax math for kernels
 - Week 18: Fused softmax
 - Week 19: LayerNorm
 - Week 20: Normalization checkpoint

@@ -1,38 +1,28 @@
-# Week 13
+# Week 13 Synchronization And Barriers
 
-Status: writing template
+## Lesson Summary
 
-## What To Capture
+Summarize why threads need barriers when one thread reads data written by
+another thread in the same block.
 
-- one tiny barrier or wait-for-ready example
-- one race condition before the wait
-- one sentence about why this is correctness work, not math work
+## Key Pattern
 
-## What Was Built
+Record the pattern:
 
-Describe the smallest coordination example you wrote or studied. Name the shared
-value, the waiting condition, and who is allowed to proceed first.
+```text
+write shared memory
+__syncthreads()
+read shared memory
+```
 
-## Correctness Check
+## Important Detail
 
-Record exactly what becomes safe after the barrier. If you found a race, write
-the failure mode in one sentence and how the barrier removes it.
+Explain why every thread in the block must reach the same barrier.
 
-## Benchmark Or Observation
+## Limitation
 
-If you ran anything, note whether the wait changed behavior, exposed a bug, or
-added overhead. If you did not benchmark, say what you would compare next.
+Write down why `__syncthreads()` does not synchronize different blocks.
 
-## Lesson Learned
+## Next Step
 
-Summarize synchronization in plain language.
-
-## Limitation Or Next Step
-
-Write one line about where waiting becomes awkward or expensive.
-
-## Write-Back Prompts
-
-1. What did the worker wait for?
-2. What broke before the wait?
-3. Why is a race condition a correctness problem?
+Write one question you want Week 14 to answer about shared updates.

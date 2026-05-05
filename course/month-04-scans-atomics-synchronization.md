@@ -8,10 +8,10 @@ Understand coordination between threads.
 
 | Week | Topic | Main Build | Done When |
 | --- | --- | --- | --- |
-| 13 | Synchronization | Barrier example inside a block. | You can explain a fixed race condition. |
-| 14 | Atomics | Histogram or counting kernel. | Atomic kernel has tests. |
-| 15 | Prefix sum / scan | Small block-level scan. | Scan result matches reference. |
-| 16 | Checkpoint | Synchronization interview notes. | Notes compare reductions, atomics, and scans. |
+| 13 | Synchronization and barriers | Understand block-local barriers and race conditions. | You can explain when `__syncthreads()` is required. |
+| 14 | Atomics and contention | Understand atomic updates, histograms, and hot counters. | You can explain why atomics are correct but can be slow. |
+| 15 | Prefix sum and scan mental model | Understand inclusive scan, exclusive scan, and offsets. | You can explain why scan is not a reduction. |
+| 16 | Parallel scan implementation | Understand staged block scan with shared memory and barriers. | You can describe a block-level scan implementation. |
 
 ## Minimum Viable Month
 

@@ -8,7 +8,7 @@ clean summary and get ready to pivot into matmul.
 ## What To Read
 
 - [../course/month-05-softmax-and-normalization.md](../course/month-05-softmax-and-normalization.md)
-- [../weeks/week-17-softmax-math.md](../weeks/week-17-softmax-math.md)
+- [../weeks/week-17-softmax-math-for-kernels.md](../weeks/week-17-softmax-math-for-kernels.md)
 - [../weeks/week-18-fused-softmax.md](../weeks/week-18-fused-softmax.md)
 - [../weeks/week-19-layernorm.md](../weeks/week-19-layernorm.md)
 

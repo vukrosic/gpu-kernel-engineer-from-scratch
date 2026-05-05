@@ -1,76 +1,302 @@
 # Week 13: Synchronization And Barriers
 
-## What This Week Is
+Weeks 11 and 12 introduced cooperative reductions.
 
-Month 4 starts with the coordination problem: multiple workers can be right on
-their own and still be wrong together if one of them reads shared state too
-early. This week is about naming that risk, showing the "wait here" moment, and
-building the habit of thinking about correctness before throughput.
+That cooperation only works when threads agree on when shared data is ready.
 
-## What To Read
+Week 13 teaches the rule behind that:
 
-- [../course/month-04-scans-atomics-synchronization.md](../course/month-04-scans-atomics-synchronization.md)
-- [../weeks/week-12-warp-level-reductions.md](../weeks/week-12-warp-level-reductions.md)
-
-## Exact Commands
-
-```bash
-pytest
-python examples/reference_bench.py
+```text
+if one thread writes data that another thread reads, you must know when the
+write becomes safe to read
 ```
 
-## Build This
+That is synchronization.
 
-Write `results/week-13-synchronization.md` with a tiny barrier example, a race
-condition explained in plain language, and one note about why waiting is a
-correctness tool rather than a math trick.
+The most important first tool is the block barrier:
 
-## Code Sketch
-
-```python
-def wait_for_writer(shared):
-    if shared["id"] == 0:
-        shared["value"] = shared["left"] + shared["right"]
-        shared["ready"] = True
-
-    while not shared["ready"]:
-        pass
-
-    return shared["value"]
+```cpp
+__syncthreads();
 ```
 
-This sketch is correct because it shows one worker publishing a value and the
-other workers refusing to read it until the publish flag is set.
+## The Problem: Correct Threads, Wrong Program
 
-## Write Down
+Imagine four threads in a block.
 
-Answer:
+Each thread writes one value into shared memory:
 
-1. What has to be true before another worker can continue?
-2. What breaks when a worker reads too early?
-3. Why is a race condition a correctness problem and not just a slowdown?
-4. What is the smallest barrier example you can explain out loud?
+```text
+thread 0 writes scratch[0]
+thread 1 writes scratch[1]
+thread 2 writes scratch[2]
+thread 3 writes scratch[3]
+```
 
-## Minimum
+Then thread 0 wants to add them:
 
-- the note exists
-- you can explain a race condition without jargon
+```text
+scratch[0] + scratch[1] + scratch[2] + scratch[3]
+```
 
-## Standard
+The dangerous version is:
 
-- you sketch a before/after barrier example
-- you explain why waiting can be necessary even when the math is simple
+```cpp
+scratch[tid] = x[tid];
 
-## Stretch
+if (tid == 0) {
+    out[0] = scratch[0] + scratch[1] + scratch[2] + scratch[3];
+}
+```
 
-- you compare synchronization to the reduction story
-- you describe one debugging habit that helps you spot races faster
+Each individual line looks reasonable.
 
-## If You Are Behind
+The problem is timing.
 
-Keep the example tiny. The goal is to understand why coordination matters.
+Thread 0 might read `scratch[2]` before thread 2 has written it.
 
-## Next Week
+That is a race condition:
 
-Week 14 introduces atomics, which make the "one at a time" side of
-coordination explicit.
+```text
+the final answer depends on the order threads happen to run
+```
+
+GPU programs must not depend on lucky timing.
+
+## The Barrier
+
+The fixed version adds a barrier:
+
+```cpp
+scratch[tid] = x[tid];
+
+__syncthreads();
+
+if (tid == 0) {
+    out[0] = scratch[0] + scratch[1] + scratch[2] + scratch[3];
+}
+```
+
+Read `__syncthreads()` as:
+
+```text
+every thread in this block must arrive here before any thread continues
+```
+
+After the barrier, thread 0 can safely assume all earlier shared-memory writes
+from the block have happened.
+
+The barrier does not make the math faster.
+
+It makes the program correct.
+
+## Barriers Are Block-Local
+
+This is important:
+
+```text
+__syncthreads() only synchronizes threads inside the same block
+```
+
+It does not synchronize the whole grid.
+
+Block 0 cannot use `__syncthreads()` to wait for block 1.
+
+That is why large reductions often use more than one kernel:
+
+```text
+kernel 1: each block writes partial results
+kernel 2: reduce the partial results
+```
+
+A kernel launch boundary acts like a global ordering point between kernels.
+
+Inside one kernel, blocks mostly run independently.
+
+## Where Barriers Show Up In Reductions
+
+Week 11 used this shared-memory reduction shape:
+
+```cpp
+scratch[tid] = value;
+__syncthreads();
+
+for (int stride = blockDim.x / 2; stride > 0; stride /= 2) {
+    if (tid < stride) {
+        scratch[tid] += scratch[tid + stride];
+    }
+
+    __syncthreads();
+}
+```
+
+There are two reasons for the barriers.
+
+First, after loading:
+
+```text
+all scratch values must exist before any thread combines them
+```
+
+Second, after each stage:
+
+```text
+the next stage must read the updated partial sums, not old values
+```
+
+That gives the rhythm:
+
+```text
+write shared memory
+wait
+read shared memory
+write partials
+wait
+read updated partials
+write smaller partials
+wait
+```
+
+This rhythm is one of the core patterns in GPU kernels.
+
+## A Race Condition In Plain Language
+
+A race condition is not just "parallel code is hard."
+
+It is more specific:
+
+```text
+two or more operations access the same data
+at least one operation writes
+the program result depends on which operation happens first
+```
+
+Example:
+
+```text
+thread 0 reads scratch[1]
+thread 1 writes scratch[1]
+```
+
+If the read happens before the write, thread 0 gets an old value.
+
+If the write happens before the read, thread 0 gets the new value.
+
+Same code.
+
+Different answer.
+
+That is a correctness bug.
+
+## Not Every Shared-Memory Use Needs A Barrier
+
+If each thread only reads and writes its own location:
+
+```cpp
+scratch[tid] = x[tid] * 2.0f;
+out[tid] = scratch[tid];
+```
+
+There is no cross-thread dependency.
+
+Thread 0 does not need thread 1's value.
+
+In that case, a barrier would not protect anything important.
+
+A useful question is:
+
+```text
+does any thread read data written by another thread?
+```
+
+If yes, think carefully about synchronization.
+
+If no, a barrier may only slow the kernel down.
+
+## The Dangerous Barrier: Divergence
+
+All threads in a block must reach the same `__syncthreads()` call.
+
+This is dangerous:
+
+```cpp
+if (tid < 16) {
+    __syncthreads();
+}
+```
+
+Only some threads enter the `if`.
+
+Those threads wait for the rest of the block.
+
+But the rest of the block never arrives at that barrier.
+
+That can hang the block.
+
+The safer shape is:
+
+```cpp
+if (tid < 16) {
+    scratch[tid] = x[tid];
+}
+
+__syncthreads();
+```
+
+Now every thread reaches the barrier.
+
+Only some threads did the work before it.
+
+## Barrier Placement
+
+Barrier placement is about dependencies.
+
+Use a barrier after writes that other threads will read:
+
+```cpp
+scratch[tid] = value;
+__syncthreads();
+```
+
+Use a barrier between stages when stage 2 reads values written by stage 1:
+
+```cpp
+scratch[tid] += scratch[tid + stride];
+__syncthreads();
+```
+
+Do not place barriers inside branches that only some block threads enter.
+
+Do not add barriers just to "be safe" without knowing what data dependency they
+protect.
+
+Correctness first.
+
+Then remove unnecessary waiting when you can explain why it is unnecessary.
+
+## The Core Pattern
+
+When reading a kernel with synchronization, ask:
+
+```text
+What data is shared?
+Which thread writes it?
+Which thread reads it?
+What must be true before the read?
+Does every thread in the block reach the barrier?
+Is the barrier block-local enough for this dependency?
+```
+
+Those questions turn synchronization from magic into engineering.
+
+## Bridge To Week 14
+
+Barriers make threads wait at a known point.
+
+Atomics solve a different coordination problem:
+
+```text
+many threads want to update the same memory location
+```
+
+Week 14 teaches what happens when the shared state is not a scratchpad stage,
+but a counter or accumulator that many threads touch.
