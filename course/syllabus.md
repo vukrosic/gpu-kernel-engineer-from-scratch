@@ -76,8 +76,8 @@ Goal: understand the kernel behind most deep learning compute.
 | --- | --- | --- | --- |
 | 21 | Naive matrix multiplication | Understand one output cell as one dot product across K. | Naive matmul indexing explanation. |
 | 22 | Tiled matrix multiplication | Understand shared-memory tiles and reuse across a C tile. | Tiled matmul explanation. |
-| 23 | Tile sizes and occupancy | Compare block sizes and resource usage. | Tuning report. |
-| 24 | Checkpoint | Clean up matmul code and notes. | Month 6 matmul page. |
+| 23 | Matmul memory reuse | Understand how A and B tile values are reused across a C tile. | Matmul reuse explanation. |
+| 24 | Occupancy, registers, and tile size | Understand how tile choices consume GPU resources. | Occupancy and tile-size explanation. |
 
 Quarterly reset: review Months 4-6 and update resume bullets.
 
@@ -87,10 +87,10 @@ Goal: use Triton as a higher-level kernel tool for modern AI workloads.
 
 | Week | Topic | Assignment | Portfolio Artifact |
 | --- | --- | --- | --- |
-| 25 | Triton mental model | Rewrite vector add in Triton. | CUDA vs Triton comparison. |
-| 26 | Triton blocks and masks | Build elementwise and reduction kernels. | Triton kernel suite. |
-| 27 | Triton softmax | Implement row-wise softmax in Triton. | Triton softmax benchmark. |
-| 28 | Checkpoint | Explain when Triton is useful. | CUDA vs Triton essay. |
+| 25 | Triton mental model | Understand program instances, offsets, and masks. | Triton mental model explanation. |
+| 26 | Triton vector add and masks | Understand masked loads and stores on edge blocks. | Triton masks explanation. |
+| 27 | Triton reductions | Understand row-wise sum and max reductions in Triton. | Triton reduction explanation. |
+| 28 | Triton row-wise softmax | Understand softmax as Triton row ownership plus reductions. | Triton softmax explanation. |
 
 Minimum viable month: one Triton kernel, one test, one benchmark.
 
@@ -100,10 +100,10 @@ Goal: learn practical tuning in the style of modern ML infrastructure.
 
 | Week | Topic | Assignment | Portfolio Artifact |
 | --- | --- | --- | --- |
-| 29 | Triton matmul | Build tiled matmul in Triton. | Matmul benchmark table. |
-| 30 | Autotuning ideas | Compare block sizes, warps, and stages. | Tuning grid results. |
-| 31 | Batched matmul | Extend matmul to batches. | Batched matmul tests. |
-| 32 | Checkpoint | Package matmul results clearly. | Size vs speed chart. |
+| 29 | Triton matmul basics | Understand one program as one C tile with a K loop. | Triton matmul explanation. |
+| 30 | Triton matmul performance knobs | Understand block sizes, warps, stages, and shape-dependent tuning. | Tuning explanation. |
+| 31 | Batched matmul indexing | Understand batch strides and 3D launch grids. | Batched indexing explanation. |
+| 32 | Profiling GPU kernels | Understand timing, profiling, baselines, and bottleneck hypotheses. | Profiling note. |
 
 Minimum viable month: one tuned Triton matmul benchmark.
 

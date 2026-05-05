@@ -106,20 +106,20 @@ Month 5: Softmax And Normalization
 Month 6: Matmul Foundations
 - Week 21: Naive matrix multiplication
 - Week 22: Tiled matrix multiplication
-- Week 23: Tile sizes and occupancy
-- Week 24: Matmul checkpoint
+- Week 23: Matmul memory reuse
+- Week 24: Occupancy, registers, and tile size
 
 Month 7: Triton For AI Kernels
 - Week 25: Triton mental model
-- Week 26: Triton blocks and masks
-- Week 27: Triton softmax
-- Week 28: Triton checkpoint
+- Week 26: Triton vector add and masks
+- Week 27: Triton reductions
+- Week 28: Triton row-wise softmax
 
 Month 8: Triton Matmul And Tuning
-- Week 29: Triton matmul
-- Week 30: Autotuning
-- Week 31: Batched matmul
-- Week 32: Tuning checkpoint
+- Week 29: Triton matmul basics
+- Week 30: Triton matmul performance knobs
+- Week 31: Batched matmul indexing
+- Week 32: Profiling GPU kernels
 
 Month 9: PyTorch Integration
 - Week 33: PyTorch baselines

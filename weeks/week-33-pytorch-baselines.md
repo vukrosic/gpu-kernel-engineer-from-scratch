@@ -9,7 +9,7 @@ is more than just a backup plan.
 ## What To Read
 
 - [../course/month-09-pytorch-integration.md](../course/month-09-pytorch-integration.md)
-- [week-32-month-08-checkpoint.md](week-32-month-08-checkpoint.md)
+- [week-32-profiling-gpu-kernels.md](week-32-profiling-gpu-kernels.md)
 - [../gputriton/reference.py](../gputriton/reference.py)
 - [../tests/test_reference.py](../tests/test_reference.py)
 

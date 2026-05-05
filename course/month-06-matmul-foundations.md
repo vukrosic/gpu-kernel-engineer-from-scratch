@@ -10,8 +10,8 @@ Understand the kernel behind most deep learning compute.
 | --- | --- | --- | --- |
 | 21 | Naive matrix multiplication | Understand one output cell as one dot product across K. | You can explain the naive matmul indexing. |
 | 22 | Tiled matrix multiplication | Understand shared-memory tiles and reuse across a C tile. | You can explain why tiling reduces repeated global loads. |
-| 23 | Tile sizes and occupancy | Compare block sizes and resource usage. | Tuning report is written. |
-| 24 | Checkpoint | Matmul portfolio page. | Results and tradeoffs are clear. |
+| 23 | Matmul memory reuse | Understand how A and B tile values are reused across a C tile. | You can explain why tiling raises arithmetic intensity. |
+| 24 | Occupancy, registers, and tile size | Understand how tile choices consume GPU resources. | You can explain why bigger tiles are not automatically better. |
 
 ## Minimum Viable Month
 

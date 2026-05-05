@@ -34,6 +34,16 @@ Each week should have one Markdown file that can be read from top to bottom:
 - [Week 20: RMSNorm Kernel](week-20-rmsnorm-kernel.md)
 - [Week 21: Naive Matrix Multiplication](week-21-naive-matmul.md)
 - [Week 22: Tiled Matrix Multiplication](week-22-tiled-matmul.md)
+- [Week 23: Matmul Memory Reuse](week-23-matmul-memory-reuse.md)
+- [Week 24: Occupancy, Registers, And Tile Size](week-24-occupancy-registers-and-tile-size.md)
+- [Week 25: Triton Mental Model](week-25-triton-mental-model.md)
+- [Week 26: Triton Vector Add And Masks](week-26-triton-vector-add-and-masks.md)
+- [Week 27: Triton Reductions](week-27-triton-reductions.md)
+- [Week 28: Triton Row-Wise Softmax](week-28-triton-row-wise-softmax.md)
+- [Week 29: Triton Matmul Basics](week-29-triton-matmul-basics.md)
+- [Week 30: Triton Matmul Performance Knobs](week-30-triton-matmul-performance-knobs.md)
+- [Week 31: Batched Matmul Indexing](week-31-batched-matmul-indexing.md)
+- [Week 32: Profiling GPU Kernels](week-32-profiling-gpu-kernels.md)
 
 ## How To Use This Folder
 
@@ -54,9 +64,6 @@ notes for preserving the core idea.
 The rest of the year is scaffolded here so the 12-month roadmap is visible at a
 glance:
 
-- Month 06: [Week 23](week-23-tiling-and-occupancy.md), [Week 24](week-24-month-06-checkpoint.md)
-- Month 07: [Week 25](week-25-triton-mental-model.md), [Week 26](week-26-triton-blocks-and-masks.md), [Week 27](week-27-triton-softmax.md), [Week 28](week-28-month-07-checkpoint.md)
-- Month 08: [Week 29](week-29-triton-matmul.md), [Week 30](week-30-autotuning.md), [Week 31](week-31-batched-matmul.md), [Week 32](week-32-month-08-checkpoint.md)
 - Month 09: [Week 33](week-33-pytorch-baselines.md), [Week 34](week-34-custom-op-wrapper.md), [Week 35](week-35-gpu-test-matrix.md), [Week 36](week-36-month-09-checkpoint.md)
 - Month 10: [Week 37](week-37-gelu-fusion.md), [Week 38](week-38-rmsnorm.md), [Week 39](week-39-attention-pieces.md), [Week 40](week-40-month-10-checkpoint.md)
 - Month 11: [Week 41](week-41-attention-forward.md), [Week 42](week-42-flashattention-concepts.md), [Week 43](week-43-kv-cache.md), [Week 44](week-44-month-11-checkpoint.md)

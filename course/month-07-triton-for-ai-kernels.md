@@ -8,10 +8,10 @@ Use Triton as a practical implementation path for AI kernels.
 
 | Week | Topic | Main Build | Done When |
 | --- | --- | --- | --- |
-| 25 | Triton mental model | Vector add in Triton. | One Triton kernel is tested. |
-| 26 | Blocks and masks | Elementwise or reduction kernels. | Masks are explained. |
-| 27 | Triton softmax | Row-wise softmax in Triton. | Benchmark exists. |
-| 28 | Checkpoint | CUDA vs Triton comparison. | Short essay is published. |
+| 25 | Triton mental model | Understand program instances, offsets, and masks. | You can explain Triton blocks of data. |
+| 26 | Triton vector add and masks | Understand masked loads and stores on edge blocks. | You can explain why masks protect correctness. |
+| 27 | Triton reductions | Understand row-wise sum and max reductions in Triton. | You can explain reduction identities for masked values. |
+| 28 | Triton row-wise softmax | Understand softmax as Triton row ownership plus reductions. | You can describe the fused Triton softmax pipeline. |
 
 ## Minimum Viable Month
 

@@ -1,31 +1,25 @@
-# Week 25
+# Week 25 Triton Mental Model
 
-Status: writing prompt
+## Lesson Summary
 
-## What Was Built
+Summarize Triton as program instances operating on blocks of data with masks.
 
-- Describe the Triton mental-model note you wrote.
-- Name the program id, block size, and one vector length you traced.
-- Include the smallest diagram that makes the program/block/mask relationship obvious.
+## Key Pattern
 
-## Correctness Check
+Record the basic shape:
 
-- Explain why the mask keeps the last block safe.
-- Write down the exact edge case you checked.
-- Say how the Triton shape matches the reference implementation.
+```text
+program id -> offsets -> mask -> load block -> compute -> store block
+```
 
-## Benchmark Or Observation
+## Important Detail
 
-- Record the command you ran and the input shape you used.
-- Note what you learned from the observation, without inventing a number.
-- If you did not measure, write the next command you would run.
+Explain how Triton differs from thinking one CUDA thread at a time.
 
-## Lesson Learned
+## Limitation
 
-- Finish this sentence: "In Triton, one program usually means ..."
-- Capture one comparison to CUDA in plain language.
+Write down what Triton does not hide about GPU engineering.
 
-## Limitation Or Next Step
+## Next Step
 
-- Name the part of the execution model that is still easiest to forget.
-- Write the next question you want Week 26 to answer.
+Write one question you want Week 26 to answer about masks.

@@ -34,16 +34,16 @@ Every assignment has three levels so you can stay in motion.
 | 20 | RMSNorm kernel | RMSNorm vs LayerNorm explanation. |
 | 21 | Naive matrix multiplication | Naive matmul indexing explanation. |
 | 22 | Tiled matrix multiplication | Tiled matmul reuse explanation. |
-| 23 | Matmul tuning | Block-size comparison. |
-| 24 | Month 6 checkpoint | Matmul portfolio page. |
-| 25 | Triton vector add | One Triton kernel with test. |
-| 26 | Triton masks | Elementwise or reduction kernel using masks. |
-| 27 | Triton softmax | Row softmax in Triton. |
-| 28 | Month 7 checkpoint | CUDA vs Triton comparison. |
-| 29 | Triton matmul | Tiled Triton matmul benchmark. |
-| 30 | Tuning grid | Compare warps, stages, and block sizes. |
-| 31 | Batched matmul | Batched matmul tests. |
-| 32 | Month 8 checkpoint | Size vs speed chart. |
+| 23 | Matmul memory reuse | Matmul reuse explanation. |
+| 24 | Occupancy, registers, and tile size | Tile-size tradeoff explanation. |
+| 25 | Triton mental model | Triton program/block/mask explanation. |
+| 26 | Triton vector add and masks | Edge-block mask explanation. |
+| 27 | Triton reductions | Triton sum/max reduction explanation. |
+| 28 | Triton row-wise softmax | Triton softmax pipeline explanation. |
+| 29 | Triton matmul basics | Triton C-tile indexing explanation. |
+| 30 | Triton matmul performance knobs | Tuning knob explanation. |
+| 31 | Batched matmul indexing | Batch stride explanation. |
+| 32 | Profiling GPU kernels | Profiling and benchmark hygiene note. |
 | 33 | PyTorch baseline | Compare against PyTorch ops. |
 | 34 | Kernel wrapper | Clean Python API for one kernel. |
 | 35 | GPU test matrix | Shape, dtype, and tolerance tests. |
