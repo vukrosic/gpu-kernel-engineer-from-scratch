@@ -4,9 +4,9 @@ Status: month checkpoint template
 
 ## Summary
 
-Summarize GELU fusion, RMSNorm, and attention pieces in three concise
-sentences. Say what changed in your understanding, not just what the topics
-were.
+Summarize GELU fusion, residual/norm fusion, attention scores, and transformer
+kernel dataflow in a few concise sentences. Say what changed in your
+understanding, not just what the topics were.
 
 ## Best Result
 

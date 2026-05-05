@@ -116,7 +116,7 @@ Goal: connect custom kernels to the ML ecosystem you actually use.
 | 33 | PyTorch baselines | Compare custom kernels to PyTorch ops. | Baseline benchmark script. |
 | 34 | Custom op wrapper | Wrap one kernel in a clean Python API. | Usable package interface. |
 | 35 | Testing GPU code | Add shape, dtype, and tolerance tests. | Test matrix for one kernel. |
-| 36 | Checkpoint | Make the repo easier for reviewers to run. | Installation and demo docs. |
+| 36 | Debugging GPU kernels | Narrow failed GPU tests methodically. | Debugging workflow note. |
 
 Quarterly reset: polish Triton and PyTorch integration work.
 
@@ -127,9 +127,9 @@ Goal: build kernels tied directly to transformer workloads.
 | Week | Topic | Assignment | Portfolio Artifact |
 | --- | --- | --- | --- |
 | 37 | GELU and activation fusion | Fuse bias and activation. | Fused MLP benchmark. |
-| 38 | RMSNorm | Implement RMSNorm and compare with LayerNorm. | Normalization comparison note. |
-| 39 | Attention pieces | Build QK score computation and masking reference. | Attention math walkthrough. |
-| 40 | Checkpoint | Explain transformer bottlenecks. | "Where transformer time goes." |
+| 38 | Residual and norm fusion | Understand residual add plus normalization dataflow. | Fusion dataflow note. |
+| 39 | Attention scores and masks | Build QK score computation and masking reference. | Attention score walkthrough. |
+| 40 | Transformer kernel dataflow | Explain how transformer operations map to kernel patterns. | "Where transformer time goes." |
 
 Minimum viable month: one fused transformer-adjacent kernel and one benchmark.
 

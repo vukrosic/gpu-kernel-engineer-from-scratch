@@ -125,13 +125,13 @@ Month 9: PyTorch Integration
 - Week 33: PyTorch baselines
 - Week 34: Custom op wrapper
 - Week 35: GPU test matrix
-- Week 36: Integration checkpoint
+- Week 36: Debugging GPU kernels
 
 Month 10: Transformer Kernels
 - Week 37: GELU fusion
-- Week 38: RMSNorm
-- Week 39: Attention pieces
-- Week 40: Transformer checkpoint
+- Week 38: Residual and norm fusion
+- Week 39: Attention scores and masks
+- Week 40: Transformer kernel dataflow
 
 Month 11: Attention And Inference
 - Week 41: Attention forward pass

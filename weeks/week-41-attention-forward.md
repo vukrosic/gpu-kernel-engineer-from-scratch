@@ -1,97 +1,188 @@
 # Week 41: Attention Forward Pass
 
-## What This Week Is
+Week 39 taught attention scores and masks.
 
-You connect the attention pieces into one forward-pass story. The goal is to
-understand the full path from inputs to output and to know where the math is
-easiest to check.
+Week 40 placed attention inside transformer dataflow.
 
-## What To Read
+Week 41 connects the full forward pass:
 
-- [../course/month-11-attention-and-inference.md](../course/month-11-attention-and-inference.md)
-- [week-39-attention-pieces.md](week-39-attention-pieces.md)
-
-## Exact Commands
-
-```bash
-pytest
-python examples/reference_bench.py
+```text
+scores -> masked softmax -> weighted sum with V
 ```
 
-## Build This
+## Step 1: Start With The Formula
 
-Write a simplified attention forward pass for one head. Compare it against a
-reference path on a short sequence and a slightly longer sequence so you can
-spot shape or masking mistakes early.
+Single-head attention is:
 
-## Code Sketch
+```text
+Attention(Q, K, V) = softmax(QK^T / sqrt(d)) V
+```
+
+The tensors are:
+
+```text
+Q: [seq_q, head_dim]
+K: [seq_k, head_dim]
+V: [seq_k, head_dim]
+output: [seq_q, head_dim]
+```
+
+The output has one vector for each query position.
+
+## Step 2: Compute Scores
+
+Scores compare every query with every key:
 
 ```python
-import math
-
-
-def dot(a, b):
-    return sum(x * y for x, y in zip(a, b))
-
-
-def softmax(xs):
-    peak = max(xs)
-    exps = [math.exp(x - peak) for x in xs]
-    total = sum(exps)
-    return [e / total for e in exps]
-
-
-def apply_mask(scores, row_mask):
-    return [s if keep else float("-inf") for s, keep in zip(scores, row_mask)]
-
-
-def attention_forward(q, k, v, masks=None):
-    d = len(q[0])
-    out = []
-    for row, qi in enumerate(q):
-        scores = [dot(qi, kj) / math.sqrt(d) for kj in k]
-        if masks is not None:
-            scores = apply_mask(scores, masks[row])
-        weights = softmax(scores)
-        out.append([
-            sum(w * val[i] for w, val in zip(weights, v))
-            for i in range(len(v[0]))
-        ])
-    return out
+scores = q @ k.transpose(-1, -2)
 ```
 
-The sketch is correct because it follows the same forward math as a full
-attention block, just without batching and without extra framework plumbing.
+The shape is:
 
-Write `results/week-41-attention-forward.md` with the full forward-pass flow
-and one note about where the math is easiest to check.
+```text
+[seq_q, head_dim] @ [head_dim, seq_k] -> [seq_q, seq_k]
+```
 
-## Write Down
+Then scale:
 
-- What is the full forward path?
-- Where can errors hide?
-- What should be checked first?
+```python
+scores = scores / math.sqrt(head_dim)
+```
 
-## Minimum
+This is the part Week 39 isolated.
 
-- one forward-pass sketch
-- one note file
-- one short explanation
+## Step 3: Apply The Mask
 
-## Standard
+For causal attention, future keys are hidden:
 
-- compare two sequence lengths
-- note one correctness check
+```python
+rows = torch.arange(seq_q, device=q.device)[:, None]
+cols = torch.arange(seq_k, device=q.device)[None, :]
+scores = scores.masked_fill(cols > rows, -float("inf"))
+```
 
-## Stretch
+After this, invalid positions are still present in the tensor, but their values
+make softmax assign them zero probability.
 
-- sketch a causal mask
-- explain one inference use case
+Masking belongs before softmax.
 
-## If You Are Behind
+## Step 4: Apply Softmax
 
-Keep the forward pass to one simple diagram.
+Softmax converts scores into probabilities:
 
-## Next Week
+```python
+probs = torch.softmax(scores, dim=-1)
+```
 
-You will learn the core ideas behind FlashAttention-style thinking.
+Each query row becomes a distribution over key positions:
+
+```text
+probs[q, :] sums to 1
+```
+
+Numerically stable softmax is usually computed as:
+
+```text
+subtract row max
+exponentiate
+sum exponentials
+divide by row sum
+```
+
+That connects attention back to the softmax lessons.
+
+## Step 5: Multiply By V
+
+The output is a weighted sum of value vectors:
+
+```python
+out = probs @ v
+```
+
+Shape:
+
+```text
+[seq_q, seq_k] @ [seq_k, head_dim] -> [seq_q, head_dim]
+```
+
+For one query position:
+
+```text
+out[q, :] = sum over k of probs[q, k] * V[k, :]
+```
+
+This is why softmax probabilities matter: they decide how much each value vector
+contributes.
+
+## Step 6: Write The Reference
+
+A readable PyTorch reference is:
+
+```python
+def attention_forward(q, k, v, *, causal=False):
+    head_dim = q.shape[-1]
+    scores = q @ k.transpose(-1, -2)
+    scores = scores / math.sqrt(head_dim)
+
+    if causal:
+        seq_q, seq_k = scores.shape[-2:]
+        rows = torch.arange(seq_q, device=q.device)[:, None]
+        cols = torch.arange(seq_k, device=q.device)[None, :]
+        scores = scores.masked_fill(cols > rows, -float("inf"))
+
+    probs = torch.softmax(scores, dim=-1)
+    return probs @ v
+```
+
+This reference materializes `scores` and `probs`.
+
+That is fine for clarity.
+
+Optimized attention kernels try to avoid materializing those full matrices.
+
+## Step 7: Think About Kernel Ownership
+
+A naive attention implementation can be viewed as three kernels:
+
+```text
+kernel 1: compute scores
+kernel 2: softmax rows
+kernel 3: multiply probabilities by V
+```
+
+That is easy to understand but memory-heavy.
+
+The large intermediates are:
+
+```text
+scores: [seq_q, seq_k]
+probs:  [seq_q, seq_k]
+```
+
+For long sequences, these matrices dominate memory traffic.
+
+That problem leads directly to FlashAttention concepts.
+
+## The Core Pattern
+
+Attention forward is:
+
+```text
+compute QK^T scores
+scale scores
+apply masks
+softmax each score row
+multiply probabilities by V
+return one output vector per query
+```
+
+The simple reference teaches the math.
+
+The optimized kernel changes how much intermediate data is written to memory.
+
+## Bridge To Week 42
+
+Week 42 teaches the FlashAttention idea.
+
+Instead of materializing the full score and probability matrices, the kernel
+processes attention in tiles and keeps the softmax state online.

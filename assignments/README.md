@@ -47,11 +47,11 @@ Every assignment has three levels so you can stay in motion.
 | 33 | PyTorch baseline | Compare against PyTorch ops. |
 | 34 | Kernel wrapper | Clean Python API for one kernel. |
 | 35 | GPU test matrix | Shape, dtype, and tolerance tests. |
-| 36 | Month 9 checkpoint | Installation and demo docs. |
+| 36 | Debugging GPU kernels | Methodical debugging workflow. |
 | 37 | Fused activation | Bias plus GELU or ReLU fusion. |
-| 38 | RMSNorm | RMSNorm comparison with LayerNorm. |
-| 39 | Attention pieces | QK scores and masking reference. |
-| 40 | Month 10 checkpoint | Transformer bottleneck note. |
+| 38 | Residual and norm fusion | Residual add plus normalization dataflow. |
+| 39 | Attention scores and masks | QK scores and masking reference. |
+| 40 | Transformer kernel dataflow | Transformer bottleneck map. |
 | 41 | Attention forward | Simplified attention correctness. |
 | 42 | FlashAttention concept | Memory reuse explanation. |
 | 43 | KV cache | KV-cache simulation or benchmark. |

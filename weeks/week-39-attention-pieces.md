@@ -1,88 +1,184 @@
-# Week 39: Attention Pieces
+# Week 39: Attention Scores And Masks
 
-## What This Week Is
+Week 39 starts attention from the smallest useful pieces.
 
-You break attention into the pieces you actually need to reason about. The goal
-is to see query, key, value, scores, mask, softmax, and weighted sum as
-separate steps before you try to fuse anything.
+The full attention formula is:
 
-## What To Read
-
-- [../course/month-10-transformer-kernels.md](../course/month-10-transformer-kernels.md)
-- [week-38-rmsnorm.md](week-38-rmsnorm.md)
-
-## Exact Commands
-
-```bash
-pytest
-python examples/reference_bench.py
+```text
+softmax(QK^T / sqrt(d)) V
 ```
 
-## Build This
+This lesson focuses on the first half:
 
-Write one-query attention as a reference walkthrough. Keep each intermediate
-named so you can point to the score matrix, the mask, and the final mix without
-guessing where the work happens.
+```text
+QK^T / sqrt(d)
+masking
+```
 
-## Code Sketch
+## Step 1: Name The Tensors
+
+For one attention head:
+
+```text
+Q: [seq_q, head_dim]
+K: [seq_k, head_dim]
+V: [seq_k, head_dim]
+```
+
+`Q` contains query vectors.
+
+`K` contains key vectors.
+
+`V` contains value vectors.
+
+The score matrix compares every query position with every key position:
+
+```text
+scores: [seq_q, seq_k]
+```
+
+## Step 2: Compute One Score
+
+One score is a dot product:
+
+```text
+score[q, k] = dot(Q[q, :], K[k, :])
+```
+
+As a loop:
 
 ```python
-import math
-
-
-def softmax(xs):
-    peak = max(xs)
-    exps = [math.exp(x - peak) for x in xs]
-    total = sum(exps)
-    return [e / total for e in exps]
-
-
-def attention_one_query(q, keys, values, mask=None):
-    scores = [
-        sum(qi * ki for qi, ki in zip(q, key)) / math.sqrt(len(q))
-        for key in keys
-    ]
-    if mask is not None:
-        scores = [s if keep else float("-inf") for s, keep in zip(scores, mask)]
-    weights = softmax(scores)
-    return [
-        sum(w * value[i] for w, value in zip(weights, values))
-        for i in range(len(values[0]))
-    ]
+score = 0.0
+for d in range(head_dim):
+    score += Q[q, d] * K[k, d]
 ```
 
-The sketch is correct because it follows the attention recipe in order: score,
-mask, normalize, then mix the values.
+This is matmul logic.
 
-Write `results/week-39-attention-pieces.md` with a labeled attention diagram
-and one note about where memory pressure comes from.
+The attention score matrix is `Q @ K.T`.
 
-## Write Down
+## Step 3: Apply The Scale
 
-- What are the attention pieces?
-- Which intermediate is easiest to name?
-- Which part is most expensive to keep around?
+Attention scores are usually scaled:
 
-## Minimum
+```python
+scores = scores / math.sqrt(head_dim)
+```
 
-- one attention diagram
-- one note file
-- one plain-language summary
+The scale keeps dot products from growing too large as `head_dim` grows.
 
-## Standard
+Large scores can make softmax too sharp and numerically unstable.
 
-- compare masked and unmasked attention
-- note one memory issue
+For kernels, the scale is just a multiply:
 
-## Stretch
+```python
+scale = 1.0 / math.sqrt(head_dim)
+score = score * scale
+```
 
-- sketch a row-wise attention path
-- explain one reason attention is hard to optimize
+## Step 4: Add A Causal Mask
 
-## If You Are Behind
+In autoregressive decoding, position `q` cannot attend to future positions.
 
-Keep the diagram and one summary sentence.
+That means:
 
-## Next Week
+```text
+key position k is invalid when k > q
+```
 
-You will pause for a checkpoint and package the transformer-kernel month.
+A causal mask turns those invalid scores into negative infinity:
+
+```python
+if k > q:
+    score = -float("inf")
+```
+
+Softmax will turn negative infinity into zero probability.
+
+That is why masks are applied before softmax.
+
+## Step 5: Add A Padding Mask
+
+Padding masks handle fake tokens added to make sequences the same length.
+
+If a key position is padding, every query should ignore it:
+
+```python
+if key_is_padding[k]:
+    score = -float("inf")
+```
+
+Causal masks and padding masks can both apply.
+
+The final rule is:
+
+```text
+if a key position is not allowed, its score becomes negative infinity
+```
+
+## Step 6: Build The PyTorch Reference
+
+A clear reference is:
+
+```python
+def attention_scores(q, k, *, causal=False):
+    head_dim = q.shape[-1]
+    scores = q @ k.transpose(-1, -2)
+    scores = scores / math.sqrt(head_dim)
+
+    if causal:
+        seq_q, seq_k = scores.shape[-2:]
+        rows = torch.arange(seq_q, device=scores.device)[:, None]
+        cols = torch.arange(seq_k, device=scores.device)[None, :]
+        scores = scores.masked_fill(cols > rows, -float("inf"))
+
+    return scores
+```
+
+This reference is not optimized.
+
+It exists to make the math and masking rules explicit.
+
+## Step 7: Think Like A Kernel
+
+A score kernel owns tiles of the score matrix.
+
+One tile might cover:
+
+```text
+BLOCK_Q query positions
+BLOCK_K key positions
+```
+
+For each tile, the kernel needs:
+
+```text
+Q block: [BLOCK_Q, head_dim]
+K block: [BLOCK_K, head_dim]
+output scores: [BLOCK_Q, BLOCK_K]
+```
+
+This is tiled matmul with attention-specific masking.
+
+## The Core Pattern
+
+Attention score computation is:
+
+```text
+load query vectors
+load key vectors
+compute dot products
+scale by 1 / sqrt(head_dim)
+apply causal and padding masks
+produce score tile
+```
+
+Understanding this piece makes the full attention forward pass much less
+mysterious.
+
+## Bridge To Week 40
+
+Week 40 zooms out to transformer kernel dataflow.
+
+Before implementing full attention, it helps to see where attention, MLPs,
+normalization, residuals, and fusion fit in the larger block.

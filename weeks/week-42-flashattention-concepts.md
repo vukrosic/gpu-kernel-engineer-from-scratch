@@ -1,88 +1,198 @@
 # Week 42: FlashAttention Concepts
 
-## What This Week Is
+Week 41 taught attention forward in the simple form:
 
-You learn why attention can be rethought around memory savings and tiles. The
-goal is to understand the idea before worrying about a full implementation.
-
-## What To Read
-
-- [../course/month-11-attention-and-inference.md](../course/month-11-attention-and-inference.md)
-- [week-41-attention-forward.md](week-41-attention-forward.md)
-
-## Exact Commands
-
-```bash
-pytest
-python examples/reference_bench.py
+```text
+scores = QK^T
+probs = softmax(scores)
+out = probs V
 ```
 
-## Build This
+That version is easy to understand.
 
-Draw a tiled attention flow and explain the online-softmax trick in words. The
-goal is to show how you can process chunks of K and V without materializing the
-whole score matrix.
+It is also memory-hungry.
 
-## Code Sketch
+Week 42 teaches the core idea behind FlashAttention-style kernels.
 
-```python
-import math
+## Step 1: See The Memory Problem
 
+For sequence length `S`, the score matrix has shape:
 
-def dot(a, b):
-    return sum(x * y for x, y in zip(a, b))
-
-
-def tiled_attention_step(q, k_tiles, v_tiles):
-    running_max = float("-inf")
-    running_sum = 0.0
-    running_out = None
-
-    for k_tile, v_tile in zip(k_tiles, v_tiles):
-        scores = [dot(q, key) for key in k_tile]
-        block_max = max(scores)
-        new_max = max(running_max, block_max)
-        exp_scores = [math.exp(s - new_max) for s in scores]
-        if running_out is None:
-            running_out = [0.0 for _ in v_tile[0]]
-        running_sum = running_sum * math.exp(running_max - new_max) + sum(exp_scores)
-        # The output accumulator would be rescaled and updated here.
-        running_max = new_max
-    return running_out
+```text
+[S, S]
 ```
 
-The sketch is correct as a concept because it keeps the softmax state up to
-date across tiles instead of storing every score at once.
+If `S = 4096`, then:
 
-Write `results/week-42-flashattention-concepts.md` with one memory diagram and
-one note about why the idea is important.
+```text
+scores has 4096 * 4096 = 16,777,216 elements
+```
 
-## Write Down
+The probability matrix has the same size.
 
-- What problem does FlashAttention solve?
-- What changes about memory use?
-- Why does tiling help?
+Naive attention may write and read both:
 
-## Minimum
+```text
+write scores
+read scores for softmax
+write probs
+read probs for probs @ V
+```
 
-- one concept note
-- one memory sketch
-- one plain-language summary
+FlashAttention tries to avoid materializing these full matrices in global
+memory.
 
-## Standard
+## Step 2: Process Attention In Tiles
 
-- compare normal attention and FlashAttention thinking
-- note one savings idea
+Instead of computing all scores at once, process blocks of keys and values:
 
-## Stretch
+```text
+load a block of Q rows
+load a block of K rows
+compute a score tile
+update softmax state
+load matching V rows
+update output accumulator
+move to the next K/V block
+```
 
-- sketch a tiled attention flow
-- explain one implementation challenge
+The output is built gradually.
 
-## If You Are Behind
+The full score matrix never needs to be stored.
 
-Keep the memory idea and one summary sentence.
+## Step 3: Remember Softmax Needs A Row Sum
 
-## Next Week
+Softmax for one row is:
 
-You will learn how KV cache changes inference-time attention behavior.
+```text
+exp(score_i - max_score) / sum_j exp(score_j - max_score)
+```
+
+The row max and row sum are global across all keys.
+
+If keys are processed in blocks, the kernel must update:
+
+```text
+running row max
+running row sum
+running output accumulator
+```
+
+That is the heart of online softmax.
+
+## Step 4: Understand Online Softmax State
+
+For each query row, keep:
+
+```text
+m: current maximum score seen so far
+l: current sum of exponentials adjusted to m
+o: current output accumulator
+```
+
+When a new score block arrives, compute its block max:
+
+```text
+m_new = max(m_old, block_max)
+```
+
+Then rescale the old state so it matches the new maximum:
+
+```text
+l_new = l_old * exp(m_old - m_new) + block_sum * exp(block_max - m_new)
+```
+
+The output accumulator is rescaled in the same spirit before adding the new
+weighted values.
+
+You do not need to derive the full kernel yet.
+
+You need to see why the state exists.
+
+## Step 5: Apply Masks Inside The Tile
+
+Causal masks still apply.
+
+But now they apply to a score tile:
+
+```text
+query positions: q block
+key positions: k block
+mask score[q, k] when k > q
+```
+
+Invalid scores become negative infinity before the tile participates in
+softmax.
+
+Masking is still before softmax.
+
+Only the storage strategy changed.
+
+## Step 6: Compare Naive And FlashAttention Dataflow
+
+Naive attention:
+
+```text
+compute full scores
+store full scores
+softmax full rows
+store full probabilities
+multiply probabilities by V
+```
+
+FlashAttention-style attention:
+
+```text
+stream K/V blocks
+compute score tiles
+update online softmax state
+accumulate output
+store final output
+```
+
+The math is the same.
+
+The memory traffic is different.
+
+## Step 7: Know The Tradeoff
+
+FlashAttention-style kernels are more complex because they combine:
+
+```text
+tiled matmul
+masking
+online softmax
+V accumulation
+careful numerical stability
+```
+
+The reward is avoiding huge intermediate matrices.
+
+That matters most when sequence length is large.
+
+For tiny sequences, the complexity may not pay off.
+
+## The Core Pattern
+
+FlashAttention is built around this idea:
+
+```text
+do not materialize scores and probabilities
+process attention in tiles
+keep online softmax state per query row
+accumulate the final output directly
+write only the output
+```
+
+This is the same lesson as earlier fusion weeks, but at attention scale:
+
+```text
+avoid unnecessary global-memory intermediates
+```
+
+## Bridge To Week 43
+
+Week 43 moves from training-style attention to inference.
+
+The next bottleneck is the KV cache: storing and reusing past keys and values so
+the model does not recompute the entire prefix at every generated token.

@@ -1,83 +1,192 @@
 # Week 37: GELU Fusion
 
-## What This Week Is
+Week 37 starts transformer-adjacent kernels.
 
-You treat GELU as the small activation that often sits right next to a bias add
-or projection output. The point is to see that the math is simple, but the
-extra write between steps is not free.
+The first idea is fusion.
 
-## What To Read
+Fusion means combining operations that would otherwise be separate GPU kernels.
 
-- [../course/month-10-transformer-kernels.md](../course/month-10-transformer-kernels.md)
-- [week-36-month-09-checkpoint.md](week-36-month-09-checkpoint.md)
+This week uses bias plus GELU as the example.
 
-## Exact Commands
+## Step 1: See The Unfused Path
 
-```bash
-pytest
-python examples/reference_bench.py
-```
-
-## Build This
-
-Write a tiny fused bias-plus-GELU path. Start with a reference version that
-adds bias, then applies GELU, then write the same logic as one pass over the
-inputs so you can compare the two shapes directly.
-
-## Code Sketch
+In PyTorch, an MLP block often does something like:
 
 ```python
-import math
-
-
-def gelu(x):
-    return 0.5 * x * (
-        1.0 + math.tanh(math.sqrt(2.0 / math.pi) * (x + 0.044715 * x * x * x))
-    )
-
-
-def fused_bias_gelu(xs, bias):
-    out = []
-    for x, b in zip(xs, bias):
-        y = x + b
-        out.append(gelu(y))
-    return out
+x = linear_output + bias
+y = torch.nn.functional.gelu(x)
 ```
 
-The fused version is correct because it computes the same value as the two-step
-path, just without storing the intermediate result in a separate buffer.
+That is clear code.
 
-Write `results/week-37-gelu-fusion.md` with the GELU formula, the fused-vs-
-unfused comparison, and one note about memory traffic.
+But as GPU work, it may mean:
 
-## Write Down
+```text
+kernel 1: add bias
+kernel 2: apply GELU
+```
 
-- What does GELU approximate?
-- What disappears when you fuse the bias add with the activation?
-- Why does one fewer memory pass matter?
+The intermediate tensor `x` is written to memory and then read again.
 
-## Minimum
+Fusion tries to avoid that extra memory traffic.
 
-- one GELU formula
-- one fused-vs-unfused note
-- one plain-language correctness sentence
+## Step 2: Understand GELU
 
-## Standard
+GELU is an activation function.
 
-- compare exact and approximate GELU
-- note one bandwidth benefit
-- mention one transformer block where GELU appears
+A common approximation is:
 
-## Stretch
+```python
+def gelu_approx(x):
+    c = 0.7978845608028654
+    return 0.5 * x * (1.0 + torch.tanh(c * (x + 0.044715 * x * x * x)))
+```
 
-- sketch a fused bias, residual, and GELU block
-- explain why this is a good first fusion target
+You do not need to memorize the constants.
 
-## If You Are Behind
+The important point is:
 
-Keep the formula and the one-pass explanation.
+```text
+GELU reads one value and returns one value
+```
 
-## Next Week
+That makes it an elementwise operation.
 
-You will study RMSNorm and see how a normalization kernel can be written as
-another tight pass over data.
+Elementwise operations are natural candidates for fusion.
+
+## Step 3: Fuse Bias And Activation
+
+The fused operation is:
+
+```text
+output = gelu(input + bias)
+```
+
+As scalar logic:
+
+```python
+def fused_bias_gelu_scalar(x, bias):
+    v = x + bias
+    c = 0.7978845608028654
+    return 0.5 * v * (1.0 + math.tanh(c * (v + 0.044715 * v * v * v)))
+```
+
+The kernel should load `x`, load `bias`, add them, apply GELU, and store the
+final output.
+
+It should not store the intermediate `x + bias` tensor.
+
+## Step 4: Track The Memory Traffic
+
+The unfused path has this shape:
+
+```text
+read input
+read bias
+write intermediate
+read intermediate
+write output
+```
+
+The fused path has this shape:
+
+```text
+read input
+read bias
+write output
+```
+
+The math is the same.
+
+The memory traffic is different.
+
+That is the main reason fusion matters.
+
+## Step 5: Handle Bias Broadcasting
+
+Bias is often shaped like the hidden dimension:
+
+```text
+input: [batch, hidden]
+bias:  [hidden]
+```
+
+Each row uses the same bias vector.
+
+For a flattened tensor, the hidden index is:
+
+```python
+hidden_index = offset % hidden_size
+```
+
+Then the bias load is:
+
+```python
+bias_value = bias[hidden_index]
+```
+
+This is the key indexing idea for fused bias operations.
+
+The input position chooses both:
+
+```text
+which activation value to read
+which bias value to reuse
+```
+
+## Step 6: Keep The Reference Simple
+
+The PyTorch baseline should be direct:
+
+```python
+def torch_bias_gelu(x, bias):
+    return torch.nn.functional.gelu(x + bias, approximate="tanh")
+```
+
+This is the correctness target.
+
+The custom kernel can use different launch mechanics, but it should match this
+operation.
+
+## Step 7: Know What Fusion Can And Cannot Fix
+
+Fusion helps most when memory traffic or launch overhead matters.
+
+It may not help if:
+
+```text
+the tensor is tiny
+the fused math is much more expensive
+the operation is already fused by the framework
+the custom kernel has poor memory access
+```
+
+Fusion is not magic.
+
+It is a way to avoid unnecessary reads, writes, and launches when the operations
+naturally belong together.
+
+## The Core Pattern
+
+For fused bias plus GELU:
+
+```text
+start from the PyTorch expression
+identify the intermediate tensor
+load input and bias once
+compute bias add in registers
+apply GELU immediately
+store only the final output
+compare to PyTorch with tolerance
+benchmark against the unfused PyTorch path
+```
+
+Fusion is successful when it preserves the exact operation while reducing the
+amount of intermediate memory traffic.
+
+## Bridge To Week 38
+
+Week 38 continues fusion, but with residual and normalization patterns.
+
+Those appear constantly in transformer blocks, and they teach a more complex
+kind of fusion than a single activation.
