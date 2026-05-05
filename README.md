@@ -88,7 +88,7 @@ Month 2: Memory And Benchmarking
 Month 3: Reductions
 - Week 09: Reductions mental model
 - Week 10: Naive reduction kernels
-- Week 11: Shared reduction thinking
+- Week 11: Block-level reductions with shared memory
 - Week 12: Warp-level thinking
 
 Month 4: Scans, Atomics, Synchronization

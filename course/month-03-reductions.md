@@ -10,7 +10,7 @@ Build kernels where many values combine into fewer values.
 | --- | --- | --- | --- |
 | 9 | Reductions mental model | Understand sum, max, axes, output shape, and coordination. | You can explain why reductions are not elementwise kernels. |
 | 10 | Naive reduction kernels | Read one-thread-per-output row sum and row max kernels. | You can explain why the naive kernel is correct but limited. |
-| 11 | Shared reduction thinking | Explain partial sums and cooperative reduction inside a block. | You can describe how workers cooperate on one output. |
+| 11 | Block-level reductions with shared memory | Explain how one block cooperates through shared memory to reduce one output region. | You can describe the shared-memory reduction pattern. |
 | 12 | Warp-level thinking | Understand how warp execution changes reduction design. | You have a warp-level reduction explanation. |
 
 ## Minimum Viable Month

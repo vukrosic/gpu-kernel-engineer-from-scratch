@@ -13,7 +13,7 @@ thinking, and warp-level thinking should all be present as one connected arc.
 - [../course/month-03-reductions.md](../course/month-03-reductions.md)
 - [../weeks/week-09-reductions-mental-model.md](../weeks/week-09-reductions-mental-model.md)
 - [../weeks/week-10-naive-reduction-kernels.md](../weeks/week-10-naive-reduction-kernels.md)
-- [../weeks/week-11-warp-level-thinking.md](../weeks/week-11-warp-level-thinking.md)
+- [../weeks/week-11-block-level-reductions-with-shared-memory.md](../weeks/week-11-block-level-reductions-with-shared-memory.md)
 
 ## Exact Commands
 
