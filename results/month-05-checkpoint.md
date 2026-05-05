@@ -4,8 +4,9 @@ Status: month checkpoint template
 
 ## Summary
 
-Summarize softmax, fused softmax, and LayerNorm in three concise sentences.
-Focus on the numerical-stability story and the transformer connection.
+Summarize softmax, fused row-wise softmax, LayerNorm, and RMSNorm in a few
+concise sentences. Focus on numerical stability, row-wise statistics, and the
+transformer connection.
 
 ## Best Result
 

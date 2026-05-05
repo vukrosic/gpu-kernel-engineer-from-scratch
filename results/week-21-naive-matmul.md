@@ -1,46 +1,28 @@
-# Week 21
+# Week 21 Naive Matrix Multiplication
 
-Status: writing template
+## Lesson Summary
 
-## What To Capture
+Summarize naive matmul as one output element per thread and one dot product per
+output.
 
-- the matrix shapes you tried
-- the loop order you used
-- one correctness check
-- one note about what makes the naive version slow
+## Key Pattern
 
-## Shapes Tried
+Record the index formulas:
 
-| A Shape | B Shape | Output Shape | What To Verify |
-| --- | --- | --- | --- |
-|  |  |  |  |
-|  |  |  |  |
+```text
+A[row * K + p]
+B[p * N + col]
+C[row * N + col]
+```
 
-## What Was Built
+## Important Detail
 
-Describe the baseline matmul you wrote or studied. Name the shapes, the loop
-nest, and the output layout.
+Explain why rectangular shapes are important for correctness tests.
 
-## Correctness Check
+## Limitation
 
-Record why the dot product for one output cell is enough to prove the result for
-that cell. If you compared against `gputriton/reference.py`, say what matched.
+Write down what values the naive kernel reloads too often.
 
-## Benchmark Or Observation
+## Next Step
 
-If you measured anything, note one observation about the naive version. If you
-did not measure, write the comparison you would make next.
-
-## Lesson Learned
-
-Summarize naive matmul in one or two sentences.
-
-## Limitation Or Next Step
-
-Write one sentence about why tiling is the obvious next move.
-
-## Write-Back Prompts
-
-1. How does each output cell get computed?
-2. What is slow about the naive version?
-3. What shape checks mattered most?
+Write one question you want Week 22 to answer about tiling.

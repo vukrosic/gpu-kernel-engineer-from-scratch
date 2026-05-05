@@ -8,8 +8,8 @@ Understand the kernel behind most deep learning compute.
 
 | Week | Topic | Main Build | Done When |
 | --- | --- | --- | --- |
-| 21 | Naive matmul | Basic matrix multiplication. | Correct across matrix sizes. |
-| 22 | Tiled matmul | Shared-memory tiled matmul. | TFLOPS benchmark exists. |
+| 21 | Naive matrix multiplication | Understand one output cell as one dot product across K. | You can explain the naive matmul indexing. |
+| 22 | Tiled matrix multiplication | Understand shared-memory tiles and reuse across a C tile. | You can explain why tiling reduces repeated global loads. |
 | 23 | Tile sizes and occupancy | Compare block sizes and resource usage. | Tuning report is written. |
 | 24 | Checkpoint | Matmul portfolio page. | Results and tradeoffs are clear. |
 

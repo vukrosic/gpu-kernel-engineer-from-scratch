@@ -62,9 +62,9 @@ Goal: build transformer-adjacent kernels people recognize.
 | Week | Topic | Assignment | Portfolio Artifact |
 | --- | --- | --- | --- |
 | 17 | Softmax math for kernels | Understand stable row-wise softmax as max, exp, sum, and divide. | Kernel-shaped softmax explanation. |
-| 18 | Fused softmax | Combine max, exp, sum, and divide in one kernel. | Fused softmax benchmark. |
-| 19 | LayerNorm | Implement forward LayerNorm. | LayerNorm correctness and timing. |
-| 20 | Checkpoint | Explain why normalization appears in transformers. | Kernel-to-transformers note. |
+| 18 | Fused row-wise softmax | Understand how stable softmax becomes one kernel-shaped pipeline. | Fused softmax explanation. |
+| 19 | LayerNorm kernel mental model | Understand row mean, variance, normalization, gamma, and beta. | LayerNorm kernel explanation. |
+| 20 | RMSNorm kernel | Understand sum of squares, inverse RMS, and learned weights. | RMSNorm kernel explanation. |
 
 Minimum viable month: correct row-wise softmax and numerical-stability explanation.
 
@@ -74,8 +74,8 @@ Goal: understand the kernel behind most deep learning compute.
 
 | Week | Topic | Assignment | Portfolio Artifact |
 | --- | --- | --- | --- |
-| 21 | Naive matmul | Implement basic matrix multiplication. | Tests across matrix sizes. |
-| 22 | Tiled matmul | Use shared memory tiling. | TFLOPS benchmark table. |
+| 21 | Naive matrix multiplication | Understand one output cell as one dot product across K. | Naive matmul indexing explanation. |
+| 22 | Tiled matrix multiplication | Understand shared-memory tiles and reuse across a C tile. | Tiled matmul explanation. |
 | 23 | Tile sizes and occupancy | Compare block sizes and resource usage. | Tuning report. |
 | 24 | Checkpoint | Clean up matmul code and notes. | Month 6 matmul page. |
 

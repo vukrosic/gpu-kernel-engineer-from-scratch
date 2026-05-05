@@ -29,11 +29,11 @@ Every assignment has three levels so you can stay in motion.
 | 15 | Prefix sum and scan mental model | Inclusive vs exclusive scan explanation. |
 | 16 | Parallel scan implementation | Staged block scan explanation. |
 | 17 | Softmax math for kernels | Numerically stable softmax explanation. |
-| 18 | Fused softmax | One fused softmax benchmark. |
-| 19 | LayerNorm | Forward LayerNorm correctness. |
-| 20 | Month 5 checkpoint | Normalization systems note. |
-| 21 | Naive matmul | Correct matmul across sizes. |
-| 22 | Tiled matmul | Shared-memory tiled matmul. |
+| 18 | Fused row-wise softmax | Fused softmax pipeline explanation. |
+| 19 | LayerNorm kernel mental model | LayerNorm row-statistics explanation. |
+| 20 | RMSNorm kernel | RMSNorm vs LayerNorm explanation. |
+| 21 | Naive matrix multiplication | Naive matmul indexing explanation. |
+| 22 | Tiled matrix multiplication | Tiled matmul reuse explanation. |
 | 23 | Matmul tuning | Block-size comparison. |
 | 24 | Month 6 checkpoint | Matmul portfolio page. |
 | 25 | Triton vector add | One Triton kernel with test. |

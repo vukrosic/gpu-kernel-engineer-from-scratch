@@ -99,13 +99,13 @@ Month 4: Scans, Atomics, Synchronization
 
 Month 5: Softmax And Normalization
 - Week 17: Softmax math for kernels
-- Week 18: Fused softmax
-- Week 19: LayerNorm
-- Week 20: Normalization checkpoint
+- Week 18: Fused row-wise softmax
+- Week 19: LayerNorm kernel mental model
+- Week 20: RMSNorm kernel
 
 Month 6: Matmul Foundations
-- Week 21: Naive matmul
-- Week 22: Tiled matmul
+- Week 21: Naive matrix multiplication
+- Week 22: Tiled matrix multiplication
 - Week 23: Tile sizes and occupancy
 - Week 24: Matmul checkpoint
 
@@ -150,24 +150,21 @@ and the first ten weekly lessons live in [weeks/](weeks/).
 
 ## What To Do Each Week
 
-Each week follows the same shape:
+Each rewritten week follows the same shape:
 
 1. Read the current week file.
-2. Run the starter or reference code.
-3. Implement the smallest correct version.
-4. Add or run a correctness check.
-5. Benchmark or record an observation.
-6. Write a short note in `results/`.
-7. Do the Minimum, Standard, or Stretch version depending on your time.
+2. Study the mental model and code-shaped examples.
+3. Use the matching `results/` file to capture the main takeaway.
+4. Move to the next lesson.
 
 The weekly file is the source of truth. The syllabus tells you where the course
 is going, but the weekly file tells you what to do today.
 
 ## How The Course Prevents Burnout
 
-- Each month has three build weeks and one checkpoint week.
-- Each week has one catch-up day and one lighter rest/portfolio day.
-- Every assignment has Minimum, Standard, and Stretch versions.
+- Each lesson focuses on one GPU engineering idea.
+- Result notes stay lightweight.
+- Later implementation work builds on the lesson files instead of replacing them.
 - If you fall behind, use [course/recovery-system.md](course/recovery-system.md) instead of quitting.
 
 The rule is simple: correct and finished beats perfect and abandoned.

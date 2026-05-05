@@ -382,7 +382,7 @@ The stable math is the foundation.
 
 ## Bridge To Week 18
 
-Week 18 turns this math into fused softmax thinking.
+Week 18 turns this math into fused row-wise softmax thinking.
 
 The central question becomes:
 

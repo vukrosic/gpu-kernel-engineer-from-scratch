@@ -27,4 +27,4 @@ Write down why softmax is simple as a formula but more complex as a GPU kernel.
 
 ## Next Step
 
-Write one question you want Week 18 to answer about fused softmax.
+Write one question you want Week 18 to answer about fused row-wise softmax.

@@ -1,55 +1,31 @@
-# Week 22
+# Week 22 Tiled Matrix Multiplication
 
-Status: writing template
+## Lesson Summary
 
-## What To Capture
+Summarize tiling as loading small chunks of A and B so a block can reuse them
+while computing a C tile.
 
-- one tile diagram
-- one note about reuse
-- one comparison between tiled and naive matmul
-- one tradeoff you noticed
+## Key Pattern
 
-## Tile Sketch
+Record the loop shape:
 
 ```text
-A tile:
-[   ][   ]
-[   ][   ]
-
-B tile:
-[   ][   ]
-[   ][   ]
-
-Output tile:
-[   ][   ]
-[   ][   ]
+for each K tile:
+  load A tile
+  load B tile
+  wait
+  accumulate
+  wait
 ```
 
-## What Was Built
+## Important Detail
 
-Describe the tiled block or kernel you wrote or studied. Name the tile sizes
-and the area of the output they cover.
+Explain why the two barriers around tile use are needed.
 
-## Correctness Check
+## Limitation
 
-Record why the tile accumulation should still match the naive result. If you
-compared against the reference, say what matched.
+Write down why real tiled kernels need boundary checks.
 
-## Benchmark Or Observation
+## Next Step
 
-If you measured anything, note whether the tile changed reuse or data movement.
-If you did not measure, write the comparison you would make next.
-
-## Lesson Learned
-
-Summarize why tiling changes the shape of the work.
-
-## Limitation Or Next Step
-
-Write one sentence about what tile size tradeoff you want to explore next.
-
-## Write-Back Prompts
-
-1. What is a tile?
-2. What is reused inside a tile?
-3. What stays the same as the naive version?
+Write one question you want Week 23 to answer about tile size and occupancy.

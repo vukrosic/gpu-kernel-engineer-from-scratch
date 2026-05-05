@@ -29,6 +29,11 @@ Each week should have one Markdown file that can be read from top to bottom:
 - [Week 15: Prefix Sum And Scan Mental Model](week-15-prefix-sum-scan-mental-model.md)
 - [Week 16: Parallel Scan Implementation](week-16-parallel-scan-implementation.md)
 - [Week 17: Softmax Math For Kernels](week-17-softmax-math-for-kernels.md)
+- [Week 18: Fused Row-Wise Softmax](week-18-fused-row-wise-softmax.md)
+- [Week 19: LayerNorm Kernel Mental Model](week-19-layernorm-kernel-mental-model.md)
+- [Week 20: RMSNorm Kernel](week-20-rmsnorm-kernel.md)
+- [Week 21: Naive Matrix Multiplication](week-21-naive-matmul.md)
+- [Week 22: Tiled Matrix Multiplication](week-22-tiled-matmul.md)
 
 ## How To Use This Folder
 
@@ -49,8 +54,7 @@ notes for preserving the core idea.
 The rest of the year is scaffolded here so the 12-month roadmap is visible at a
 glance:
 
-- Month 05: [Week 18](week-18-fused-softmax.md), [Week 19](week-19-layernorm.md), [Week 20](week-20-month-05-checkpoint.md)
-- Month 06: [Week 21](week-21-naive-matmul.md), [Week 22](week-22-tiled-matmul.md), [Week 23](week-23-tiling-and-occupancy.md), [Week 24](week-24-month-06-checkpoint.md)
+- Month 06: [Week 23](week-23-tiling-and-occupancy.md), [Week 24](week-24-month-06-checkpoint.md)
 - Month 07: [Week 25](week-25-triton-mental-model.md), [Week 26](week-26-triton-blocks-and-masks.md), [Week 27](week-27-triton-softmax.md), [Week 28](week-28-month-07-checkpoint.md)
 - Month 08: [Week 29](week-29-triton-matmul.md), [Week 30](week-30-autotuning.md), [Week 31](week-31-batched-matmul.md), [Week 32](week-32-month-08-checkpoint.md)
 - Month 09: [Week 33](week-33-pytorch-baselines.md), [Week 34](week-34-custom-op-wrapper.md), [Week 35](week-35-gpu-test-matrix.md), [Week 36](week-36-month-09-checkpoint.md)
