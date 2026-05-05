@@ -1,28 +1,24 @@
-# Week 45
+# Week 45 Benchmark Dashboard
 
-Status: writing template
+Use this note as the dashboard structure for benchmark evidence.
 
-## What Was Built
+## Dashboard Columns
 
-Describe the dashboard layout, the table columns, or the chart structure you
-used to organize benchmark notes.
+- Operation:
+- Implementation:
+- Baseline:
+- Shape:
+- Dtype:
+- Hardware:
+- Timing method:
+- Correctness status:
+- Result:
+- Note:
 
-## Correctness Check
+## Reporting Rule
 
-Explain where the numbers or observations come from and how you would verify
-they are tied to the right kernel and shape.
+Write the rule you will follow before making any performance claim.
 
-## Benchmark Or Observation
+## Best Current Row
 
-List the metrics or comparisons you want the dashboard to track every month, and
-paste the real values later if you run them.
-
-## Lesson Learned
-
-Write one sentence about why a dashboard helps the project stay honest and easy
-to scan.
-
-## Limitation Or Next Step
-
-Name the next reporting rule or chart you would add if the page starts to feel
-too sparse.
+Paste or sketch the benchmark row that is clearest today.

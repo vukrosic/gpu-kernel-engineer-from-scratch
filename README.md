@@ -137,7 +137,7 @@ Month 11: Attention And Inference
 - Week 41: Attention forward pass
 - Week 42: FlashAttention concepts
 - Week 43: KV cache
-- Week 44: Attention checkpoint
+- Week 44: Attention capstone plan
 
 Month 12: Portfolio And Interviews
 - Week 45: Benchmark dashboard

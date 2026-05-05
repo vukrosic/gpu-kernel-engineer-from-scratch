@@ -1,82 +1,191 @@
 # Week 45: Benchmark Dashboard
 
-## What This Week Is
+Week 45 follows the [Week 44 attention capstone plan](week-44-attention-capstone-plan.md)
+and teaches how to present benchmark evidence.
 
-You learn how to collect the work into a simple benchmark dashboard. The goal
-is to make your progress visible without turning the repo into a spreadsheet
-graveyard.
+The goal is not to make a pretty table.
 
-## What To Read
+The goal is to make performance claims easy to verify.
 
-- [../course/month-12-portfolio-and-interviews.md](../course/month-12-portfolio-and-interviews.md)
-- [week-44-month-11-checkpoint.md](week-44-month-11-checkpoint.md)
+## Step 1: Decide What A Row Means
 
-## Exact Commands
+Each dashboard row should describe one comparison.
 
-```bash
-pytest
-python examples/reference_bench.py
+The row is not just a number.
+
+It is a small claim:
+
+```text
+for this operation, shape, dtype, hardware, and timing method, this result was
+observed against this baseline
 ```
 
-## Build This
+That sentence tells you which columns the table needs.
 
-Create a one-page dashboard structure that records kernel name, input shape,
-baseline, measured result, and the note you want future-you to remember. Leave
-the values blank if you have not run them yet, but make the columns final.
+## Step 2: Use Stable Columns
 
-## Code Sketch
+A useful benchmark dashboard can start with:
 
-```python
-rows = [
-    {
-        "kernel": "gelu fusion",
-        "shape": "batch x hidden",
-        "baseline": "unfused reference",
-        "result": "",
-        "note": "one fewer pass over activations",
-    },
-    {
-        "kernel": "rmsnorm",
-        "shape": "batch x hidden",
-        "baseline": "layernorm reference",
-        "result": "",
-        "note": "one reduction and one scale",
-    },
-]
+```text
+operation
+implementation
+baseline
+shape
+dtype
+hardware
+timing method
+correctness status
+result
+note
 ```
 
-The sketch is correct because it records the comparison structure first, which
-is the part you need before any real numbers can mean something.
+These columns protect you from vague claims.
 
-Write `results/week-45-benchmark-dashboard.md` with one dashboard sketch and
-one note about what should be tracked every month.
+They force every number to carry context.
 
-## Write Down
+## Step 3: Separate Correctness From Speed
 
-- What belongs on the dashboard?
-- What should be compared month to month?
-- What is the simplest useful chart?
+A fast incorrect kernel is not a win.
 
-## Minimum
+The dashboard should show correctness before performance:
 
-- one dashboard note
-- one short table
-- one plain-language summary
+```text
+correctness: pass
+timing: 32 us
+```
 
-## Standard
+If correctness is unknown, the row should say so:
 
-- compare two metrics
-- note one reporting rule
+```text
+correctness: not checked
+timing: do not trust yet
+```
 
-## Stretch
+That keeps the dashboard honest.
 
-- sketch a dashboard layout
-- explain one reason the dashboard matters
+## Step 4: Record Shape Precisely
 
-## If You Are Behind
+Shape is part of the result.
 
-Keep the dashboard to one page.
+For vector add:
 
-## Next Week
+```text
+n = 1,048,576
+```
 
-You will practice explaining the work as if someone asked you in an interview.
+For matmul:
+
+```text
+M = 1024, K = 1024, N = 1024
+```
+
+For attention:
+
+```text
+batch = 1, heads = 8, seq = 2048, head_dim = 64
+```
+
+Without shape, a benchmark number is almost useless.
+
+## Step 5: Name The Baseline
+
+Always say what the custom path is compared against:
+
+```text
+PyTorch torch.add
+PyTorch matmul
+unfused PyTorch bias + GELU
+naive attention reference
+previous tile size
+```
+
+Different baselines answer different questions.
+
+Comparing to PyTorch asks:
+
+```text
+is the custom path competitive with the normal ML workflow?
+```
+
+Comparing to an earlier kernel asks:
+
+```text
+did this optimization improve my own implementation?
+```
+
+## Step 6: Track Timing Method
+
+Timing method belongs in the dashboard.
+
+Examples:
+
+```text
+CUDA events, 100 repeats
+torch.utils.benchmark
+Nsight Systems timeline
+manual wall-clock timing
+```
+
+Some methods are better than others, but hidden timing methods are always bad.
+
+If CUDA work is involved, synchronization matters.
+
+The dashboard should make that visible.
+
+## Step 7: Keep Notes Short
+
+The note column should explain the main interpretation:
+
+```text
+edge shape handled by mask
+larger tile improved reuse but used more registers
+KV cache saves projection work but increases memory
+```
+
+Do not turn the dashboard into a diary.
+
+Longer reasoning belongs in the weekly result notes.
+
+The dashboard is the index.
+
+## Example Dashboard Row
+
+```text
+operation: bias + GELU
+implementation: fused Triton sketch
+baseline: PyTorch x + bias then GELU
+shape: batch=32, hidden=4096
+dtype: float32
+hardware: local GPU
+timing method: CUDA events, 50 repeats
+correctness: pass
+result: pending
+note: fusion removes one intermediate activation write
+```
+
+Even with `result: pending`, this row is useful because the comparison is clear.
+
+## The Core Pattern
+
+A good benchmark dashboard records:
+
+```text
+what was measured
+what it was compared against
+which shape and dtype were used
+which timing method produced the number
+whether correctness passed
+what one-line interpretation matters
+```
+
+Benchmarks should make the project easier to trust.
+
+If a table makes the project look faster but harder to verify, it is doing the
+wrong job.
+
+## Bridge To Week 46
+
+Week 46 turns the benchmark and lesson work into interview explanations.
+
+The next skill is explaining what you built clearly enough that another
+engineer can follow the decisions.

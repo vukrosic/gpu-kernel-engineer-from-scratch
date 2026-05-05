@@ -66,7 +66,7 @@ glance:
 
 - Month 09: [Week 33](week-33-pytorch-baselines.md), [Week 34](week-34-custom-op-wrapper.md), [Week 35](week-35-gpu-test-matrix.md), [Week 36](week-36-debugging-gpu-kernels.md)
 - Month 10: [Week 37](week-37-gelu-fusion.md), [Week 38](week-38-residual-and-norm-fusion.md), [Week 39](week-39-attention-pieces.md), [Week 40](week-40-transformer-kernel-dataflow.md)
-- Month 11: [Week 41](week-41-attention-forward.md), [Week 42](week-42-flashattention-concepts.md), [Week 43](week-43-kv-cache.md), [Week 44](week-44-month-11-checkpoint.md)
+- Month 11: [Week 41](week-41-attention-forward.md), [Week 42](week-42-flashattention-concepts.md), [Week 43](week-43-kv-cache.md), [Week 44](week-44-attention-capstone-plan.md)
 - Month 12: [Week 45](week-45-benchmark-dashboard.md), [Week 46](week-46-interview-explanations.md), [Week 47](week-47-resume-and-story.md), [Week 48](week-48-final-capstone.md)
 
 ## Rule

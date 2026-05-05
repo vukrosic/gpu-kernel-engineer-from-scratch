@@ -1,77 +1,169 @@
 # Week 46: Interview Explanations
 
-## What This Week Is
+Week 46 teaches how to explain GPU kernel work in an interview.
 
-You turn the course into words you can say out loud. The goal is to explain the
-work clearly, not to memorize canned answers.
+The point is not to memorize answers.
 
-## What To Read
+The point is to turn technical work into clear engineering reasoning.
 
-- [../course/month-12-portfolio-and-interviews.md](../course/month-12-portfolio-and-interviews.md)
-- [week-45-benchmark-dashboard.md](week-45-benchmark-dashboard.md)
+## Step 1: Start With The Problem
 
-## Exact Commands
+A strong answer begins with the problem, not the tool.
 
-```bash
-pytest
-python examples/reference_bench.py
+Weak opening:
+
+```text
+I used Triton and CUDA.
 ```
 
-## Build This
+Better opening:
 
-Write three interview-style answers: one about speeding up a kernel, one about a
-memory tradeoff, and one about a bug or mismatch you solved. Keep them short
-enough to practice without notes.
-
-## Code Sketch
-
-```python
-answers = {
-    "how do you speed up attention?": [
-        "reduce memory traffic",
-        "reuse tiles or cached data",
-        "verify against a reference path",
-    ],
-    "what tradeoff did KV cache introduce?": [
-        "lower decode cost",
-        "higher memory use",
-        "more state to manage",
-    ],
-}
+```text
+I worked on making custom GPU kernels correct, measurable, and easier to compare
+against PyTorch baselines.
 ```
 
-The sketch is correct because it turns the week into a question-and-answer bank
-you can rehearse and refine.
+The second version tells the listener what the work was for.
 
-Write `results/week-46-interview-explanations.md` with three interview-style
-answers and one note about what you still want to practice.
+Tools come after purpose.
 
-## Write Down
+## Step 2: Use The Reference-First Story
 
-- How do you explain your strongest kernel?
-- How do you explain one performance tradeoff?
-- How do you explain one bug you solved?
+The course has one strong repeated pattern:
 
-## Minimum
+```text
+reference first
+custom kernel second
+benchmark third
+```
 
-- one interview note
-- one answer draft
-- one short summary
+That is a good interview answer because it sounds like engineering discipline.
 
-## Standard
+Example:
 
-- compare two answers
-- note one weak spot
+```text
+For each kernel, I started with a PyTorch or CPU reference, used it as the
+correctness contract, then compared shape, dtype, device, and values before
+timing the custom path.
+```
 
-## Stretch
+This answer explains how you avoided optimizing wrong code.
 
-- practice a verbal summary
-- explain one project in 60 seconds
+## Step 3: Explain Memory Traffic
 
-## If You Are Behind
+Many kernel improvements are memory stories.
 
-Keep the answers short and honest.
+A concise explanation:
 
-## Next Week
+```text
+Some operations are limited less by arithmetic and more by how many times they
+read and write global memory. Fusion helps when it removes intermediate tensor
+writes without changing the operation.
+```
 
-You will shape the project story and resume bullets that tie the year together.
+Then give one example:
+
+```text
+Bias plus GELU can be fused so the kernel reads input and bias, computes the
+activation immediately, and writes only the final output.
+```
+
+That connects concept to implementation.
+
+## Step 4: Explain Tiling
+
+Tiling is about reuse.
+
+A clear answer:
+
+```text
+In matmul, a tile of A and a tile of B can be loaded once and reused for many
+multiply-adds. The tile size controls reuse, but it also affects shared memory,
+register pressure, and occupancy.
+```
+
+This answer is good because it includes the tradeoff.
+
+Do not say only "tiling is faster."
+
+Say why and what it costs.
+
+## Step 5: Explain Attention
+
+Attention needs a memory-aware explanation.
+
+A useful version:
+
+```text
+Naive attention materializes the full score and probability matrices. For long
+sequences, those intermediates become large. FlashAttention-style kernels avoid
+writing the full matrices by processing tiles and keeping online softmax state.
+```
+
+That answer covers:
+
+```text
+the baseline
+the bottleneck
+the optimization idea
+```
+
+## Step 6: Explain KV Cache
+
+KV cache is an inference tradeoff.
+
+A clean answer:
+
+```text
+During decoding, the model only gets one new token at a time. The KV cache saves
+past keys and values so they do not need to be recomputed every step. It saves
+compute, but it uses memory that grows with sequence length.
+```
+
+Again, include the tradeoff.
+
+Interviewers listen for tradeoffs because real systems are not free wins.
+
+## Step 7: Use A Three-Part Answer
+
+For most questions, use this shape:
+
+```text
+1. what problem did I face?
+2. what approach did I use?
+3. how did I check it?
+```
+
+Example:
+
+```text
+The problem was that a fused operation can look faster while being wrong. I used
+a PyTorch baseline as the contract, tested output shape, dtype, device, and
+values, and only then compared timing. That kept performance work tied to
+correctness.
+```
+
+That is short, specific, and believable.
+
+## The Core Pattern
+
+Strong GPU-kernel interview explanations include:
+
+```text
+the operation being optimized
+the baseline used for correctness
+the bottleneck hypothesis
+the optimization idea
+the tradeoff
+the evidence
+```
+
+If you can say those six things simply, the project becomes much easier to
+understand.
+
+## Bridge To Week 47
+
+Week 47 turns these explanations into a project story and resume bullets.
+
+The same rule applies: specific claims, clear evidence, and no vague speedup
+theater.

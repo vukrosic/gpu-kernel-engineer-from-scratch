@@ -142,7 +142,7 @@ Goal: build a serious capstone around attention and inference bottlenecks.
 | 41 | Attention forward pass | Implement simplified attention forward. | Correct attention output test. |
 | 42 | FlashAttention concepts | Explain tiling and memory reuse. | FlashAttention concept note. |
 | 43 | KV cache basics | Build a small KV-cache simulation or benchmark. | Inference bottleneck writeup. |
-| 44 | Checkpoint | Polish attention code and explanations. | Capstone draft. |
+| 44 | Attention capstone plan | Connect attention forward, FlashAttention concepts, and KV cache into one project story. | Capstone direction. |
 
 Minimum viable month: simplified attention with tests and explanation.
 

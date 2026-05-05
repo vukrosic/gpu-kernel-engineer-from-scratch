@@ -1,72 +1,188 @@
 # Week 48: Final Capstone
 
-## What This Week Is
+Week 48 finishes the course.
 
-You finish the course by packaging the strongest version of the year into one
-public artifact. The goal is to make the repo easy to browse, easy to cite, and
-easy to explain in a first conversation.
+The final capstone is the public shape of the project:
 
-## What To Read
-
-- [../course/month-12-portfolio-and-interviews.md](../course/month-12-portfolio-and-interviews.md)
-- [week-47-resume-and-story.md](week-47-resume-and-story.md)
-
-## Exact Commands
-
-```bash
-pytest
-python examples/reference_bench.py
+```text
+what the repo teaches
+what was implemented or studied
+how correctness is checked
+how performance is measured
+what the next serious version would improve
 ```
 
-## Build This
+## Step 1: Make The First Page Clear
 
-Polish the final README, make sure the benchmark story is easy to find, and
-write a final summary that connects the whole course from baseline kernels to
-transformer inference and portfolio materials.
+The README should answer:
 
-## Code Sketch
-
-```python
-repo_outline = {
-    "start_here": "README with project summary",
-    "proof": "benchmark and note files",
-    "story": "resume bullets and interview answers",
-    "next": "what to keep improving after the course",
-}
+```text
+what is this project?
+who is it for?
+what topics does it cover?
+where should someone start?
+what proves the work is real?
 ```
 
-The sketch is correct because it shows the full public shape of the project,
-not just the code path.
+A reviewer should not need to guess whether the repo is:
 
-Write `results/week-48-final-capstone.md` with the final project summary, the
-best benchmark note, and the final next-step list.
+```text
+a course
+a kernel library
+a portfolio project
+a research notebook
+```
 
-## Write Down
+Say what it is directly.
 
-- What is the most important thing you built?
-- What should someone notice first in the repo?
-- What would you keep improving after the course?
+## Step 2: Show The Learning Arc
 
-## Minimum
+The final capstone should make the sequence visible:
 
-- one final summary
-- one benchmark note
-- one next-step list
+```text
+GPU mental model
+CPU references
+CUDA basics
+memory access
+reductions
+softmax and normalization
+matmul tiling
+Triton kernels
+PyTorch integration
+transformer kernels
+attention and inference
+portfolio packaging
+```
 
-## Standard
+This arc is the value of the project.
 
-- compare the final version to the starting point
-- add one polished project bullet
+It shows that the course is not a random pile of kernels.
 
-## Stretch
+## Step 3: Point To Correctness Evidence
 
-- write a public project announcement draft
-- sketch a next-steps roadmap
+Correctness evidence includes:
 
-## If You Are Behind
+```text
+reference implementations
+tests
+baseline comparisons
+test matrices
+debugging notes
+```
 
-Keep the final capstone honest and simple.
+The final capstone should make this habit obvious:
 
-## Next Week
+```text
+reference first, kernel second, benchmark third
+```
 
-There is no next week. The course is done; the repo is the result.
+That is the engineering spine of the repo.
+
+## Step 4: Point To Performance Evidence
+
+Performance evidence should be precise.
+
+Good evidence names:
+
+```text
+operation
+shape
+dtype
+baseline
+timing method
+hardware
+result or observation
+```
+
+If a number is missing, do not fake it.
+
+Write the benchmark structure and mark the result as pending.
+
+Honest incomplete evidence is better than confident nonsense.
+
+## Step 5: Separate Lessons From Results
+
+The repo has two kinds of artifacts:
+
+```text
+weeks/   -> teaching and explanation
+results/ -> notes, comparisons, and evidence
+```
+
+The capstone should preserve that separation.
+
+Lessons teach the concept.
+
+Results record what happened in the project.
+
+Mixing them makes both harder to read.
+
+## Step 6: Write The Final Project Summary
+
+A final summary can be short:
+
+```text
+This project is a GPU kernel engineering roadmap that starts from CPU
+references and simple CUDA kernels, then builds toward memory-aware matmul,
+Triton kernels, PyTorch integration, transformer fusion patterns, attention
+dataflow, FlashAttention concepts, and KV-cache inference tradeoffs.
+```
+
+Then add the proof:
+
+```text
+The repo emphasizes correctness through references and tests, and performance
+through benchmark notes that name shapes, baselines, dtypes, and timing methods.
+```
+
+That is enough for the public story.
+
+## Step 7: Name The Next Version
+
+A finished project can still have a next version.
+
+Good next steps are specific:
+
+```text
+add real GPU benchmark numbers across fixed hardware
+implement one production-quality Triton attention kernel
+add Nsight profiling screenshots or notes
+expand PyTorch custom-op packaging
+compare multiple tile sizes for matmul and attention
+```
+
+This tells the reader where the work would go next.
+
+It also shows that you understand the difference between a learning repo and a
+production kernel library.
+
+## Final Capstone Shape
+
+The final capstone should contain:
+
+```text
+one project summary
+one topic map
+one correctness story
+one benchmark story
+one attention/inference highlight
+one resume-ready project paragraph
+one next-version list
+```
+
+That is the whole course compressed into one readable artifact.
+
+## The Core Pattern
+
+A strong final capstone makes the project:
+
+```text
+easy to open
+easy to navigate
+easy to verify
+easy to explain
+easy to continue
+```
+
+The course is done when the repo can speak clearly without you standing next to
+it.

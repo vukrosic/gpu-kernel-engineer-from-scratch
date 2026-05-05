@@ -1,27 +1,32 @@
-# Week 48
+# Week 48 Final Capstone
 
-Status: writing template
+Use this note as the final public-facing project summary.
 
-## What Was Built
+## Project Summary
 
-Describe the final public-facing package, including the README, benchmark story,
-and project summary.
+Write the final short description of the repo.
 
-## Correctness Check
+## Topic Map
 
-Explain how you know the final artifact still points to the right files and
-does not promise anything the repo cannot support.
+- Foundations:
+- CUDA kernels:
+- Memory and reductions:
+- Matmul and Triton:
+- PyTorch integration:
+- Transformer and attention kernels:
+- Portfolio evidence:
 
-## Benchmark Or Observation
+## Correctness Story
 
-Record the benchmark note you want a reviewer to notice first, and paste the
-actual values later if you add them.
+Explain how references, tests, baselines, and comparison rules make the project
+trustworthy.
 
-## Lesson Learned
+## Benchmark Story
 
-Write one sentence about what the year of kernel work taught you at the project
-level.
+Name the benchmark dashboard row or result note someone should read first.
 
-## Limitation Or Next Step
+## Next Version
 
-List the next three improvements you would make if the course continued.
+- Improvement 1:
+- Improvement 2:
+- Improvement 3:

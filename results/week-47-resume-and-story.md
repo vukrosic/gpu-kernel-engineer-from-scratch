@@ -1,28 +1,24 @@
-# Week 47
+# Week 47 Resume And Project Story
 
-Status: writing template
+Use this note to turn the repo into resume-ready language.
 
-## What Was Built
+## Project Summary
 
-Describe the three resume bullets and the short project summary paragraph you
-drafted.
+Write one sentence that names the domain, method, and proof.
 
-## Correctness Check
+## Resume Bullets
 
-Explain how you checked that the bullets point at real artifacts, clear scope,
-and believable impact.
+- Bullet 1:
+- Bullet 2:
+- Bullet 3:
 
-## Benchmark Or Observation
+## Evidence Links
 
-Record which bullet or summary version felt strongest and which one still felt
-too wordy.
+- README:
+- Lessons:
+- Results:
+- Tests or benchmarks:
 
-## Lesson Learned
+## Cut List
 
-Write one sentence about the story the repo tells when someone reads it for the
-first time.
-
-## Limitation Or Next Step
-
-Name one line you would cut or tighten before putting the text in a resume or
-profile.
+Name one vague claim or phrase you should remove.

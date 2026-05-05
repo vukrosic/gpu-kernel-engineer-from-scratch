@@ -1,27 +1,28 @@
-# Week 46
+# Week 46 Interview Explanations
 
-Status: writing template
+Use this note to draft interview answers from the project.
 
-## What Was Built
+## Answer 1: Correctness
 
-Describe the three interview-style answers you drafted and the topic each one
-covers.
+- Question:
+- Problem:
+- Approach:
+- Evidence:
 
-## Correctness Check
+## Answer 2: Performance
 
-Explain how you checked the answers for clarity, honesty, and a believable
-connection to the work you actually did.
+- Question:
+- Bottleneck:
+- Optimization idea:
+- Tradeoff:
 
-## Benchmark Or Observation
+## Answer 3: Attention Or Inference
 
-Record which answer felt easiest to say out loud and which one still needs
-practice.
+- Question:
+- Baseline:
+- Memory issue:
+- Optimized direction:
 
-## Lesson Learned
+## Weak Spot
 
-Write one sentence about how your explanation style changed when you moved from
-notes to spoken answers.
-
-## Limitation Or Next Step
-
-Name the question or tradeoff you still stumble on and want to rehearse again.
+Name the answer that still needs practice.

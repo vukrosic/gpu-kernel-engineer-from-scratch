@@ -55,7 +55,7 @@ Every assignment has three levels so you can stay in motion.
 | 41 | Attention forward | Simplified attention correctness. |
 | 42 | FlashAttention concept | Memory reuse explanation. |
 | 43 | KV cache | KV-cache simulation or benchmark. |
-| 44 | Month 11 checkpoint | Capstone draft. |
+| 44 | Attention capstone plan | Attention and inference project story. |
 | 45 | Benchmark dashboard | Final tables and charts. |
 | 46 | Interview explanations | Kernel interview question bank. |
 | 47 | Resume story | 3-5 resume bullets and project narrative. |
