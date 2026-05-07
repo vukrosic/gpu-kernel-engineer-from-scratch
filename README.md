@@ -3,6 +3,8 @@
 A 12-month CUDA, Triton, and AI systems course where you build a public GPU
 kernels portfolio one week at a time.
 
+Watch YouTube course here - https://youtu.be/F5v_7OCwKHs
+
 ## Start Here
 
 This repo is the 1-year roadmap to become a GPU kernel engineer.
